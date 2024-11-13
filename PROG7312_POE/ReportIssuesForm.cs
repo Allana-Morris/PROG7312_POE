@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PROG7312_POE.TreeClass;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -175,6 +176,8 @@ namespace PROG7312_POE
                 IssueClass issue = new IssueClass(userLocation, userCategory, userDescription, userFileName, userFileData);
 
                 issueList.Add(issue);
+                BinarySearchTree bst = new BinarySearchTree();
+                bst.Insert(issue);
 
                 MessageBox.Show("Issue reported successfully");
             }

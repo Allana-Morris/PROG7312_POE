@@ -1,4 +1,5 @@
-﻿
+﻿using PROG7312_POE.Properties;
+
 namespace PROG7312_POE
 {
     partial class ReportIssuesForm

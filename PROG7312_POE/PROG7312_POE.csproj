@@ -9,6 +9,7 @@
     <AssemblyName>PROG7312_POE</AssemblyName>
     <ApplicationIcon>Home.ico</ApplicationIcon>
     <ApplicationVersion>1.0.0.*</ApplicationVersion>
+	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	 <EnableDefaultCompileItems>false</EnableDefaultCompileItems> <!-- Optionally disable default compile items -->
     <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems> <!-- Disable default embedded resources -->
   </PropertyGroup>
@@ -18,6 +19,7 @@
     <Compile Include="EventClass.cs" />
     <Compile Include="EventManagement.cs" />
     <Compile Include="FeedbackClass.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="IssueClass.cs" />
     <Compile Include="LocalEventsAndAnnouncementsForm.cs">
       <SubType>Form</SubType>
@@ -27,7 +29,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-	<Compile Include="Properties\Resources.resx" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
 	<Compile Include="Properties\Settings.Designer.cs">
 	  <DesignTimeSharedInput>True</DesignTimeSharedInput>
 	  <AutoGen>True</AutoGen>
@@ -70,7 +76,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportIssuesForm.resx" />
   </ItemGroup>
 
   <ItemGroup>

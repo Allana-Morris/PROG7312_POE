@@ -143,27 +143,9 @@ namespace PROG7312_POE.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
         /// </summary>
-        public static System.IO.UnmanagedMemoryStream Windows_95_Error {
-            get {
-                return ResourceManager.GetStream("Windows_95_Error", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
         public static System.IO.UnmanagedMemoryStream Windows_95_Shutdown {
             get {
                 return ResourceManager.GetStream("Windows_95_Shutdown", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
-        /// </summary>
-        public static System.IO.UnmanagedMemoryStream Windows_95_Startup {
-            get {
-                return ResourceManager.GetStream("Windows_95_Startup", resourceCulture);
             }
         }
     }

@@ -19,14 +19,14 @@ namespace PROG7312_POE
 
         public IssueClass() { } 
 
-        public IssueClass(string location, string category, string description, string filename, byte[] filedata, DateTime submissionDate)
+        public IssueClass(string location, string category, string description, string filename, byte[] filedata)
         {
             this.userLocation = location;
             this.userCategory = category;
             this.userDescription = description;
             this.userFileName = filename;
             this.userFileData = filedata;
-            this.userSubmissionDate = submissionDate;
+            this.userSubmissionDate = DateTime.Now;
         }
 
     }
