@@ -74,11 +74,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="LocalEventsAndAnnouncementsForm.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportIssuesForm.resx" />
+    <EmbeddedResource Include="ServiceRequestStatusForm.resx" />
+    <EmbeddedResource Include="StartUp.resx" />
   </ItemGroup>
 
   <ItemGroup>
