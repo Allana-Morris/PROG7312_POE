@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PROG7312_POE.Class;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,12 +20,12 @@ namespace PROG7312_POE
 
         private void TSMIReturnToHome_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void tSlblExit_Click(object sender, EventArgs e)
         {
-
+            this.Close();
         }
 
         private void tSTopBat_MouseDown(object sender, MouseEventArgs e)
@@ -91,5 +92,54 @@ namespace PROG7312_POE
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 
+        private void btnViewDetails_Click(object sender, EventArgs e)
+        {
+            var selectedRequest = GetSelectedRequest();
+
+            if (selectedRequest != null)
+            {
+                // Build the text for the RichTextBox
+                string requestDetails = $"Request Location: {selectedRequest.Category}\n" +   // Request Location
+                                        $"Category: {selectedRequest.Category}\n" +          // Category
+                                        $"Description:\n{selectedRequest.Description}\n\n" + // Description
+                                        $"Customer Name: {selectedRequest.Customer.Name}\n" + // Customer Name
+                                        $"Customer Contact Number: {selectedRequest.Customer.ContactNumber}"; // Customer Contact Number
+
+                // Set the RichTextBox text to the built string
+                rTBDetails.Text = requestDetails;
+            }
+            else
+            {
+                rTBDetails.Text = "No request selected.";
+            }
+        }
+
+        private ReportedRequest GetSelectedRequest()
+        {
+            if (lVRequests.SelectedItems.Count > 0)
+            {
+                // Assuming the RequestId is stored in the first column of the ListView
+                Guid selectedRequestId = Guid.Parse(lVRequests.SelectedItems[0].Text);
+
+                var rm = new RequestManager();
+
+                // Retrieve the ReportedRequest by ID from your collection or tree
+                return rm.GetRequestById(selectedRequestId); // Replace with your actual method to retrieve the request
+            }
+            else
+            {
+                return null; // No item selected
+            }
+        }
+
+        private void btnTrackProgress_Click(object sender, EventArgs e)
+        {
+            var selectedRequest = GetSelectedRequest();
+            if (selectedRequest != null)
+            {
+                pBRequestProgress.Value = selectedRequest.Progress;         
+                lblPercentage.Text = $"{selectedRequest.Progress}% Complete...";
+            }
+        }
     }
 }

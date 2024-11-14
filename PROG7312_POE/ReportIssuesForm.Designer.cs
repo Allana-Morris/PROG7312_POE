@@ -30,230 +30,226 @@ namespace PROG7312_POE
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnBrowse = new System.Windows.Forms.Button();
-            this.btnSubmit = new System.Windows.Forms.Button();
-            this.tSTopBat = new System.Windows.Forms.ToolStrip();
-            this.tSlblTitle = new System.Windows.Forms.ToolStripLabel();
-            this.tSlblExit = new System.Windows.Forms.ToolStripLabel();
-            this.mSMenu = new System.Windows.Forms.MenuStrip();
-            this.mTSMIMenu = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMIReturnToHome = new System.Windows.Forms.ToolStripMenuItem();
-            this.tBAttachment = new System.Windows.Forms.TextBox();
-            this.tBLocation = new System.Windows.Forms.TextBox();
-            this.rTBDescription = new System.Windows.Forms.RichTextBox();
-            this.UserProgress = new System.Windows.Forms.ProgressBar();
-            this.lblLocation = new System.Windows.Forms.Label();
-            this.lblCategory = new System.Windows.Forms.Label();
-            this.lblDescription = new System.Windows.Forms.Label();
-            this.lblAttachment = new System.Windows.Forms.Label();
-            this.cBCategory = new System.Windows.Forms.ComboBox();
-            this.tSTopBat.SuspendLayout();
-            this.mSMenu.SuspendLayout();
-            this.SuspendLayout();
+            btnBrowse = new System.Windows.Forms.Button();
+            btnSubmit = new System.Windows.Forms.Button();
+            tSTopBat = new System.Windows.Forms.ToolStrip();
+            tSlblTitle = new System.Windows.Forms.ToolStripLabel();
+            tSlblExit = new System.Windows.Forms.ToolStripLabel();
+            mSMenu = new System.Windows.Forms.MenuStrip();
+            mTSMIMenu = new System.Windows.Forms.ToolStripMenuItem();
+            TSMIReturnToHome = new System.Windows.Forms.ToolStripMenuItem();
+            tBAttachment = new System.Windows.Forms.TextBox();
+            tBLocation = new System.Windows.Forms.TextBox();
+            rTBDescription = new System.Windows.Forms.RichTextBox();
+            UserProgress = new System.Windows.Forms.ProgressBar();
+            lblLocation = new System.Windows.Forms.Label();
+            lblCategory = new System.Windows.Forms.Label();
+            lblDescription = new System.Windows.Forms.Label();
+            lblAttachment = new System.Windows.Forms.Label();
+            cBCategory = new System.Windows.Forms.ComboBox();
+            tSTopBat.SuspendLayout();
+            mSMenu.SuspendLayout();
+            SuspendLayout();
             // 
             // btnBrowse
             // 
-            this.btnBrowse.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBrowse.Location = new System.Drawing.Point(291, 457);
-            this.btnBrowse.Name = "btnBrowse";
-            this.btnBrowse.Size = new System.Drawing.Size(84, 29);
-            this.btnBrowse.TabIndex = 0;
-            this.btnBrowse.Text = "&Browse...";
-            this.btnBrowse.UseVisualStyleBackColor = false;
+            btnBrowse.BackColor = System.Drawing.SystemColors.ControlLight;
+            btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            btnBrowse.Location = new System.Drawing.Point(291, 457);
+            btnBrowse.Name = "btnBrowse";
+            btnBrowse.Size = new System.Drawing.Size(84, 29);
+            btnBrowse.TabIndex = 0;
+            btnBrowse.Text = "&Browse...";
+            btnBrowse.UseVisualStyleBackColor = false;
+            btnBrowse.Click += btnBrowse_Click;
             // 
             // btnSubmit
             // 
-            this.btnSubmit.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSubmit.Location = new System.Drawing.Point(291, 508);
-            this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(84, 29);
-            this.btnSubmit.TabIndex = 1;
-            this.btnSubmit.Text = "Submit";
-            this.btnSubmit.UseVisualStyleBackColor = false;
+            btnSubmit.BackColor = System.Drawing.SystemColors.ControlLight;
+            btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            btnSubmit.Location = new System.Drawing.Point(291, 508);
+            btnSubmit.Name = "btnSubmit";
+            btnSubmit.Size = new System.Drawing.Size(84, 29);
+            btnSubmit.TabIndex = 1;
+            btnSubmit.Text = "Submit";
+            btnSubmit.UseVisualStyleBackColor = false;
             // 
             // tSTopBat
             // 
-            this.tSTopBat.BackColor = System.Drawing.Color.MidnightBlue;
-            this.tSTopBat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tSTopBat.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.tSTopBat.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.tSTopBat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tSlblTitle,
-            this.tSlblExit});
-            this.tSTopBat.Location = new System.Drawing.Point(0, 0);
-            this.tSTopBat.Name = "tSTopBat";
-            this.tSTopBat.Size = new System.Drawing.Size(387, 25);
-            this.tSTopBat.TabIndex = 2;
-            this.tSTopBat.Text = "toolStrip1";
-            this.tSTopBat.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tSTopBat_MouseDown);
+            tSTopBat.BackColor = System.Drawing.Color.MidnightBlue;
+            tSTopBat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            tSTopBat.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            tSTopBat.ImageScalingSize = new System.Drawing.Size(20, 20);
+            tSTopBat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tSlblTitle, tSlblExit });
+            tSTopBat.Location = new System.Drawing.Point(0, 0);
+            tSTopBat.Name = "tSTopBat";
+            tSTopBat.Size = new System.Drawing.Size(387, 25);
+            tSTopBat.TabIndex = 2;
+            tSTopBat.Text = "toolStrip1";
+            tSTopBat.MouseDown += tSTopBat_MouseDown;
             // 
             // tSlblTitle
             // 
-            this.tSlblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tSlblTitle.ForeColor = System.Drawing.Color.White;
-            this.tSlblTitle.Image = global::PROG7312_POE.Properties.Resources.Report_Issue;
-            this.tSlblTitle.Name = "tSlblTitle";
-            this.tSlblTitle.Size = new System.Drawing.Size(136, 22);
-            this.tSlblTitle.Text = "Report Issue";
+            tSlblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            tSlblTitle.ForeColor = System.Drawing.Color.White;
+            tSlblTitle.Image = Resources.Report_Issue;
+            tSlblTitle.Name = "tSlblTitle";
+            tSlblTitle.Size = new System.Drawing.Size(136, 22);
+            tSlblTitle.Text = "Report Issue";
             // 
             // tSlblExit
             // 
-            this.tSlblExit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            this.tSlblExit.BackColor = System.Drawing.Color.MidnightBlue;
-            this.tSlblExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tSlblExit.ForeColor = System.Drawing.Color.Gainsboro;
-            this.tSlblExit.Name = "tSlblExit";
-            this.tSlblExit.Size = new System.Drawing.Size(21, 22);
-            this.tSlblExit.Text = "X";
-            this.tSlblExit.Click += new System.EventHandler(this.tSlblExit_Click_1);
+            tSlblExit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            tSlblExit.BackColor = System.Drawing.Color.MidnightBlue;
+            tSlblExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            tSlblExit.ForeColor = System.Drawing.Color.Gainsboro;
+            tSlblExit.Name = "tSlblExit";
+            tSlblExit.Size = new System.Drawing.Size(21, 22);
+            tSlblExit.Text = "X";
+            tSlblExit.Click += tSlblExit_Click;
             // 
             // mSMenu
             // 
-            this.mSMenu.BackColor = System.Drawing.Color.LightGray;
-            this.mSMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.mSMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.mSMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mTSMIMenu});
-            this.mSMenu.Location = new System.Drawing.Point(0, 25);
-            this.mSMenu.Name = "mSMenu";
-            this.mSMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.mSMenu.Size = new System.Drawing.Size(387, 28);
-            this.mSMenu.TabIndex = 3;
-            this.mSMenu.Text = "menuStrip1";
+            mSMenu.BackColor = System.Drawing.Color.LightGray;
+            mSMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            mSMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            mSMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { mTSMIMenu });
+            mSMenu.Location = new System.Drawing.Point(0, 25);
+            mSMenu.Name = "mSMenu";
+            mSMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            mSMenu.Size = new System.Drawing.Size(387, 28);
+            mSMenu.TabIndex = 3;
+            mSMenu.Text = "menuStrip1";
             // 
             // mTSMIMenu
             // 
-            this.mTSMIMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMIReturnToHome});
-            this.mTSMIMenu.Name = "mTSMIMenu";
-            this.mTSMIMenu.Size = new System.Drawing.Size(64, 24);
-            this.mTSMIMenu.Text = "Menu";
+            mTSMIMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { TSMIReturnToHome });
+            mTSMIMenu.Name = "mTSMIMenu";
+            mTSMIMenu.Size = new System.Drawing.Size(64, 24);
+            mTSMIMenu.Text = "Menu";
             // 
             // TSMIReturnToHome
             // 
-            this.TSMIReturnToHome.Image = global::PROG7312_POE.Properties.Resources.Home;
-            this.TSMIReturnToHome.Name = "TSMIReturnToHome";
-            this.TSMIReturnToHome.Size = new System.Drawing.Size(211, 26);
-            this.TSMIReturnToHome.Text = "Return to Home";
+            TSMIReturnToHome.Image = Resources.Home;
+            TSMIReturnToHome.Name = "TSMIReturnToHome";
+            TSMIReturnToHome.Size = new System.Drawing.Size(211, 26);
+            TSMIReturnToHome.Text = "Return to Home";
             // 
             // tBAttachment
             // 
-            this.tBAttachment.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tBAttachment.Location = new System.Drawing.Point(105, 458);
-            this.tBAttachment.Multiline = true;
-            this.tBAttachment.Name = "tBAttachment";
-            this.tBAttachment.ReadOnly = true;
-            this.tBAttachment.ShortcutsEnabled = false;
-            this.tBAttachment.Size = new System.Drawing.Size(180, 29);
-            this.tBAttachment.TabIndex = 4;
-            this.tBAttachment.TabStop = false;
+            tBAttachment.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            tBAttachment.Location = new System.Drawing.Point(105, 458);
+            tBAttachment.Multiline = true;
+            tBAttachment.Name = "tBAttachment";
+            tBAttachment.ReadOnly = true;
+            tBAttachment.ShortcutsEnabled = false;
+            tBAttachment.Size = new System.Drawing.Size(180, 29);
+            tBAttachment.TabIndex = 4;
+            tBAttachment.TabStop = false;
             // 
             // tBLocation
             // 
-            this.tBLocation.BackColor = System.Drawing.SystemColors.Control;
-            this.tBLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tBLocation.Location = new System.Drawing.Point(105, 101);
-            this.tBLocation.Name = "tBLocation";
-            this.tBLocation.ShortcutsEnabled = false;
-            this.tBLocation.Size = new System.Drawing.Size(270, 27);
-            this.tBLocation.TabIndex = 5;
+            tBLocation.BackColor = System.Drawing.SystemColors.Control;
+            tBLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            tBLocation.Location = new System.Drawing.Point(105, 101);
+            tBLocation.Name = "tBLocation";
+            tBLocation.ShortcutsEnabled = false;
+            tBLocation.Size = new System.Drawing.Size(270, 27);
+            tBLocation.TabIndex = 5;
             // 
             // rTBDescription
             // 
-            this.rTBDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rTBDescription.Location = new System.Drawing.Point(105, 204);
-            this.rTBDescription.Name = "rTBDescription";
-            this.rTBDescription.Size = new System.Drawing.Size(270, 232);
-            this.rTBDescription.TabIndex = 7;
-            this.rTBDescription.Text = "";
+            rTBDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            rTBDescription.Location = new System.Drawing.Point(105, 204);
+            rTBDescription.Name = "rTBDescription";
+            rTBDescription.Size = new System.Drawing.Size(270, 232);
+            rTBDescription.TabIndex = 7;
+            rTBDescription.Text = "";
             // 
             // UserProgress
             // 
-            this.UserProgress.Dock = System.Windows.Forms.DockStyle.Top;
-            this.UserProgress.Location = new System.Drawing.Point(0, 53);
-            this.UserProgress.Name = "UserProgress";
-            this.UserProgress.Size = new System.Drawing.Size(387, 23);
-            this.UserProgress.TabIndex = 8;
+            UserProgress.Dock = System.Windows.Forms.DockStyle.Top;
+            UserProgress.Location = new System.Drawing.Point(0, 53);
+            UserProgress.Name = "UserProgress";
+            UserProgress.Size = new System.Drawing.Size(387, 23);
+            UserProgress.TabIndex = 8;
             // 
             // lblLocation
             // 
-            this.lblLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblLocation.Location = new System.Drawing.Point(3, 104);
-            this.lblLocation.Name = "lblLocation";
-            this.lblLocation.Size = new System.Drawing.Size(91, 24);
-            this.lblLocation.TabIndex = 9;
-            this.lblLocation.Text = "Location";
+            lblLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            lblLocation.Location = new System.Drawing.Point(3, 104);
+            lblLocation.Name = "lblLocation";
+            lblLocation.Size = new System.Drawing.Size(91, 24);
+            lblLocation.TabIndex = 9;
+            lblLocation.Text = "Location";
             // 
             // lblCategory
             // 
-            this.lblCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCategory.Location = new System.Drawing.Point(3, 152);
-            this.lblCategory.Name = "lblCategory";
-            this.lblCategory.Size = new System.Drawing.Size(91, 28);
-            this.lblCategory.TabIndex = 10;
-            this.lblCategory.Text = "Category";
+            lblCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            lblCategory.Location = new System.Drawing.Point(3, 152);
+            lblCategory.Name = "lblCategory";
+            lblCategory.Size = new System.Drawing.Size(91, 28);
+            lblCategory.TabIndex = 10;
+            lblCategory.Text = "Category";
             // 
             // lblDescription
             // 
-            this.lblDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescription.Location = new System.Drawing.Point(3, 204);
-            this.lblDescription.Name = "lblDescription";
-            this.lblDescription.Size = new System.Drawing.Size(96, 21);
-            this.lblDescription.TabIndex = 11;
-            this.lblDescription.Text = "Description";
+            lblDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            lblDescription.Location = new System.Drawing.Point(3, 204);
+            lblDescription.Name = "lblDescription";
+            lblDescription.Size = new System.Drawing.Size(96, 21);
+            lblDescription.TabIndex = 11;
+            lblDescription.Text = "Description";
             // 
             // lblAttachment
             // 
-            this.lblAttachment.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAttachment.Location = new System.Drawing.Point(3, 461);
-            this.lblAttachment.Name = "lblAttachment";
-            this.lblAttachment.Size = new System.Drawing.Size(91, 25);
-            this.lblAttachment.TabIndex = 12;
-            this.lblAttachment.Text = "Attach File";
+            lblAttachment.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            lblAttachment.Location = new System.Drawing.Point(3, 461);
+            lblAttachment.Name = "lblAttachment";
+            lblAttachment.Size = new System.Drawing.Size(91, 25);
+            lblAttachment.TabIndex = 12;
+            lblAttachment.Text = "Attach File";
             // 
             // cBCategory
             // 
-            this.cBCategory.BackColor = System.Drawing.SystemColors.Control;
-            this.cBCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cBCategory.FormattingEnabled = true;
-            this.cBCategory.Location = new System.Drawing.Point(105, 152);
-            this.cBCategory.Name = "cBCategory";
-            this.cBCategory.Size = new System.Drawing.Size(270, 28);
-            this.cBCategory.TabIndex = 13;
-            this.cBCategory.Text = "Select a Category";
+            cBCategory.BackColor = System.Drawing.SystemColors.Control;
+            cBCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            cBCategory.FormattingEnabled = true;
+            cBCategory.Location = new System.Drawing.Point(105, 152);
+            cBCategory.Name = "cBCategory";
+            cBCategory.Size = new System.Drawing.Size(270, 28);
+            cBCategory.TabIndex = 13;
+            cBCategory.Text = "Select a Category";
             // 
             // ReportIssuesForm
             // 
-            this.BackColor = System.Drawing.Color.Gainsboro;
-            this.ClientSize = new System.Drawing.Size(387, 549);
-            this.Controls.Add(this.rTBDescription);
-            this.Controls.Add(this.cBCategory);
-            this.Controls.Add(this.lblAttachment);
-            this.Controls.Add(this.lblDescription);
-            this.Controls.Add(this.lblCategory);
-            this.Controls.Add(this.lblLocation);
-            this.Controls.Add(this.UserProgress);
-            this.Controls.Add(this.tBLocation);
-            this.Controls.Add(this.tBAttachment);
-            this.Controls.Add(this.mSMenu);
-            this.Controls.Add(this.tSTopBat);
-            this.Controls.Add(this.btnSubmit);
-            this.Controls.Add(this.btnBrowse);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.MainMenuStrip = this.mSMenu;
-            this.Name = "ReportIssuesForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.tSTopBat.ResumeLayout(false);
-            this.tSTopBat.PerformLayout();
-            this.mSMenu.ResumeLayout(false);
-            this.mSMenu.PerformLayout();
-            this.ResumeLayout(false);
-            this.PerformLayout();
-
+            BackColor = System.Drawing.Color.Gainsboro;
+            ClientSize = new System.Drawing.Size(387, 549);
+            Controls.Add(rTBDescription);
+            Controls.Add(cBCategory);
+            Controls.Add(lblAttachment);
+            Controls.Add(lblDescription);
+            Controls.Add(lblCategory);
+            Controls.Add(lblLocation);
+            Controls.Add(UserProgress);
+            Controls.Add(tBLocation);
+            Controls.Add(tBAttachment);
+            Controls.Add(mSMenu);
+            Controls.Add(tSTopBat);
+            Controls.Add(btnSubmit);
+            Controls.Add(btnBrowse);
+            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            MainMenuStrip = mSMenu;
+            Name = "ReportIssuesForm";
+            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            tSTopBat.ResumeLayout(false);
+            tSTopBat.PerformLayout();
+            mSMenu.ResumeLayout(false);
+            mSMenu.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
 

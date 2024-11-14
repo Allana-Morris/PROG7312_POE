@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PROG7312_POE
+namespace PROG7312_POE.Class.Models
 {
     public class AnnouncementClass
     {

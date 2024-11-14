@@ -9,6 +9,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PROG7312_POE.Class;
+using PROG7312_POE.Class.Models;
 
 namespace PROG7312_POE
 {

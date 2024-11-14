@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PROG7312_POE.Class.Models;
 
-namespace PROG7312_POE
+namespace PROG7312_POE.Class
 {
     public class EventManagement
     {

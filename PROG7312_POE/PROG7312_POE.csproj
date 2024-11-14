@@ -2,25 +2,41 @@
 <Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>net8.0-windows</TargetFramework>
+    <TargetFramework>net8.0-windows10.0.26100.0</TargetFramework>
 	    <UseWPF>false</UseWPF>
     <UseWindowsForms>true</UseWindowsForms>
     <RootNamespace>PROG7312_POE</RootNamespace>
     <AssemblyName>PROG7312_POE</AssemblyName>
     <ApplicationIcon>Home.ico</ApplicationIcon>
     <ApplicationVersion>1.0.0.*</ApplicationVersion>
-	<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	<GenerateAssemblyInfo>False</GenerateAssemblyInfo>
 	 <EnableDefaultCompileItems>false</EnableDefaultCompileItems> <!-- Optionally disable default compile items -->
-    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems> <!-- Disable default embedded resources -->
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <PackageIcon>Home.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile> <!-- Disable default embedded resources -->
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;CA1416</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <NoWarn>1701;1702;CA1416</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="AnnouncementClass.cs" />
-    <Compile Include="EventClass.cs" />
-    <Compile Include="EventManagement.cs" />
-    <Compile Include="FeedbackClass.cs" />
+    <Compile Include="Class\Models\AnnouncementClass.cs" />
+    <Compile Include="Class\Models\Customer.cs" />
+    <Compile Include="Class\Models\Enums\RequestCategory.cs" />
+    <Compile Include="Class\Models\Enums\RequestPriority.cs" />
+    <Compile Include="Class\Models\Enums\RequestStatus.cs" />
+    <Compile Include="Class\Models\EventClass.cs" />
+    <Compile Include="Class\EventManagement.cs" />
+    <Compile Include="Class\Models\FeedbackClass.cs" />
+    <Compile Include="Class\Models\ReportedRequest.cs" />
+    <Compile Include="Class\RequestManager.cs" />
+    <Compile Include="CustomerInput.cs" />
+    <Compile Include="CustomerInput.Designer.cs" />
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="IssueClass.cs" />
     <Compile Include="LocalEventsAndAnnouncementsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -44,8 +60,8 @@
 	  <AutoGen>True</AutoGen>
 	  <DependentUpon>Windows.resx</DependentUpon>
 	</Compile>
-	<Compile Include="TreeClass\BinarySearchTree.cs" />
-	<Compile Include="TreeClass\TreeNode.cs" />
+	<Compile Include="Class\TreeClass\RedandBlackTree.cs" />
+	<Compile Include="Class\TreeClass\TreeNode.cs" />
     <Compile Include="UserFeedback.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,10 +86,15 @@
     <Compile Include="StartUp.Designer.cs">
       <DependentUpon>StartUp.cs</DependentUpon>
     </Compile>
-    <Compile Include="ValidationClass.cs" />
+    <Compile Include="Class\ValidationClass.cs" />
+  </ItemGroup>
+
+<ItemGroup>
+    <SupportedPlatform Include="Windows" />
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Include="CustomerInput.resx" />
     <EmbeddedResource Include="LocalEventsAndAnnouncementsForm.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -85,6 +106,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include="Resources\Home.ico" />
     <None Include="Resources\Windows 95 Shutdown.wav" />
     <None Include="Resources\Feedback.png" />
@@ -97,6 +122,10 @@
     <None Update="Properties\Settings.settings">
       <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Resources\Home.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
     </None>
   </ItemGroup>
 </Project>

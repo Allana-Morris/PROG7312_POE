@@ -1,4 +1,7 @@
-﻿using PROG7312_POE.TreeClass;
+﻿using PROG7312_POE.Class;
+using PROG7312_POE.Class.Models;
+using PROG7312_POE.Class.Models.Enums;
+using PROG7312_POE.Class.TreeClass;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,9 +42,9 @@ namespace PROG7312_POE
 
         ValidationClass val = new ValidationClass();
 
-        IssueClass catList = new IssueClass();
+        RequestCategory catList = new RequestCategory();
 
-        List<IssueClass> issueList = new List<IssueClass>();
+        List<ReportedRequest> issueList = new List<ReportedRequest>();
 
         //-------------------------------------------------------------------------------------
         /// <summary>
@@ -69,11 +72,19 @@ namespace PROG7312_POE
         /// </summary>
         public void loadCategories()
         {
-            foreach (var category in catList.categoryList)
+            cBCategory.Items.Clear(); // Clear any existing items
+
+            foreach (var category in Enum.GetValues(typeof(RequestCategory)).Cast<RequestCategory>())
             {
-                cBCategory.Items.Add(category);
+                // Get the description for each enum value and add it to the ComboBox
+                cBCategory.Items.Add(GetEnumDescription(category));
             }
 
+            // Optionally set the ComboBox to the first item by default
+            if (cBCategory.Items.Count > 0)
+            {
+                cBCategory.SelectedIndex = 0;
+            }
         }
         //-------------------------------------------------------------------------------------
         /// <summary>
@@ -96,7 +107,7 @@ namespace PROG7312_POE
         /// <summary>
         /// 
         /// </summary>
-        private void btnAttach_Click(object sender, EventArgs e)
+        private void btnBrowse_Click(object sender, EventArgs e)
         {
             try
             {
@@ -114,7 +125,7 @@ namespace PROG7312_POE
                     userFileData = File.ReadAllBytes(openFileDialog.FileName);
                 }
             }
-            catch
+            catch (Exception ex)
             { }
         }
 
@@ -128,7 +139,7 @@ namespace PROG7312_POE
             int filledCount = 0;
 
             if (tBLocation.Text.Length > 1) filledCount++;
-            if (cBCategory.Text.Length > 1) filledCount++;
+            if (cBCategory.Text.Length > 1 && cBCategory.Text != "Select a Category") filledCount++;
             if (rTBDescription.Text.Length > 1) filledCount++;
             if (tBAttachment.Text.Length > 1) filledCount++;
 
@@ -145,9 +156,19 @@ namespace PROG7312_POE
             string userLocation = "";
             string userCategory = "";
             string userDescription = "";
+            Customer customer = null;
+            RequestCategory category = RequestCategory.None;
 
             if (UserProgress.Value < 4)
             {
+                using (CustomerInput customerInputForm = new CustomerInput())
+                {
+                    if (customerInputForm.ShowDialog() == DialogResult.OK)
+                    {
+                        customer = customerInputForm.CustomerDetails;
+                    }
+                }
+
                 if (string.IsNullOrEmpty(userFileName))
                 {
                     MessageBox.Show("Please upload a file before submitting the issue report");
@@ -159,10 +180,15 @@ namespace PROG7312_POE
                 if (cBCategory.Text != "Select a Category") userCategory = cBCategory.Text;
                 bool isMatchFound = false;
 
-                foreach (var cat in catList.categoryList)
+
+                foreach (var cat in Enum.GetValues(typeof(RequestCategory)).Cast<RequestCategory>())
                 {
-                    if (cBCategory.Text == cat)
+                    // Get the description of the enum value
+                    var description = GetEnumDescription(cat);
+
+                    if (cBCategory.Text == description)
                     {
+                        category = cat;
                         isMatchFound = true; // A match was found
                         break; // Exit the loop early since we found a match
                     }
@@ -173,10 +199,11 @@ namespace PROG7312_POE
                     MessageBox.Show("The selected category does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
 
-                IssueClass issue = new IssueClass(userLocation, userCategory, userDescription, userFileName, userFileData);
+                ReportedRequest issue = new ReportedRequest(customer, userDescription, category, userLocation, userFileName, userFileData);
+
 
                 issueList.Add(issue);
-                BinarySearchTree bst = new BinarySearchTree();
+                RedBlackTree bst = new RedBlackTree();
                 bst.Insert(issue);
 
                 MessageBox.Show("Issue reported successfully");
@@ -187,15 +214,12 @@ namespace PROG7312_POE
             }
         }
 
-        //-------------------------------------------------------------------------------------
-        /// <summary>
-        /// 
-        /// </summary>
-        private void tSlblExit_Click_1(object sender, EventArgs e)
+        private string GetEnumDescription(Enum value)
         {
-            this.Close();
+            var field = value.GetType().GetField(value.ToString());
+            var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
+            return attribute == null ? value.ToString() : attribute.Description;
         }
-
 
         //-------------------------------------------------------------------------------------
         /// <summary>
@@ -264,6 +288,5 @@ namespace PROG7312_POE
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-
     }
 }

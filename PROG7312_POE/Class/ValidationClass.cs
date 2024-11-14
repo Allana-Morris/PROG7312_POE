@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PROG7312_POE
+namespace PROG7312_POE.Class
 {
     internal class ValidationClass
     {
@@ -25,9 +25,9 @@ namespace PROG7312_POE
             bool LargerToDate = true;
             bool ValidDates = true;
 
-            if ((FromDate < DateTime.Now) || (ToDate < DateTime.Now))
+            if (FromDate < DateTime.Now || ToDate < DateTime.Now)
             {
-                pastDate = false;     
+                pastDate = false;
             }
 
             if (ToDate < FromDate)
@@ -67,6 +67,6 @@ namespace PROG7312_POE
         }
 
 
-        
+
     }
 }

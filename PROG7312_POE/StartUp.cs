@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.Media;
 using System.Windows.Forms;
+using PROG7312_POE.Class;
 
 namespace PROG7312_POE
 {
@@ -67,8 +68,8 @@ namespace PROG7312_POE
         /// </summary>
         private void pBRequestStatus_Click(object sender, EventArgs e)
         {
-            SoundPlayer soundPlayer = new SoundPlayer();
-            soundPlayer.Play();
+            ServiceRequestStatusForm SRS = new ServiceRequestStatusForm();
+            SRS.ShowDialog();
 
         }
 
