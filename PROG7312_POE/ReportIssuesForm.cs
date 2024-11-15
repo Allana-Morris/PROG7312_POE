@@ -44,6 +44,8 @@ namespace PROG7312_POE
 
         RequestCategory catList = new RequestCategory();
 
+        private RedBlackTree bst = new RedBlackTree();
+
         List<ReportedRequest> issueList = new List<ReportedRequest>();
 
         //-------------------------------------------------------------------------------------
@@ -159,7 +161,7 @@ namespace PROG7312_POE
             Customer customer = null;
             RequestCategory category = RequestCategory.None;
 
-            if (UserProgress.Value < 4)
+            if (UserProgress.Value == 4)
             {
                 using (CustomerInput customerInputForm = new CustomerInput())
                 {
@@ -203,10 +205,10 @@ namespace PROG7312_POE
 
 
                 issueList.Add(issue);
-                RedBlackTree bst = new RedBlackTree();
                 bst.Insert(issue);
 
                 MessageBox.Show("Issue reported successfully");
+                this.Close();
             }
             else
             {

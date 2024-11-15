@@ -75,6 +75,7 @@ namespace PROG7312_POE
             btnSubmit.TabIndex = 1;
             btnSubmit.Text = "Submit";
             btnSubmit.UseVisualStyleBackColor = false;
+            btnSubmit.Click += btnSubmit_Click;
             // 
             // tSTopBat
             // 

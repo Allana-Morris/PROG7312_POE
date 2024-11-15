@@ -41,7 +41,7 @@ namespace PROG7312_POE.Class.TreeClass
 
         private void FixInsert(TreeNode node)
         {
-            while (node != root && node.Parent.NodeColor == Color.Red)
+            while ((node != root && node.Parent != null && node.Parent.NodeColor == Color.Red)
             {
                 if (node.Parent == node.Parent.Parent.Left)
                 {

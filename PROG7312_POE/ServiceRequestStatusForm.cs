@@ -1,4 +1,5 @@
 ﻿using PROG7312_POE.Class;
+using PROG7312_POE.Class.TreeClass;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,14 +9,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PROG7312_POE
 {
     public partial class ServiceRequestStatusForm : Form
     {
+        RedBlackTree tree = new RedBlackTree();
+
         public ServiceRequestStatusForm()
         {
             InitializeComponent();
+            LoadRequestsFromTree(tree);
         }
 
         private void TSMIReturnToHome_Click(object sender, EventArgs e)
@@ -139,6 +144,39 @@ namespace PROG7312_POE
             {
                 pBRequestProgress.Value = selectedRequest.Progress;         
                 lblPercentage.Text = $"{selectedRequest.Progress}% Complete...";
+            }
+        }
+
+        public void LoadRequestsFromTree(RedBlackTree tree)
+        {
+
+            // Clear existing items in the ListView
+            lVRequests.Items.Clear();
+            lVRequests.Columns.Clear();
+            // Perform in-order traversal to get a sorted list of ServiceRequests
+            var requests = tree.InOrderTraversal();
+            lVRequests.View = View.Details;
+            lVRequests.Columns.Add("Request ID", 100);
+            lVRequests.Columns.Add("Category", 150);
+            lVRequests.Columns.Add("Location", 150);
+            lVRequests.Columns.Add("Priority", 100);
+            lVRequests.Columns.Add("Status", 100);
+
+
+            // Add each request to the ListView
+            foreach (var request in requests)
+            {
+                // Assign priority based on category
+                var priority = request.AssignPriority(request.Category).ToString();
+
+                // Create a ListView item
+                var item = new ListViewItem(request.RequestId.ToString());
+                item.SubItems.Add(request.Category.ToString());
+                item.SubItems.Add(request.UserLocation.ToString());
+                item.SubItems.Add(priority);
+                item.SubItems.Add(request.Status.ToString());
+
+                lVRequests.Items.Add(item);
             }
         }
     }
