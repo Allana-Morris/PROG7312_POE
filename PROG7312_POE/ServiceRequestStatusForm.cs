@@ -1,4 +1,5 @@
 ﻿using PROG7312_POE.Class;
+using PROG7312_POE.Class.Models;
 using PROG7312_POE.Class.TreeClass;
 using System;
 using System.Collections.Generic;
@@ -15,12 +16,12 @@ namespace PROG7312_POE
 {
     public partial class ServiceRequestStatusForm : Form
     {
-        RedBlackTree tree = new RedBlackTree();
+        private RedBlackTree redBlackTree = new RedBlackTree();
 
         public ServiceRequestStatusForm()
         {
             InitializeComponent();
-            LoadRequestsFromTree(tree);
+            LoadRequestsFromTree(redBlackTree);
         }
 
         private void TSMIReturnToHome_Click(object sender, EventArgs e)
@@ -45,7 +46,7 @@ namespace PROG7312_POE
         protected override void WndProc(ref Message m)
         {
             const int WM_NCHITTEST = 0x84;
-            const int HTCLIENT = 1;
+            // const int HTCLIENT = 1;
             const int HTCAPTION = 2;
             const int HTLEFT = 10;
             const int HTRIGHT = 11;
@@ -104,8 +105,8 @@ namespace PROG7312_POE
             if (selectedRequest != null)
             {
                 // Build the text for the RichTextBox
-                string requestDetails = $"Request Location: {selectedRequest.Category}\n" +   // Request Location
-                                        $"Category: {selectedRequest.Category}\n" +          // Category
+                string requestDetails = $"Request Location: {selectedRequest.UserLocation}\n" +   // Request Location
+                                        $"Category: {GetEnumDescription(selectedRequest.Category)}\n" +          // Category
                                         $"Description:\n{selectedRequest.Description}\n\n" + // Description
                                         $"Customer Name: {selectedRequest.Customer.Name}\n" + // Customer Name
                                         $"Customer Contact Number: {selectedRequest.Customer.ContactNumber}"; // Customer Contact Number
@@ -123,17 +124,16 @@ namespace PROG7312_POE
         {
             if (lVRequests.SelectedItems.Count > 0)
             {
-                // Assuming the RequestId is stored in the first column of the ListView
-                Guid selectedRequestId = Guid.Parse(lVRequests.SelectedItems[0].Text);
+                
+                string selectedRequestname = lVRequests.SelectedItems[0].Text;
 
-                var rm = new RequestManager();
+                var rbt = new RedBlackTree();
 
-                // Retrieve the ReportedRequest by ID from your collection or tree
-                return rm.GetRequestById(selectedRequestId); // Replace with your actual method to retrieve the request
+                return rbt.nameSearch(selectedRequestname);
             }
             else
             {
-                return null; // No item selected
+                return null;
             }
         }
 
@@ -142,42 +142,70 @@ namespace PROG7312_POE
             var selectedRequest = GetSelectedRequest();
             if (selectedRequest != null)
             {
-                pBRequestProgress.Value = selectedRequest.Progress;         
+                pBRequestProgress.Value = selectedRequest.Progress;
                 lblPercentage.Text = $"{selectedRequest.Progress}% Complete...";
             }
         }
 
         public void LoadRequestsFromTree(RedBlackTree tree)
         {
-
-            // Clear existing items in the ListView
+            // Clear existing items and columns in the ListView
             lVRequests.Items.Clear();
             lVRequests.Columns.Clear();
-            // Perform in-order traversal to get a sorted list of ServiceRequests
-            var requests = tree.InOrderTraversal();
-            lVRequests.View = View.Details;
-            lVRequests.Columns.Add("Request ID", 100);
-            lVRequests.Columns.Add("Category", 150);
-            lVRequests.Columns.Add("Location", 150);
-            lVRequests.Columns.Add("Priority", 100);
-            lVRequests.Columns.Add("Status", 100);
 
+            // Perform in-order traversal to get a sorted list of ServiceRequests
+            var requests = tree.GetRequestsForListView();
+
+            // Optionally, sort requests by Category before adding to ListView
+            requests = requests.OrderBy(r => r.Category).ToList(); // Sort by Category
+
+            // Set up the ListView to display details
+            lVRequests.View = View.Details;
+
+            // Add columns to the ListView for displaying data
+            lVRequests.Columns.Add("Request ID", 100);
+            lVRequests.Columns.Add("Category", 200);
+            lVRequests.Columns.Add("Location", 175);
+            lVRequests.Columns.Add("Priority", 125);
+            lVRequests.Columns.Add("Status", 125);
 
             // Add each request to the ListView
             foreach (var request in requests)
             {
-                // Assign priority based on category
                 var priority = request.AssignPriority(request.Category).ToString();
-
-                // Create a ListView item
-                var item = new ListViewItem(request.RequestId.ToString());
-                item.SubItems.Add(request.Category.ToString());
-                item.SubItems.Add(request.UserLocation.ToString());
+                var item = new ListViewItem(request.RequestName);
+                item.SubItems.Add(GetEnumDescription(request.Category));
+                item.SubItems.Add(request.UserLocation);
                 item.SubItems.Add(priority);
-                item.SubItems.Add(request.Status.ToString());
+                item.SubItems.Add(GetEnumDescription(request.Status));
 
                 lVRequests.Items.Add(item);
             }
         }
+
+        // Get description for Status enum
+        private string GetEnumDescription(Enum value)
+        {
+            var field = value.GetType().GetField(value.ToString());
+            var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
+            return attribute == null ? value.ToString() : attribute.Description;
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            ReportedRequest sRequest = GetSelectedRequest();
+            Random rand = new Random();
+
+            // Generate random values for the hour, minute, and second
+            int hour = rand.Next(0, 24);    // Random hour between 0 and 23
+            int minute = rand.Next(0, 60);  // Random minute between 0 and 59
+            int second = rand.Next(0, 60);  // Random second between 0 and 59
+
+            // Create a random time with today's date, but with the random time values
+            DateTime randomTime = DateTime.Today.AddHours(hour).AddMinutes(minute).AddSeconds(second);
+            int prog = rand.Next(0, 100);
+            sRequest.UpdateStatus(prog, randomTime);
+        }
+
     }
 }

@@ -192,8 +192,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem returnToHomeToolStripMenuItem;
         private System.Windows.Forms.ToolStrip tSTopbar;
         private System.Windows.Forms.MenuStrip mSMenu;
         private System.Windows.Forms.ToolStripLabel tSlblTitle;

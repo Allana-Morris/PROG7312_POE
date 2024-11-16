@@ -9,13 +9,13 @@ namespace PROG7312_POE.Class.Models.Enums
 {
     public enum RequestStatus
     {
-        [Description("Pending")]
-        Pending,
+        [Description("Request Open")]
+        Open,
 
         [Description("In Progress")]
         InProgress,
 
-        [Description("Resolved")]
-        Resolved
+        [Description("Closed")]
+        Closed
     }
 }

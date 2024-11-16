@@ -14,23 +14,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-///TO DO
-///- add page that displays all reported issues done in session
-///- allow for more than one file upload
-///- add docx file support
-///- show list of uploaded files (allow for add more or delete on preview of uploaded files)
-///- funky-afy the progress bar
-///- look into resizeable pages
-///- look into moveable pages
-///- user help tips
-///- show preview of reported issues on selection in list of all submitions
-///- jazz up AI code
-///- AI declaration for code
-///- Keep the Windows 95 theme running
-///- Exception handling 
-///- Add code references
-///- Better comments 
-
 namespace PROG7312_POE
 {
     public partial class ReportIssuesForm : Form
@@ -42,9 +25,7 @@ namespace PROG7312_POE
 
         ValidationClass val = new ValidationClass();
 
-        RequestCategory catList = new RequestCategory();
-
-        private RedBlackTree bst = new RedBlackTree();
+        private RedBlackTree rbt = new RedBlackTree();
 
         List<ReportedRequest> issueList = new List<ReportedRequest>();
 
@@ -128,7 +109,9 @@ namespace PROG7312_POE
                 }
             }
             catch (Exception ex)
-            { }
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         //-------------------------------------------------------------------------------------
@@ -155,64 +138,76 @@ namespace PROG7312_POE
         /// </summary>
         private void btnSubmit_Click(object sender, EventArgs e)
         {
+            // Fields to capture user inputs
             string userLocation = "";
-            string userCategory = "";
             string userDescription = "";
             Customer customer = null;
             RequestCategory category = RequestCategory.None;
 
+            // Ensure the user has completed all steps
             if (UserProgress.Value == 4)
             {
+                // Prompt for customer details
                 using (CustomerInput customerInputForm = new CustomerInput())
                 {
                     if (customerInputForm.ShowDialog() == DialogResult.OK)
                     {
                         customer = customerInputForm.CustomerDetails;
                     }
+                    else
+                    {
+                        MessageBox.Show("Customer details are required to submit the issue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
 
+                // Ensure a file is uploaded before proceeding
                 if (string.IsNullOrEmpty(userFileName))
                 {
-                    MessageBox.Show("Please upload a file before submitting the issue report");
+                    MessageBox.Show("Please upload a file before submitting the issue report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
+                // Validate location and description inputs
                 if (val.isString(tBLocation.Text)) userLocation = tBLocation.Text;
                 if (val.isString(rTBDescription.Text)) userDescription = rTBDescription.Text;
-                if (cBCategory.Text != "Select a Category") userCategory = cBCategory.Text;
+
+                // Validate and match the selected category
                 bool isMatchFound = false;
-
-
                 foreach (var cat in Enum.GetValues(typeof(RequestCategory)).Cast<RequestCategory>())
                 {
-                    // Get the description of the enum value
                     var description = GetEnumDescription(cat);
-
                     if (cBCategory.Text == description)
                     {
                         category = cat;
-                        isMatchFound = true; // A match was found
+                        isMatchFound = true;
                         break; // Exit the loop early since we found a match
                     }
                 }
+
                 if (!isMatchFound)
                 {
-                    // Display an error message if no match was found
                     MessageBox.Show("The selected category does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
                 }
 
+                // Create the ReportedRequest object
                 ReportedRequest issue = new ReportedRequest(customer, userDescription, category, userLocation, userFileName, userFileData);
 
-
+                // Add the issue to the issue list and the tree
                 issueList.Add(issue);
-                bst.Insert(issue);
+                rbt.Insert(issue);
 
-                MessageBox.Show("Issue reported successfully");
+                Console.WriteLine($"Inserted ReportedRequest with ID: {issue.RequestId}");
+
+                // Confirm successful submission
+                MessageBox.Show("Issue reported successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Invalid Issue Request");
+                // Invalid state for submission
+                MessageBox.Show("Invalid Issue Request.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -239,7 +234,7 @@ namespace PROG7312_POE
         protected override void WndProc(ref Message m)
         {
             const int WM_NCHITTEST = 0x84;
-            const int HTCLIENT = 1;
+          //  const int HTCLIENT = 1;
             const int HTCAPTION = 2;
             const int HTLEFT = 10;
             const int HTRIGHT = 11;

@@ -96,7 +96,7 @@ namespace PROG7312_POE
         protected override void WndProc(ref Message m)
         {
             const int WM_NCHITTEST = 0x84;
-            const int HTCLIENT = 1;
+            //const int HTCLIENT = 1;
             const int HTCAPTION = 2;
             const int HTLEFT = 10;
             const int HTRIGHT = 11;

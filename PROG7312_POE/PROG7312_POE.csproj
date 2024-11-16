@@ -24,6 +24,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Class\IDSingleton.cs" />
     <Compile Include="Class\Models\AnnouncementClass.cs" />
     <Compile Include="Class\Models\Customer.cs" />
     <Compile Include="Class\Models\Enums\RequestCategory.cs" />
@@ -33,7 +34,7 @@
     <Compile Include="Class\EventManagement.cs" />
     <Compile Include="Class\Models\FeedbackClass.cs" />
     <Compile Include="Class\Models\ReportedRequest.cs" />
-    <Compile Include="Class\RequestManager.cs" />
+    <Compile Include="Class\TreeClass\RedBlackTreeNode.cs" />
     <Compile Include="CustomerInput.cs" />
     <Compile Include="CustomerInput.Designer.cs" />
     <Compile Include="GlobalSuppressions.cs" />
@@ -60,8 +61,7 @@
 	  <AutoGen>True</AutoGen>
 	  <DependentUpon>Windows.resx</DependentUpon>
 	</Compile>
-	<Compile Include="Class\TreeClass\RedandBlackTree.cs" />
-	<Compile Include="Class\TreeClass\TreeNode.cs" />
+	<Compile Include="Class\TreeClass\RedBlackTree.cs" />
     <Compile Include="UserFeedback.cs">
       <SubType>Form</SubType>
     </Compile>

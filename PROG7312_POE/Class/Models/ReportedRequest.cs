@@ -7,6 +7,7 @@ using System;
 public class ReportedRequest : IComparable<ReportedRequest>
 {
     public Guid RequestId { get; private set; }
+    public string RequestName { get; private set; }
     public Customer Customer { get; set; }
     public DateTime RequestDate { get; private set; }
     public DateTime LastUpdated { get; set; }
@@ -22,7 +23,7 @@ public class ReportedRequest : IComparable<ReportedRequest>
 
     public ReportedRequest(Customer customer, string description, RequestCategory category, string location, string filename, byte[] filedata)
     {
-        RequestId = Guid.NewGuid();
+        RequestId = new Guid();
         Customer = customer;
         RequestDate = DateTime.Now;
         LastUpdated = DateTime.Now;
@@ -31,20 +32,54 @@ public class ReportedRequest : IComparable<ReportedRequest>
         UserLocation = location;
         UserFileName = filename;
         UserFileData = filedata;
-        Status = RequestStatus.Pending;
+        Status = RequestStatus.Open;
         Progress = 0;
     }
 
-    public void UpdateStatus(RequestStatus newStatus, int progress)
+    public ReportedRequest(int id, ReportedRequest rr)
     {
-        Status = newStatus;
+        RequestId = rr.RequestId;
+        RequestName = GenerateCustomRequestId(id);
+        Customer = rr.Customer;
+        RequestDate = rr.RequestDate;
+        LastUpdated = rr.LastUpdated;
+        Description = rr.Description;
+        Category = rr.Category;
+        UserLocation = rr.UserLocation;
+        UserFileName = rr.UserFileName;
+        UserFileData = rr.UserFileData;
+        Status = rr.Status;
+        Progress = rr.Progress;
+    }
+
+    public void UpdateStatus(int progress, DateTime updateTime)
+    {
+        if (progress > 0 && progress < 100)
+        {
+            Status = RequestStatus.InProgress;
+        }
+        else if (progress == 100)
+        {
+            Status = RequestStatus.Closed;
+        }
+        else
+        {
+            Status = RequestStatus.Open;
+        }
         Progress = progress;
-        LastUpdated = DateTime.Now;
+        //LastUpdated = DateTime.Now;
+        LastUpdated = updateTime;
+    }
+
+    private string GenerateCustomRequestId(int id)
+    {
+        return $"REP{id:D3}"; // D3 formats the number as a 3-digit string, e.g., "REP001"
     }
 
     public int CompareTo(ReportedRequest other)
     {
-        return RequestId.CompareTo(other.RequestId);
+        if (other == null) return 1; // To handle null comparisons
+        return this.RequestId.CompareTo(other.RequestId);
     }
 
     internal ReportedRequest(Guid requestId)
