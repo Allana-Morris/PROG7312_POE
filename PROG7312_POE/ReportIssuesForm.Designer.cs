@@ -30,6 +30,7 @@ namespace PROG7312_POE
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             btnBrowse = new System.Windows.Forms.Button();
             btnSubmit = new System.Windows.Forms.Button();
             tSTopBat = new System.Windows.Forms.ToolStrip();
@@ -38,17 +39,20 @@ namespace PROG7312_POE
             mSMenu = new System.Windows.Forms.MenuStrip();
             mTSMIMenu = new System.Windows.Forms.ToolStripMenuItem();
             TSMIReturnToHome = new System.Windows.Forms.ToolStripMenuItem();
-            tBAttachment = new System.Windows.Forms.TextBox();
             tBLocation = new System.Windows.Forms.TextBox();
             rTBDescription = new System.Windows.Forms.RichTextBox();
-            UserProgress = new System.Windows.Forms.ProgressBar();
             lblLocation = new System.Windows.Forms.Label();
             lblCategory = new System.Windows.Forms.Label();
             lblDescription = new System.Windows.Forms.Label();
             lblAttachment = new System.Windows.Forms.Label();
             cBCategory = new System.Windows.Forms.ComboBox();
+            tVFiles = new System.Windows.Forms.TreeView();
+            cMSRightClick = new System.Windows.Forms.ContextMenuStrip(components);
+            tSMIDelete = new System.Windows.Forms.ToolStripMenuItem();
+            pBProgress = new Class.BrickProgressBar();
             tSTopBat.SuspendLayout();
             mSMenu.SuspendLayout();
+            cMSRightClick.SuspendLayout();
             SuspendLayout();
             // 
             // btnBrowse
@@ -56,7 +60,7 @@ namespace PROG7312_POE
             btnBrowse.BackColor = System.Drawing.SystemColors.ControlLight;
             btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            btnBrowse.Location = new System.Drawing.Point(291, 457);
+            btnBrowse.Location = new System.Drawing.Point(105, 593);
             btnBrowse.Name = "btnBrowse";
             btnBrowse.Size = new System.Drawing.Size(84, 29);
             btnBrowse.TabIndex = 0;
@@ -69,7 +73,7 @@ namespace PROG7312_POE
             btnSubmit.BackColor = System.Drawing.SystemColors.ControlLight;
             btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            btnSubmit.Location = new System.Drawing.Point(291, 508);
+            btnSubmit.Location = new System.Drawing.Point(291, 633);
             btnSubmit.Name = "btnSubmit";
             btnSubmit.Size = new System.Drawing.Size(84, 29);
             btnSubmit.TabIndex = 1;
@@ -86,7 +90,7 @@ namespace PROG7312_POE
             tSTopBat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tSlblTitle, tSlblExit });
             tSTopBat.Location = new System.Drawing.Point(0, 0);
             tSTopBat.Name = "tSTopBat";
-            tSTopBat.Size = new System.Drawing.Size(387, 25);
+            tSTopBat.Size = new System.Drawing.Size(413, 25);
             tSTopBat.TabIndex = 2;
             tSTopBat.Text = "toolStrip1";
             tSTopBat.MouseDown += tSTopBat_MouseDown;
@@ -120,7 +124,7 @@ namespace PROG7312_POE
             mSMenu.Location = new System.Drawing.Point(0, 25);
             mSMenu.Name = "mSMenu";
             mSMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            mSMenu.Size = new System.Drawing.Size(387, 28);
+            mSMenu.Size = new System.Drawing.Size(413, 28);
             mSMenu.TabIndex = 3;
             mSMenu.Text = "menuStrip1";
             // 
@@ -137,18 +141,6 @@ namespace PROG7312_POE
             TSMIReturnToHome.Name = "TSMIReturnToHome";
             TSMIReturnToHome.Size = new System.Drawing.Size(211, 26);
             TSMIReturnToHome.Text = "Return to Home";
-            // 
-            // tBAttachment
-            // 
-            tBAttachment.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            tBAttachment.Location = new System.Drawing.Point(105, 458);
-            tBAttachment.Multiline = true;
-            tBAttachment.Name = "tBAttachment";
-            tBAttachment.ReadOnly = true;
-            tBAttachment.ShortcutsEnabled = false;
-            tBAttachment.Size = new System.Drawing.Size(180, 29);
-            tBAttachment.TabIndex = 4;
-            tBAttachment.TabStop = false;
             // 
             // tBLocation
             // 
@@ -168,14 +160,6 @@ namespace PROG7312_POE
             rTBDescription.Size = new System.Drawing.Size(270, 232);
             rTBDescription.TabIndex = 7;
             rTBDescription.Text = "";
-            // 
-            // UserProgress
-            // 
-            UserProgress.Dock = System.Windows.Forms.DockStyle.Top;
-            UserProgress.Location = new System.Drawing.Point(0, 53);
-            UserProgress.Name = "UserProgress";
-            UserProgress.Size = new System.Drawing.Size(387, 23);
-            UserProgress.TabIndex = 8;
             // 
             // lblLocation
             // 
@@ -224,19 +208,53 @@ namespace PROG7312_POE
             cBCategory.TabIndex = 13;
             cBCategory.Text = "Select a Category";
             // 
+            // tVFiles
+            // 
+            tVFiles.ContextMenuStrip = cMSRightClick;
+            tVFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            tVFiles.Location = new System.Drawing.Point(105, 461);
+            tVFiles.Name = "tVFiles";
+            tVFiles.Size = new System.Drawing.Size(270, 126);
+            tVFiles.TabIndex = 15;
+            tVFiles.NodeMouseDoubleClick += tVFiles_NodeMouseDoubleClick;
+            tVFiles.MouseUp += tVFiles_MouseUp;
+            // 
+            // cMSRightClick
+            // 
+            cMSRightClick.ImageScalingSize = new System.Drawing.Size(20, 20);
+            cMSRightClick.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tSMIDelete });
+            cMSRightClick.Name = "contextMenuStrip1";
+            cMSRightClick.Size = new System.Drawing.Size(123, 28);
+            cMSRightClick.Text = "Options";
+            // 
+            // tSMIDelete
+            // 
+            tSMIDelete.Name = "tSMIDelete";
+            tSMIDelete.Size = new System.Drawing.Size(122, 24);
+            tSMIDelete.Text = "Delete";
+            tSMIDelete.Click += tSMIDelete_Click;
+            // 
+            // pBProgress
+            // 
+            pBProgress.Dock = System.Windows.Forms.DockStyle.Top;
+            pBProgress.Location = new System.Drawing.Point(0, 53);
+            pBProgress.Name = "pBProgress";
+            pBProgress.Size = new System.Drawing.Size(413, 29);
+            pBProgress.TabIndex = 16;
+            // 
             // ReportIssuesForm
             // 
             BackColor = System.Drawing.Color.Gainsboro;
-            ClientSize = new System.Drawing.Size(387, 549);
+            ClientSize = new System.Drawing.Size(413, 674);
+            Controls.Add(pBProgress);
+            Controls.Add(tVFiles);
             Controls.Add(rTBDescription);
             Controls.Add(cBCategory);
             Controls.Add(lblAttachment);
             Controls.Add(lblDescription);
             Controls.Add(lblCategory);
             Controls.Add(lblLocation);
-            Controls.Add(UserProgress);
             Controls.Add(tBLocation);
-            Controls.Add(tBAttachment);
             Controls.Add(mSMenu);
             Controls.Add(tSTopBat);
             Controls.Add(btnSubmit);
@@ -249,6 +267,7 @@ namespace PROG7312_POE
             tSTopBat.PerformLayout();
             mSMenu.ResumeLayout(false);
             mSMenu.PerformLayout();
+            cMSRightClick.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -262,10 +281,8 @@ namespace PROG7312_POE
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.ToolStrip tSTopBat;
         private System.Windows.Forms.MenuStrip mSMenu;
-        private System.Windows.Forms.TextBox tBAttachment;
         private System.Windows.Forms.TextBox tBLocation;
         private System.Windows.Forms.RichTextBox rTBDescription;
-        private System.Windows.Forms.ProgressBar UserProgress;
         private System.Windows.Forms.Label lblLocation;
         private System.Windows.Forms.Label lblCategory;
         private System.Windows.Forms.Label lblDescription;
@@ -275,5 +292,9 @@ namespace PROG7312_POE
         private System.Windows.Forms.ToolStripMenuItem mTSMIMenu;
         private System.Windows.Forms.ToolStripMenuItem TSMIReturnToHome;
         private System.Windows.Forms.ComboBox cBCategory;
+        private System.Windows.Forms.TreeView tVFiles;
+        private Class.BrickProgressBar pBProgress;
+        private System.Windows.Forms.ContextMenuStrip cMSRightClick;
+        private System.Windows.Forms.ToolStripMenuItem tSMIDelete;
     }
 }

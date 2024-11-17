@@ -21,8 +21,6 @@ namespace PROG7312_POE.Class
 
         }
 
-
-
         public List<EventClass> GetAll()
         {
             List<EventClass> allEvents = EventStorage
@@ -72,6 +70,7 @@ namespace PROG7312_POE.Class
         /// </summary>
         public void LoadEvents()
         {
+            // TODO: Adapt Part Two to be compatible with part Three
             List<EventClass> events = new List<EventClass>
             {
                 new EventClass(1, "Water Quality Awareness Campaign", new DateTime(2024, 10, 15), "Water and Sanitation"),
@@ -127,3 +126,4 @@ namespace PROG7312_POE.Class
         }
     }
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

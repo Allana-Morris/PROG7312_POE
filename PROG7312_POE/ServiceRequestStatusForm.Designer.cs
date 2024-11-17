@@ -38,34 +38,34 @@
             btnViewDetails = new System.Windows.Forms.Button();
             btnTrackProgress = new System.Windows.Forms.Button();
             rTBDetails = new System.Windows.Forms.RichTextBox();
-            panel1 = new System.Windows.Forms.Panel();
             lblPercentage = new System.Windows.Forms.Label();
-            lblProgressTracker = new System.Windows.Forms.Label();
             pBRequestProgress = new System.Windows.Forms.ProgressBar();
-            button3 = new System.Windows.Forms.Button();
-            toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
+            gBProgress = new System.Windows.Forms.GroupBox();
             mSMenu.SuspendLayout();
             tSTopBat.SuspendLayout();
-            panel1.SuspendLayout();
+            gBProgress.SuspendLayout();
             SuspendLayout();
             // 
             // mSMenu
             // 
-            mSMenu.BackColor = System.Drawing.Color.LightGray;
+            mSMenu.BackColor = System.Drawing.Color.Gainsboro;
             mSMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            mSMenu.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 0);
             mSMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             mSMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { mTSMIMenu });
+            mSMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             mSMenu.Location = new System.Drawing.Point(0, 25);
+            mSMenu.Margin = new System.Windows.Forms.Padding(0, 0, 0, 2);
             mSMenu.Name = "mSMenu";
-            mSMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            mSMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            mSMenu.Size = new System.Drawing.Size(927, 28);
+            mSMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 4);
+            mSMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            mSMenu.Size = new System.Drawing.Size(684, 30);
             mSMenu.TabIndex = 3;
             mSMenu.Text = "menuStrip1";
             // 
             // mTSMIMenu
             // 
-            mTSMIMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { TSMIReturnToHome, toolStripMenuItem2 });
+            mTSMIMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { TSMIReturnToHome });
             mTSMIMenu.Name = "mTSMIMenu";
             mTSMIMenu.Size = new System.Drawing.Size(64, 24);
             mTSMIMenu.Text = "Menu";
@@ -86,7 +86,7 @@
             tSTopBat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tSlblTitle, tSlblExit });
             tSTopBat.Location = new System.Drawing.Point(0, 0);
             tSTopBat.Name = "tSTopBat";
-            tSTopBat.Size = new System.Drawing.Size(927, 25);
+            tSTopBat.Size = new System.Drawing.Size(684, 25);
             tSTopBat.TabIndex = 2;
             tSTopBat.MouseDown += tSTopBat_MouseDown;
             // 
@@ -113,107 +113,90 @@
             // lVRequests
             // 
             lVRequests.FullRowSelect = true;
-            lVRequests.Location = new System.Drawing.Point(14, 68);
+            lVRequests.Location = new System.Drawing.Point(12, 68);
             lVRequests.MultiSelect = false;
             lVRequests.Name = "lVRequests";
-            lVRequests.Size = new System.Drawing.Size(896, 194);
+            lVRequests.Size = new System.Drawing.Size(645, 194);
             lVRequests.TabIndex = 4;
             lVRequests.UseCompatibleStateImageBehavior = false;
             lVRequests.View = System.Windows.Forms.View.Details;
             // 
             // btnViewDetails
             // 
+            btnViewDetails.BackColor = System.Drawing.Color.Gainsboro;
             btnViewDetails.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            btnViewDetails.Location = new System.Drawing.Point(182, 268);
+            btnViewDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            btnViewDetails.Location = new System.Drawing.Point(12, 268);
             btnViewDetails.Name = "btnViewDetails";
-            btnViewDetails.Size = new System.Drawing.Size(126, 26);
+            btnViewDetails.Size = new System.Drawing.Size(135, 30);
             btnViewDetails.TabIndex = 5;
             btnViewDetails.Text = "View Details";
-            btnViewDetails.UseVisualStyleBackColor = true;
+            btnViewDetails.UseVisualStyleBackColor = false;
             btnViewDetails.Click += btnViewDetails_Click;
             // 
             // btnTrackProgress
             // 
+            btnTrackProgress.BackColor = System.Drawing.Color.Gainsboro;
             btnTrackProgress.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            btnTrackProgress.Location = new System.Drawing.Point(673, 268);
+            btnTrackProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            btnTrackProgress.Location = new System.Drawing.Point(522, 268);
             btnTrackProgress.Name = "btnTrackProgress";
-            btnTrackProgress.Size = new System.Drawing.Size(133, 26);
+            btnTrackProgress.Size = new System.Drawing.Size(135, 30);
             btnTrackProgress.TabIndex = 6;
             btnTrackProgress.Text = "Track Progress";
-            btnTrackProgress.UseVisualStyleBackColor = true;
+            btnTrackProgress.UseVisualStyleBackColor = false;
             btnTrackProgress.Click += btnTrackProgress_Click;
             // 
             // rTBDetails
             // 
             rTBDetails.BackColor = System.Drawing.SystemColors.Window;
-            rTBDetails.Location = new System.Drawing.Point(14, 299);
+            rTBDetails.Location = new System.Drawing.Point(12, 318);
             rTBDetails.Name = "rTBDetails";
             rTBDetails.ReadOnly = true;
             rTBDetails.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            rTBDetails.Size = new System.Drawing.Size(896, 157);
+            rTBDetails.Size = new System.Drawing.Size(645, 200);
             rTBDetails.TabIndex = 7;
             rTBDetails.Text = "";
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(lblPercentage);
-            panel1.Controls.Add(lblProgressTracker);
-            panel1.Controls.Add(pBRequestProgress);
-            panel1.Location = new System.Drawing.Point(0, 474);
-            panel1.Name = "panel1";
-            panel1.Size = new System.Drawing.Size(910, 31);
-            panel1.TabIndex = 8;
             // 
             // lblPercentage
             // 
             lblPercentage.AutoSize = true;
-            lblPercentage.Location = new System.Drawing.Point(760, 6);
+            lblPercentage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            lblPercentage.Location = new System.Drawing.Point(547, 32);
             lblPercentage.Name = "lblPercentage";
-            lblPercentage.Size = new System.Drawing.Size(0, 18);
+            lblPercentage.Size = new System.Drawing.Size(26, 20);
             lblPercentage.TabIndex = 2;
-            // 
-            // lblProgressTracker
-            // 
-            lblProgressTracker.AutoSize = true;
-            lblProgressTracker.Location = new System.Drawing.Point(24, 6);
-            lblProgressTracker.Name = "lblProgressTracker";
-            lblProgressTracker.Size = new System.Drawing.Size(124, 18);
-            lblProgressTracker.TabIndex = 1;
-            lblProgressTracker.Text = "Progress Tracker";
+            lblPercentage.Text = "lbl";
             // 
             // pBRequestProgress
             // 
             pBRequestProgress.ForeColor = System.Drawing.Color.Green;
-            pBRequestProgress.Location = new System.Drawing.Point(182, 3);
+            pBRequestProgress.Location = new System.Drawing.Point(9, 32);
             pBRequestProgress.Name = "pBRequestProgress";
-            pBRequestProgress.Size = new System.Drawing.Size(516, 26);
+            pBRequestProgress.Size = new System.Drawing.Size(480, 26);
             pBRequestProgress.Step = 100;
             pBRequestProgress.TabIndex = 0;
             // 
-            // button3
+            // gBProgress
             // 
-            button3.Location = new System.Drawing.Point(24, 393);
-            button3.Name = "button3";
-            button3.Size = new System.Drawing.Size(106, 26);
-            button3.TabIndex = 9;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // toolStripMenuItem2
-            // 
-            toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new System.Drawing.Size(224, 26);
-            toolStripMenuItem2.Text = " ";
-            toolStripMenuItem2.Click += toolStripMenuItem2_Click;
+            gBProgress.Controls.Add(lblPercentage);
+            gBProgress.Controls.Add(pBRequestProgress);
+            gBProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
+            gBProgress.Location = new System.Drawing.Point(12, 534);
+            gBProgress.Name = "gBProgress";
+            gBProgress.Size = new System.Drawing.Size(645, 70);
+            gBProgress.TabIndex = 9;
+            gBProgress.TabStop = false;
+            gBProgress.Text = "Progress Tracker";
             // 
             // ServiceRequestStatusForm
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            ClientSize = new System.Drawing.Size(927, 517);
-            Controls.Add(panel1);
+            BackColor = System.Drawing.Color.Gainsboro;
+            ClientSize = new System.Drawing.Size(684, 616);
+            Controls.Add(gBProgress);
             Controls.Add(rTBDetails);
-            Controls.Add(button3);
             Controls.Add(btnTrackProgress);
             Controls.Add(btnViewDetails);
             Controls.Add(lVRequests);
@@ -228,8 +211,8 @@
             mSMenu.PerformLayout();
             tSTopBat.ResumeLayout(false);
             tSTopBat.PerformLayout();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            gBProgress.ResumeLayout(false);
+            gBProgress.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -246,11 +229,8 @@
         private System.Windows.Forms.Button btnViewDetails;
         private System.Windows.Forms.Button btnTrackProgress;
         private System.Windows.Forms.RichTextBox rTBDetails;
-        private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ProgressBar pBRequestProgress;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Label lblProgressTracker;
         private System.Windows.Forms.Label lblPercentage;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem2;
+        private System.Windows.Forms.GroupBox gBProgress;
     }
 }

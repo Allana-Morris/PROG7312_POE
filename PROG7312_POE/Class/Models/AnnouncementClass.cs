@@ -13,3 +13,4 @@ namespace PROG7312_POE.Class.Models
         public string AnnouncementDescription { get; set; }
     }
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

@@ -124,7 +124,7 @@ namespace PROG7312_POE
         {
             if (lVRequests.SelectedItems.Count > 0)
             {
-                
+
                 string selectedRequestname = lVRequests.SelectedItems[0].Text;
 
                 var rbt = new RedBlackTree();
@@ -165,9 +165,9 @@ namespace PROG7312_POE
             // Add columns to the ListView for displaying data
             lVRequests.Columns.Add("Request ID", 100);
             lVRequests.Columns.Add("Category", 200);
-            lVRequests.Columns.Add("Location", 175);
-            lVRequests.Columns.Add("Priority", 125);
-            lVRequests.Columns.Add("Status", 125);
+            lVRequests.Columns.Add("Location", 150);
+            lVRequests.Columns.Add("Priority", 100);
+            lVRequests.Columns.Add("Status", 100);
 
             // Add each request to the ListView
             foreach (var request in requests)
@@ -207,5 +207,9 @@ namespace PROG7312_POE
             sRequest.UpdateStatus(prog, randomTime);
         }
 
+        private void rTBDetails_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

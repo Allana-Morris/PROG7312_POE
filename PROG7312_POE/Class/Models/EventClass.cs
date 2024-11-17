@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace PROG7312_POE.Class.Models
 {
+    //-------------------------------------------------------------------------------------
+    /// <summary>
+    /// 
+    /// </summary>
     public class EventClass
     {
         public int EventID { get; set; }
@@ -24,3 +28,4 @@ namespace PROG7312_POE.Class.Models
         }
     }
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

@@ -14,14 +14,16 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
+// TODO: Chnage Location into Dropdown and Implement code for SouthAfricanCities enum
+
 namespace PROG7312_POE
 {
     public partial class ReportIssuesForm : Form
     {
         private int totalBoxes = 4;
 
-        private string userFileName;
-        private byte[] userFileData;
+        private string userFileName = "";  // Initialize as an empty string
+        private byte[] userFileData = new byte[0];  // Initialize as an empty byte array
 
         ValidationClass val = new ValidationClass();
 
@@ -39,14 +41,14 @@ namespace PROG7312_POE
 
             loadCategories();
 
-            UserProgress.Minimum = 0;
-            UserProgress.Maximum = totalBoxes;
-            UserProgress.Value = 0;
+            pBProgress.Minimum = 0;
+            pBProgress.Maximum = totalBoxes;
+            pBProgress.Value = 0;
 
             tBLocation.TextChanged += new EventHandler(TextBox_TextChanged);
             cBCategory.TextChanged += new EventHandler(TextBox_TextChanged);
             rTBDescription.TextChanged += new EventHandler(TextBox_TextChanged);
-            tBAttachment.TextChanged += new EventHandler(TextBox_TextChanged);
+            tVFiles.TextChanged += new EventHandler(TextBox_TextChanged);
         }
 
         //-------------------------------------------------------------------------------------
@@ -96,16 +98,40 @@ namespace PROG7312_POE
             {
                 // Implement OpenFileDialog to attach media
                 OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 openFileDialog.Title = "Attach Image or Document";
                 openFileDialog.Filter = "Image Files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png|PDF files (*.pdf)|*.pdf|All files (*.*)|*.*";
                 openFileDialog.CheckFileExists = true;
                 openFileDialog.CheckPathExists = true;
+                openFileDialog.Multiselect = true;
+
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    // Handle attachment 
-                    tBAttachment.Text = openFileDialog.SafeFileName;
-                    userFileName = Path.GetFileName(openFileDialog.FileName);
-                    userFileData = File.ReadAllBytes(openFileDialog.FileName);
+                    StringBuilder fileNames = new StringBuilder();
+                    List<byte[]> fileDataList = new List<byte[]>();
+                    tVFiles.Nodes.Clear();
+
+                    TreeNode rootNode = new TreeNode("Attached Files");
+                    tVFiles.Nodes.Add(rootNode);
+
+                    foreach (string file in openFileDialog.FileNames)
+                    {
+
+                        fileNames.AppendLine(Path.GetFileName(file));  // Store the file names
+                        byte[] fileData = File.ReadAllBytes(file);  // Read file data
+                        fileDataList.Add(fileData);  // Store file data
+                        TreeNode node = new TreeNode(Path.GetFileName(file))
+                        {
+                            Tag = file // Store the full file path in the Tag property
+                        };
+
+                        // Add the file node to the root node
+                        rootNode.Nodes.Add(node);
+                    }
+                    tVFiles.ExpandAll();
+                    // Store file data for future processing
+                    userFileName = string.Join(", ", openFileDialog.SafeFileNames); // Set the file names
+                    userFileData = fileDataList.SelectMany(fd => fd).ToArray();  // Combine all file data into a byte array
                 }
             }
             catch (Exception ex)
@@ -126,10 +152,10 @@ namespace PROG7312_POE
             if (tBLocation.Text.Length > 1) filledCount++;
             if (cBCategory.Text.Length > 1 && cBCategory.Text != "Select a Category") filledCount++;
             if (rTBDescription.Text.Length > 1) filledCount++;
-            if (tBAttachment.Text.Length > 1) filledCount++;
+            if (tVFiles.Text.Length > 1) filledCount++;
 
             // Update ProgressBar value
-            UserProgress.Value = filledCount;
+            pBProgress.Value = filledCount;
         }
 
         //-------------------------------------------------------------------------------------
@@ -144,8 +170,8 @@ namespace PROG7312_POE
             Customer customer = null;
             RequestCategory category = RequestCategory.None;
 
-            // Ensure the user has completed all steps
-            if (UserProgress.Value == 4)
+            // Ensure the user has completed all steps (ProgressBar value should be 4)
+            if (pBProgress.Value == 4)
             {
                 // Prompt for customer details
                 using (CustomerInput customerInputForm = new CustomerInput())
@@ -157,15 +183,15 @@ namespace PROG7312_POE
                     else
                     {
                         MessageBox.Show("Customer details are required to submit the issue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        return;  // Exit if customer details are not provided
                     }
                 }
 
                 // Ensure a file is uploaded before proceeding
-                if (string.IsNullOrEmpty(userFileName))
+                if (string.IsNullOrEmpty(userFileName) || userFileData == null || userFileData.Length == 0)
                 {
                     MessageBox.Show("Please upload a file before submitting the issue report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    return;  // Exit if no file is uploaded
                 }
 
                 // Validate location and description inputs
@@ -234,7 +260,7 @@ namespace PROG7312_POE
         protected override void WndProc(ref Message m)
         {
             const int WM_NCHITTEST = 0x84;
-          //  const int HTCLIENT = 1;
+            //  const int HTCLIENT = 1;
             const int HTCAPTION = 2;
             const int HTLEFT = 10;
             const int HTRIGHT = 11;
@@ -285,5 +311,76 @@ namespace PROG7312_POE
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+
+        private void tVFiles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            TreeNode selectedNode = e.Node;
+
+            // Retrieve the full file path from the Tag property
+            string filePath = selectedNode.Tag as string;
+
+            if (!string.IsNullOrEmpty(filePath))
+            {
+                try
+                {
+                    // Use Process.Start with the full path to open the file
+                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(filePath)
+                    {
+                        UseShellExecute = true // This ensures that the file is opened with the associated application
+                    });
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error opening file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No file path available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void tVFiles_MouseUp(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                // Get the node that was clicked on
+                TreeNode selectedNode = tVFiles.GetNodeAt(e.X, e.Y);
+
+                if (selectedNode != null)
+                {
+                    // Set the selected node for the context menu
+                    tVFiles.SelectedNode = selectedNode;
+                }
+            }
+        }
+
+        private void tSMIDelete_Click(object sender, EventArgs e)
+        {
+            // Get the selected node
+            TreeNode selectedNode = tVFiles.SelectedNode;
+
+            if (selectedNode != null)
+            {
+                // Optionally, you can confirm with the user before deleting
+                var confirmation = MessageBox.Show("Are you sure you want to delete this file?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (confirmation == DialogResult.Yes)
+                {
+                    // Optionally, delete the file from the file system as well
+                    string filePath = Path.Combine("yourFilePathHere", selectedNode.Text);  // Adjust the path based on your file storage logic
+                    if (File.Exists(filePath))
+                    {
+                        File.Delete(filePath);  // Delete the file from the file system
+                    }
+
+                    // Remove the node from the TreeView
+                    tVFiles.Nodes.Remove(selectedNode);
+
+                    // Optionally, update the file list or do other necessary cleanup
+                    MessageBox.Show("File deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+        }
     }
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

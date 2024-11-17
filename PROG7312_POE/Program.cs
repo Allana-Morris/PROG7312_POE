@@ -14,7 +14,7 @@ namespace PROG7312_POE
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
+          //  Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new StartUp());
         }

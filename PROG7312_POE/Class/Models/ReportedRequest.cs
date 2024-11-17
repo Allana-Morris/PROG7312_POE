@@ -2,6 +2,7 @@
 using PROG7312_POE.Class.Models;
 using System.ComponentModel;
 using System;
+using System.Collections.Generic;
 
 // Combine the RequestPriority with IssueCategory for consistency
 public class ReportedRequest : IComparable<ReportedRequest>
@@ -15,13 +16,14 @@ public class ReportedRequest : IComparable<ReportedRequest>
     public RequestCategory Category { get; set; }
     public RequestStatus Status { get; set; }
     public int Progress { get; set; }
-    public string UserLocation { get; set; }
-    public string UserFileName { get; set; }
-    public byte[] UserFileData { get; set; }
+    public SouthAfricanCities UserLocation { get; set; }
+    public List<string> UserFileNames { get; set; } = new List<string>();
+    public List<byte[]> UserFileData { get; set; } = new List<byte[]>();
+
 
     public ReportedRequest() { }
 
-    public ReportedRequest(Customer customer, string description, RequestCategory category, string location, string filename, byte[] filedata)
+    public ReportedRequest(Customer customer, string description, RequestCategory category, SouthAfricanCities location, string filename, byte[] filedata)
     {
         RequestId = new Guid();
         Customer = customer;
@@ -30,8 +32,7 @@ public class ReportedRequest : IComparable<ReportedRequest>
         Description = description;
         Category = category;
         UserLocation = location;
-        UserFileName = filename;
-        UserFileData = filedata;
+        AddFile(filename, filedata);
         Status = RequestStatus.Open;
         Progress = 0;
     }
@@ -46,13 +47,51 @@ public class ReportedRequest : IComparable<ReportedRequest>
         Description = rr.Description;
         Category = rr.Category;
         UserLocation = rr.UserLocation;
-        UserFileName = rr.UserFileName;
+        UserFileNames = rr.UserFileNames;
         UserFileData = rr.UserFileData;
         Status = rr.Status;
         Progress = rr.Progress;
     }
 
-    public void UpdateStatus(int progress, DateTime updateTime)
+    // Method to add a file (to control how files are added)
+    public void AddFile(string filename, byte[] filedata)
+    {
+        if (string.IsNullOrWhiteSpace(filename))
+            throw new ArgumentException("Filename cannot be null or empty", nameof(filename));
+        if (filedata == null || filedata.Length == 0)
+            throw new ArgumentException("File data cannot be null or empty", nameof(filedata));
+
+        UserFileNames.Add(filename);
+        UserFileData.Add(filedata);
+    }
+
+    // Optionally: Method to remove a file by filename (or index, depending on your use case)
+    public bool RemoveFile(string filename)
+    {
+        var index = UserFileNames.IndexOf(filename);
+        if (index >= 0)
+        {
+            UserFileNames.RemoveAt(index);
+            UserFileData.RemoveAt(index);
+            return true;
+        }
+        return false;  // Return false if file was not found
+    }
+
+    // Optionally: Method to remove a file by index
+    public bool RemoveFileAt(int index)
+    {
+        if (index >= 0 && index < UserFileNames.Count)
+        {
+            UserFileNames.RemoveAt(index);
+            UserFileData.RemoveAt(index);
+            return true;
+        }
+        return false;  // Return false if index is out of range
+    }
+
+
+public void UpdateStatus(int progress, DateTime updateTime)
     {
         if (progress > 0 && progress < 100)
         {

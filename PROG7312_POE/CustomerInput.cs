@@ -25,6 +25,8 @@ namespace PROG7312_POE
             string cEmail = tBEmail.Text;
             string cNumber = tBNumber.Text;
 
+            // TODO: Validate inputs
+
             CustomerDetails = new Customer(cName, cNumber, cEmail);
 
             this.DialogResult = DialogResult.OK;
