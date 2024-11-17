@@ -14,7 +14,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
-// TODO: Chnage Location into Dropdown and Implement code for SouthAfricanCities enum
 
 namespace PROG7312_POE
 {

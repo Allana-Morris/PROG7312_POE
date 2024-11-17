@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PROG7312_POE.Class;
 using PROG7312_POE.Class.Models;
 
 namespace PROG7312_POE
@@ -24,6 +25,12 @@ namespace PROG7312_POE
             string cName = tBName.Text;
             string cEmail = tBEmail.Text;
             string cNumber = tBNumber.Text;
+
+            ValidationClass val = new ValidationClass();
+
+            if (val.isString(cName)) ;
+            if (val.isString(cEmail)) ;
+            if (val.isString(cNumber)) ;
 
             // TODO: Validate inputs
 

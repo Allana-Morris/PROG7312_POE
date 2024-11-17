@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PROG7312_POE.Class;
 using PROG7312_POE.Class.Models;
+using PROG7312_POE.Class.Models.Enums;
 
 namespace PROG7312_POE
 {
@@ -18,8 +19,7 @@ namespace PROG7312_POE
     {
         ValidationClass valClass = new ValidationClass();
         EventManagement em = new EventManagement();
-        public List<string> categoryList = new List<string> { "Water and Sanitation", "Electricy and Loadshedding", "Roads and Potholes", "Waster Management", "Public Transport", "Community Safety and Security", "Parks and Public Spaces", "Housing", "Noise Complaints", "Environmental Health", "Traffic and Transport Infrastructure", "Animal Control and Wildlife" };
-
+        
         private int[] sortStates = new int[3];  
 
         public LocalEventsAndAnnouncementsForm()
@@ -55,7 +55,7 @@ namespace PROG7312_POE
                     }
                 }
 
-                if (valClass.allCategoriesValid(selectedCategories, categoryList))
+                if (valClass.allCategoriesValid(selectedCategories))
                 {
                     //Go off and get events based on selected categories
                     selectedEvents = em.CategoryFilter(selectedCategories);
@@ -95,7 +95,7 @@ namespace PROG7312_POE
                     }
                 }
 
-                if (valClass.allCategoriesValid(selectedCategories, categoryList) && valClass.isValidDates(FromDate, ToDate))
+                if (valClass.allCategoriesValid(selectedCategories) && valClass.isValidDates(FromDate, ToDate))
                 {
                     //Go off and get events based on selected categories & Dates
                     selectedEvents = em.CategoryandDateFilter(selectedCategories, FromDate, ToDate);
@@ -104,7 +104,7 @@ namespace PROG7312_POE
                 }
                 else
                 {
-
+                    //Error
                 }
             }
             else if (!(cLBCategory.Enabled && dTPFromDate.Enabled && dTPToDate.Enabled))
@@ -125,7 +125,7 @@ namespace PROG7312_POE
             {
                 ListViewItem item = new ListViewItem(evt.EventName);
                 item.SubItems.Add(evt.EventDate.ToShortDateString());
-                item.SubItems.Add(evt.EventCategory);
+                item.SubItems.Add(GetEnumDescription(evt.EventCategory));
 
                 item.Group = EventGroup;
 
@@ -163,11 +163,28 @@ namespace PROG7312_POE
 
         private void loadCategories()
         {
-            foreach (string category in categoryList)
+            cLBCategory.Items.Clear(); // Clear any existing items
+            tVCategories.Nodes.Clear();
+            string noneString = "";
+
+            foreach (var category in Enum.GetValues(typeof(RequestCategory)).Cast<RequestCategory>())
             {
-                cLBCategory.Items.Add(category);
-                tVCategories.Nodes[0].Nodes.Add(category);
+                if (category == RequestCategory.None)
+                {
+                    noneString = GetEnumDescription(category);
+                }
+                // Get the description for each enum value and add it to the ComboBox
+                cLBCategory.Items.Add(GetEnumDescription(category));
+                tVCategories.Nodes[0].Nodes.Add(GetEnumDescription(category));
             }
+
+        }
+
+        private string GetEnumDescription(Enum value)
+        {
+            var field = value.GetType().GetField(value.ToString());
+            var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
+            return attribute == null ? value.ToString() : attribute.Description;
         }
 
         private void lVEventsandAnnoucements_ColumnClick(object sender, ColumnClickEventArgs e)

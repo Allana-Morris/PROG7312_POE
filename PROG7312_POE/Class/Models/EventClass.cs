@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PROG7312_POE.Class.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,11 +16,11 @@ namespace PROG7312_POE.Class.Models
         public int EventID { get; set; }
         public string EventName { get; set; }
         public DateTime EventDate { get; set; }
-        public string EventCategory { get; set; }
+        public RequestCategory EventCategory { get; set; }
 
         public EventClass() { }
 
-        public EventClass(int eventid, string eventName, DateTime eventDate, string eventcategory)
+        public EventClass(int eventid, string eventName, DateTime eventDate, RequestCategory eventcategory)
         {
             EventID = eventid;
             EventName = eventName;

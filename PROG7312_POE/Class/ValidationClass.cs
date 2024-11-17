@@ -1,8 +1,11 @@
-﻿using System;
+﻿using PROG7312_POE.Class.Models.Enums;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PROG7312_POE.Class
 {
@@ -42,14 +45,15 @@ namespace PROG7312_POE.Class
             return ValidDates;
         }
 
-        public bool allCategoriesValid(List<string> usercategories, List<string> setCategories)
+        public bool allCategoriesValid(List<string> usercategories)
         {
             int count = 0;
             foreach (string category in usercategories)
             {
-                foreach (string setCategory in setCategories)
+                foreach (var cat in Enum.GetValues(typeof(RequestCategory)).Cast<RequestCategory>())
                 {
-                    if (category == setCategory)
+                    var description = GetEnumDescription(cat);
+                    if (category == description)
                     {
                         count++;
                     }
@@ -63,7 +67,14 @@ namespace PROG7312_POE.Class
             else
             {
                 return true;
-            }
+            }           
+        }
+
+        private string GetEnumDescription(Enum value)
+        {
+            var field = value.GetType().GetField(value.ToString());
+            var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
+            return attribute == null ? value.ToString() : attribute.Description;
         }
 
 
