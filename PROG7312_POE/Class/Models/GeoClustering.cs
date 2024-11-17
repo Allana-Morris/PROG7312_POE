@@ -1,93 +1,69 @@
-﻿using PROG7312_POE.Class.Models.Enums.PROG7312_POE.Class.Models.Enums;
-using PROG7312_POE.Class.Models.Enums;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PROG7312_POE.Class.Models.Enums;
 
 namespace PROG7312_POE.Class.Models.GeoClustering
 {
     public class GeoClustering
     {
-        public int NumberOfClusters { get; private set; }
-        public List<Cluster> Clusters { get; private set; }
+        public Dictionary<string, HashSet<ReportedRequest>> ProvinceClusters { get; private set; }
 
-        public GeoClustering(int numberOfClusters)
+        // Constructor initializes the ProvinceClusters
+        public GeoClustering()
         {
-            NumberOfClusters = numberOfClusters;
-            Clusters = new List<Cluster>();
-        }
-
-        public void PerformClustering()
-        {
-            // Step 1: Load coordinates from the SouthAfricanCityCoordinates
-            var cityCoordinates = SouthAfricanCityCoordinates.Coordinates.ToList();
-
-            // Step 2: Initialize clusters with random centroids
-            var random = new Random();
-            Clusters = Enumerable.Range(0, NumberOfClusters)
-                .Select(i => new Cluster(cityCoordinates[random.Next(cityCoordinates.Count)].Value))
-                .ToList();
-
-            bool hasConverged;
-            do
+            ProvinceClusters = new Dictionary<string, HashSet<ReportedRequest>>();
+            // Initialize HashSets for each province
+            foreach (var province in SouthAfricanProvinces.GroupedCitiesByProvince.Keys)
             {
-                // Step 3: Assign cities to the nearest cluster
-                foreach (var cluster in Clusters)
-                {
-                    cluster.Cities.Clear();
-                }
-
-                foreach (var (city, coordinates) in cityCoordinates)
-                {
-                    var closestCluster = Clusters.OrderBy(cluster =>
-                        CalculateDistance(cluster.Centroid, coordinates)).First();
-
-                    closestCluster.Cities.Add((city, coordinates));
-                }
-
-                // Step 4: Recalculate cluster centroids
-                hasConverged = true;
-                foreach (var cluster in Clusters)
-                {
-                    var newCentroid = cluster.CalculateNewCentroid();
-                    if (!cluster.Centroid.Equals(newCentroid))
-                    {
-                        hasConverged = false;
-                        cluster.Centroid = newCentroid;
-                    }
-                }
-
-            } while (!hasConverged);
+                ProvinceClusters[province] = new HashSet<ReportedRequest>();
+            }
         }
 
-        private double CalculateDistance((double Latitude, double Longitude) point1, (double Latitude, double Longitude) point2)
+        // Simulate getting ReportedRequest objects (you can replace this with your actual method)
+
+
+        public Dictionary<string, HashSet<ReportedRequest>> PerformClustering()
         {
-            // Use Euclidean distance for simplicity
-            var latDiff = point1.Latitude - point2.Latitude;
-            var lonDiff = point1.Longitude - point2.Longitude;
-            return Math.Sqrt(latDiff * latDiff + lonDiff * lonDiff);
+            RedBlackTree rbt = new RedBlackTree();
+            // Step 1: Get all the reported requests
+            var requests = rbt.GetRequestsForListView();
+
+            // Step 2: Group requests by province based on the Location city
+            foreach (var request in requests)
+            {
+                // Get the province for the current city
+                var province = GetProvinceForCity(request.UserLocation);
+
+                // Add the request to the appropriate province cluster
+                AddRequestToProvinceCluster(province, request);
+            }
+
+            return ProvinceClusters;
         }
-    }
 
-    public class Cluster
-    {
-        public (double Latitude, double Longitude) Centroid { get; set; }
-        public List<(SouthAfricanCities City, (double Latitude, double Longitude) Coordinates)> Cities { get; private set; }
-
-        public Cluster((double Latitude, double Longitude) initialCentroid)
+        // Helper method to get the province for a given city
+        private string GetProvinceForCity(SouthAfricanCities city)
         {
-            Centroid = initialCentroid;
-            Cities = new List<(SouthAfricanCities, (double, double))>();
+            foreach (var province in SouthAfricanProvinces.GroupedCitiesByProvince)
+            {
+                if (province.Value.Any(cityInfo => cityInfo.City == city))
+                {
+                    return province.Key;
+                }
+            }
+
+            // Default to "Unknown" if the city is not found in any province
+            return "Unknown";
         }
 
-        public (double Latitude, double Longitude) CalculateNewCentroid()
+        // Helper method to add the request to the correct province cluster
+        private void AddRequestToProvinceCluster(string province, ReportedRequest request)
         {
-            if (!Cities.Any())
-                return Centroid;
-
-            var avgLatitude = Cities.Average(c => c.Coordinates.Latitude);
-            var avgLongitude = Cities.Average(c => c.Coordinates.Longitude);
-            return (avgLatitude, avgLongitude);
+            if (ProvinceClusters.ContainsKey(province))
+            {
+                ProvinceClusters[province].Add(request);
+            }
         }
     }
 }

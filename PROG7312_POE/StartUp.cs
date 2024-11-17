@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Media;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using PROG7312_POE.Class;
 
@@ -17,13 +19,15 @@ namespace PROG7312_POE
             this.DoubleBuffered = true;
             EventManagement ev = new EventManagement();
             ev.LoadEvents();
+            ReportedRequest rr = new ReportedRequest();
+            rr.LoadExampleRequests();
         }
 
         private void btnHome_Click(object sender, EventArgs e)
         {
             if (shutdownCount == 0)
             {
-                pnlMenu.Visible = Enabled;
+                pnlMenu.Visible = true;
                 shutdownCount++;
             }
             else
@@ -45,8 +49,8 @@ namespace PROG7312_POE
         /// </summary>
         private void btnShutDown_Click(object sender, EventArgs e)
         {
-            SoundPlayer soundPlayer = new SoundPlayer();
-            soundPlayer.Play();
+          //  SoundPlayer soundPlayer = new SoundPlayer();
+          //  soundPlayer.Play();
             this.Close();
         }
 

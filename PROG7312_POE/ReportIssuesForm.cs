@@ -39,13 +39,14 @@ namespace PROG7312_POE
         {
             InitializeComponent();
 
-            loadCategories();
+
+            loadEnums();
 
             pBProgress.Minimum = 0;
             pBProgress.Maximum = totalBoxes;
             pBProgress.Value = 0;
 
-            tBLocation.TextChanged += new EventHandler(TextBox_TextChanged);
+            cBLocation.TextChanged += new EventHandler(TextBox_TextChanged);
             cBCategory.TextChanged += new EventHandler(TextBox_TextChanged);
             rTBDescription.TextChanged += new EventHandler(TextBox_TextChanged);
             tVFiles.TextChanged += new EventHandler(TextBox_TextChanged);
@@ -55,20 +56,48 @@ namespace PROG7312_POE
         /// <summary>
         /// 
         /// </summary>
-        public void loadCategories()
+        public void loadEnums()
         {
             cBCategory.Items.Clear(); // Clear any existing items
+            cBLocation.Items.Clear();
+            string noneString = "";
 
             foreach (var category in Enum.GetValues(typeof(RequestCategory)).Cast<RequestCategory>())
             {
+                if(category == RequestCategory.None)
+                {
+                    noneString = GetEnumDescription(category);
+                }
                 // Get the description for each enum value and add it to the ComboBox
                 cBCategory.Items.Add(GetEnumDescription(category));
             }
 
-            // Optionally set the ComboBox to the first item by default
+            cBCategory.Sorted = true;
+            cBCategory.Items.Remove(noneString);
+
             if (cBCategory.Items.Count > 0)
             {
-                cBCategory.SelectedIndex = 0;
+                cBCategory.Text = noneString;
+            }
+
+
+            foreach (var city in Enum.GetValues(typeof(SouthAfricanCities)).Cast<SouthAfricanCities>())
+            {
+                if (city == SouthAfricanCities.None)
+                {
+                    noneString = GetEnumDescription(city);
+                }
+                // Get the description for each enum value and add it to the ComboBox
+                cBLocation.Items.Add(GetEnumDescription(city));
+            }
+
+            cBLocation.Sorted = true;
+            cBLocation.Items.Remove(noneString);
+
+            // Optionally set the ComboBox to the first item by default
+            if (cBLocation.Items.Count > 0)
+            {
+                cBLocation.Text = noneString;
             }
         }
         //-------------------------------------------------------------------------------------
@@ -149,7 +178,7 @@ namespace PROG7312_POE
             // Check how many textboxes have more than 1 character
             int filledCount = 0;
 
-            if (tBLocation.Text.Length > 1) filledCount++;
+            if (cBLocation.Text.Length > 1 && cBLocation.Text != "Select Your Location") filledCount++;
             if (cBCategory.Text.Length > 1 && cBCategory.Text != "Select a Category") filledCount++;
             if (rTBDescription.Text.Length > 1) filledCount++;
             if (tVFiles.Text.Length > 1) filledCount++;
@@ -165,10 +194,10 @@ namespace PROG7312_POE
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             // Fields to capture user inputs
-            string userLocation = "";
             string userDescription = "";
             Customer customer = null;
             RequestCategory category = RequestCategory.None;
+            SouthAfricanCities location = SouthAfricanCities.None;
 
             // Ensure the user has completed all steps (ProgressBar value should be 4)
             if (pBProgress.Value == 4)
@@ -195,11 +224,11 @@ namespace PROG7312_POE
                 }
 
                 // Validate location and description inputs
-                if (val.isString(tBLocation.Text)) userLocation = tBLocation.Text;
                 if (val.isString(rTBDescription.Text)) userDescription = rTBDescription.Text;
 
                 // Validate and match the selected category
                 bool isMatchFound = false;
+                bool isMatch = false;  
                 foreach (var cat in Enum.GetValues(typeof(RequestCategory)).Cast<RequestCategory>())
                 {
                     var description = GetEnumDescription(cat);
@@ -217,8 +246,25 @@ namespace PROG7312_POE
                     return;
                 }
 
+                foreach (var city in Enum.GetValues(typeof(SouthAfricanCities)).Cast<SouthAfricanCities>())
+                {
+                    var description = GetEnumDescription(city);
+                    if (cBCategory.Text == description)
+                    {
+                        location = city;
+                        isMatch = true;
+                        break; // Exit the loop early since we found a match
+                    }
+                }
+
+                if (!isMatch)
+                {
+                    MessageBox.Show("The selected city does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 // Create the ReportedRequest object
-                ReportedRequest issue = new ReportedRequest(customer, userDescription, category, userLocation, userFileName, userFileData);
+                ReportedRequest issue = new ReportedRequest(customer, userDescription, category, location, userFileName, userFileData);
 
                 // Add the issue to the issue list and the tree
                 issueList.Add(issue);
@@ -381,6 +427,7 @@ namespace PROG7312_POE
                 }
             }
         }
+  
     }
 }
 //-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

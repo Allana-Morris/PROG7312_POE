@@ -3,6 +3,8 @@ using PROG7312_POE.Class.Models;
 using System.ComponentModel;
 using System;
 using System.Collections.Generic;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Xml.Linq;
 
 // Combine the RequestPriority with IssueCategory for consistency
 public class ReportedRequest : IComparable<ReportedRequest>
@@ -91,7 +93,7 @@ public class ReportedRequest : IComparable<ReportedRequest>
     }
 
 
-public void UpdateStatus(int progress, DateTime updateTime)
+    public void UpdateStatus(int progress, DateTime updateTime)
     {
         if (progress > 0 && progress < 100)
         {
@@ -148,5 +150,51 @@ public void UpdateStatus(int progress, DateTime updateTime)
 
             _ => RequestPriority.Low
         };
+    }
+
+    public void LoadExampleRequests()
+    {
+        var random = new Random();
+        RedBlackTree rbt = new RedBlackTree();
+
+
+        for (int i = 1; i <= 30; i++)
+        {
+
+            // Create a new ReportedRequest
+            var req = new ReportedRequest
+            {
+                RequestId = Guid.NewGuid(),
+                RequestName = $"Request {i}",
+                Customer = new Customer($"Customer {i}",
+                     $"Customer {i}",
+                     $"customer{i}@example.com"),
+                RequestDate = DateTime.Now.AddDays(-random.Next(1, 100)),
+                LastUpdated = DateTime.Now.AddDays(-random.Next(0, 10)),
+                Description = $"Description for Request {i}",
+
+                // Ensuring Category is not "None"
+                Category = (RequestCategory)random.Next(1, Enum.GetValues(typeof(RequestCategory)).Length),
+
+                // Ensuring Status is not "None"
+                Status = (RequestStatus)random.Next(1, Enum.GetValues(typeof(RequestStatus)).Length),
+
+                Progress = random.Next(0, 101), // Progress percentage
+
+                // Ensuring UserLocation (city) is not "None"
+                UserLocation = (SouthAfricanCities)random.Next(1, Enum.GetValues(typeof(SouthAfricanCities)).Length),
+
+                UserFileNames = new List<string> { $"file{i}.txt", $"image{i}.png" },
+                UserFileData = new List<byte[]>
+    {
+        new byte[] { 0x1, 0x2, 0x3 },
+        new byte[] { 0x4, 0x5, 0x6 }
+    }
+            };
+
+            rbt.Insert(req);
+
+        }
+
     }
 }

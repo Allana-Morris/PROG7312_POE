@@ -74,6 +74,9 @@ namespace PROG7312_POE.Class.Models
                 var parent = node.Parent;
                 var grandparent = parent.Parent;
 
+                if (grandparent == null)
+                    break;
+
                 if (parent == grandparent.Left)
                 {
                     var uncle = grandparent.Right;
@@ -82,7 +85,7 @@ namespace PROG7312_POE.Class.Models
                         parent.IsRed = false;
                         uncle.IsRed = false;
                         grandparent.IsRed = true;
-                        node = grandparent;
+                        node = grandparent; // Move up the tree
                     }
                     else
                     {
@@ -104,7 +107,7 @@ namespace PROG7312_POE.Class.Models
                         parent.IsRed = false;
                         uncle.IsRed = false;
                         grandparent.IsRed = true;
-                        node = grandparent;
+                        node = grandparent; // Move up the tree
                     }
                     else
                     {
@@ -170,6 +173,15 @@ namespace PROG7312_POE.Class.Models
             }
             pivot.Right = node;
             node.Parent = pivot;
+        }
+
+        private RedBlackTreeNode GetUncle(RedBlackTreeNode node)
+        {
+            var grandparent = node.Parent?.Parent;
+            if (grandparent == null)
+                return null;
+
+            return node.Parent == grandparent.Left ? grandparent.Right : grandparent.Left;
         }
 
         public ReportedRequest nameSearch(String repName)

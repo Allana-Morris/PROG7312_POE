@@ -30,246 +30,251 @@ namespace PROG7312_POE
         /// </summary>
         private void InitializeComponent()
         {
-            components = new System.ComponentModel.Container();
-            btnBrowse = new System.Windows.Forms.Button();
-            btnSubmit = new System.Windows.Forms.Button();
-            tSTopBat = new System.Windows.Forms.ToolStrip();
-            tSlblTitle = new System.Windows.Forms.ToolStripLabel();
-            tSlblExit = new System.Windows.Forms.ToolStripLabel();
-            mSMenu = new System.Windows.Forms.MenuStrip();
-            mTSMIMenu = new System.Windows.Forms.ToolStripMenuItem();
-            TSMIReturnToHome = new System.Windows.Forms.ToolStripMenuItem();
-            tBLocation = new System.Windows.Forms.TextBox();
-            rTBDescription = new System.Windows.Forms.RichTextBox();
-            lblLocation = new System.Windows.Forms.Label();
-            lblCategory = new System.Windows.Forms.Label();
-            lblDescription = new System.Windows.Forms.Label();
-            lblAttachment = new System.Windows.Forms.Label();
-            cBCategory = new System.Windows.Forms.ComboBox();
-            tVFiles = new System.Windows.Forms.TreeView();
-            cMSRightClick = new System.Windows.Forms.ContextMenuStrip(components);
-            tSMIDelete = new System.Windows.Forms.ToolStripMenuItem();
-            pBProgress = new Class.BrickProgressBar();
-            tSTopBat.SuspendLayout();
-            mSMenu.SuspendLayout();
-            cMSRightClick.SuspendLayout();
-            SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            this.btnBrowse = new System.Windows.Forms.Button();
+            this.btnSubmit = new System.Windows.Forms.Button();
+            this.tSTopBat = new System.Windows.Forms.ToolStrip();
+            this.tSlblTitle = new System.Windows.Forms.ToolStripLabel();
+            this.tSlblExit = new System.Windows.Forms.ToolStripLabel();
+            this.mSMenu = new System.Windows.Forms.MenuStrip();
+            this.mTSMIMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMIReturnToHome = new System.Windows.Forms.ToolStripMenuItem();
+            this.rTBDescription = new System.Windows.Forms.RichTextBox();
+            this.lblLocation = new System.Windows.Forms.Label();
+            this.lblCategory = new System.Windows.Forms.Label();
+            this.lblDescription = new System.Windows.Forms.Label();
+            this.lblAttachment = new System.Windows.Forms.Label();
+            this.cBCategory = new System.Windows.Forms.ComboBox();
+            this.tVFiles = new System.Windows.Forms.TreeView();
+            this.cMSRightClick = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tSMIDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.cBLocation = new System.Windows.Forms.ComboBox();
+            this.pBProgress = new System.Windows.Forms.ProgressBar();
+            this.tSTopBat.SuspendLayout();
+            this.mSMenu.SuspendLayout();
+            this.cMSRightClick.SuspendLayout();
+            this.SuspendLayout();
             // 
             // btnBrowse
             // 
-            btnBrowse.BackColor = System.Drawing.SystemColors.ControlLight;
-            btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            btnBrowse.Location = new System.Drawing.Point(105, 593);
-            btnBrowse.Name = "btnBrowse";
-            btnBrowse.Size = new System.Drawing.Size(84, 29);
-            btnBrowse.TabIndex = 0;
-            btnBrowse.Text = "&Browse...";
-            btnBrowse.UseVisualStyleBackColor = false;
-            btnBrowse.Click += btnBrowse_Click;
+            this.btnBrowse.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnBrowse.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBrowse.Location = new System.Drawing.Point(105, 593);
+            this.btnBrowse.Name = "btnBrowse";
+            this.btnBrowse.Size = new System.Drawing.Size(84, 29);
+            this.btnBrowse.TabIndex = 0;
+            this.btnBrowse.Text = "&Browse...";
+            this.btnBrowse.UseVisualStyleBackColor = false;
+            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
             // 
             // btnSubmit
             // 
-            btnSubmit.BackColor = System.Drawing.SystemColors.ControlLight;
-            btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            btnSubmit.Location = new System.Drawing.Point(291, 633);
-            btnSubmit.Name = "btnSubmit";
-            btnSubmit.Size = new System.Drawing.Size(84, 29);
-            btnSubmit.TabIndex = 1;
-            btnSubmit.Text = "Submit";
-            btnSubmit.UseVisualStyleBackColor = false;
-            btnSubmit.Click += btnSubmit_Click;
+            this.btnSubmit.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSubmit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSubmit.Location = new System.Drawing.Point(291, 633);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(84, 29);
+            this.btnSubmit.TabIndex = 1;
+            this.btnSubmit.Text = "Submit";
+            this.btnSubmit.UseVisualStyleBackColor = false;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // tSTopBat
             // 
-            tSTopBat.BackColor = System.Drawing.Color.MidnightBlue;
-            tSTopBat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            tSTopBat.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            tSTopBat.ImageScalingSize = new System.Drawing.Size(20, 20);
-            tSTopBat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tSlblTitle, tSlblExit });
-            tSTopBat.Location = new System.Drawing.Point(0, 0);
-            tSTopBat.Name = "tSTopBat";
-            tSTopBat.Size = new System.Drawing.Size(413, 25);
-            tSTopBat.TabIndex = 2;
-            tSTopBat.Text = "toolStrip1";
-            tSTopBat.MouseDown += tSTopBat_MouseDown;
+            this.tSTopBat.BackColor = System.Drawing.Color.MidnightBlue;
+            this.tSTopBat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tSTopBat.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tSTopBat.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.tSTopBat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tSlblTitle,
+            this.tSlblExit});
+            this.tSTopBat.Location = new System.Drawing.Point(0, 0);
+            this.tSTopBat.Name = "tSTopBat";
+            this.tSTopBat.Size = new System.Drawing.Size(413, 25);
+            this.tSTopBat.TabIndex = 2;
+            this.tSTopBat.Text = "toolStrip1";
             // 
             // tSlblTitle
             // 
-            tSlblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            tSlblTitle.ForeColor = System.Drawing.Color.White;
-            tSlblTitle.Image = Resources.Report_Issue;
-            tSlblTitle.Name = "tSlblTitle";
-            tSlblTitle.Size = new System.Drawing.Size(136, 22);
-            tSlblTitle.Text = "Report Issue";
+            this.tSlblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tSlblTitle.ForeColor = System.Drawing.Color.White;
+            this.tSlblTitle.Image = global::PROG7312_POE.Properties.Resources.Report_Issue;
+            this.tSlblTitle.Name = "tSlblTitle";
+            this.tSlblTitle.Size = new System.Drawing.Size(136, 22);
+            this.tSlblTitle.Text = "Report Issue";
             // 
             // tSlblExit
             // 
-            tSlblExit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            tSlblExit.BackColor = System.Drawing.Color.MidnightBlue;
-            tSlblExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            tSlblExit.ForeColor = System.Drawing.Color.Gainsboro;
-            tSlblExit.Name = "tSlblExit";
-            tSlblExit.Size = new System.Drawing.Size(21, 22);
-            tSlblExit.Text = "X";
-            tSlblExit.Click += tSlblExit_Click;
+            this.tSlblExit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tSlblExit.BackColor = System.Drawing.Color.MidnightBlue;
+            this.tSlblExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tSlblExit.ForeColor = System.Drawing.Color.Gainsboro;
+            this.tSlblExit.Name = "tSlblExit";
+            this.tSlblExit.Size = new System.Drawing.Size(21, 22);
+            this.tSlblExit.Text = "X";
+            this.tSlblExit.Click += new System.EventHandler(this.tSlblExit_Click);
             // 
             // mSMenu
             // 
-            mSMenu.BackColor = System.Drawing.Color.LightGray;
-            mSMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            mSMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            mSMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { mTSMIMenu });
-            mSMenu.Location = new System.Drawing.Point(0, 25);
-            mSMenu.Name = "mSMenu";
-            mSMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            mSMenu.Size = new System.Drawing.Size(413, 28);
-            mSMenu.TabIndex = 3;
-            mSMenu.Text = "menuStrip1";
+            this.mSMenu.BackColor = System.Drawing.Color.LightGray;
+            this.mSMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mSMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.mSMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mTSMIMenu});
+            this.mSMenu.Location = new System.Drawing.Point(0, 25);
+            this.mSMenu.Name = "mSMenu";
+            this.mSMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+            this.mSMenu.Size = new System.Drawing.Size(413, 28);
+            this.mSMenu.TabIndex = 3;
+            this.mSMenu.Text = "menuStrip1";
             // 
             // mTSMIMenu
             // 
-            mTSMIMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { TSMIReturnToHome });
-            mTSMIMenu.Name = "mTSMIMenu";
-            mTSMIMenu.Size = new System.Drawing.Size(64, 24);
-            mTSMIMenu.Text = "Menu";
+            this.mTSMIMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMIReturnToHome});
+            this.mTSMIMenu.Name = "mTSMIMenu";
+            this.mTSMIMenu.Size = new System.Drawing.Size(64, 24);
+            this.mTSMIMenu.Text = "Menu";
             // 
             // TSMIReturnToHome
             // 
-            TSMIReturnToHome.Image = Resources.Home;
-            TSMIReturnToHome.Name = "TSMIReturnToHome";
-            TSMIReturnToHome.Size = new System.Drawing.Size(211, 26);
-            TSMIReturnToHome.Text = "Return to Home";
-            // 
-            // tBLocation
-            // 
-            tBLocation.BackColor = System.Drawing.SystemColors.Control;
-            tBLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            tBLocation.Location = new System.Drawing.Point(105, 101);
-            tBLocation.Name = "tBLocation";
-            tBLocation.ShortcutsEnabled = false;
-            tBLocation.Size = new System.Drawing.Size(270, 27);
-            tBLocation.TabIndex = 5;
+            this.TSMIReturnToHome.Image = global::PROG7312_POE.Properties.Resources.Home;
+            this.TSMIReturnToHome.Name = "TSMIReturnToHome";
+            this.TSMIReturnToHome.Size = new System.Drawing.Size(211, 26);
+            this.TSMIReturnToHome.Text = "Return to Home";
+            this.TSMIReturnToHome.Click += new System.EventHandler(this.returnToHomeToolStripMenuItem_Click);
             // 
             // rTBDescription
             // 
-            rTBDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            rTBDescription.Location = new System.Drawing.Point(105, 204);
-            rTBDescription.Name = "rTBDescription";
-            rTBDescription.Size = new System.Drawing.Size(270, 232);
-            rTBDescription.TabIndex = 7;
-            rTBDescription.Text = "";
+            this.rTBDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rTBDescription.Location = new System.Drawing.Point(105, 204);
+            this.rTBDescription.Name = "rTBDescription";
+            this.rTBDescription.Size = new System.Drawing.Size(270, 232);
+            this.rTBDescription.TabIndex = 7;
+            this.rTBDescription.Text = "";
             // 
             // lblLocation
             // 
-            lblLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            lblLocation.Location = new System.Drawing.Point(3, 104);
-            lblLocation.Name = "lblLocation";
-            lblLocation.Size = new System.Drawing.Size(91, 24);
-            lblLocation.TabIndex = 9;
-            lblLocation.Text = "Location";
+            this.lblLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLocation.Location = new System.Drawing.Point(3, 104);
+            this.lblLocation.Name = "lblLocation";
+            this.lblLocation.Size = new System.Drawing.Size(91, 24);
+            this.lblLocation.TabIndex = 9;
+            this.lblLocation.Text = "Location";
             // 
             // lblCategory
             // 
-            lblCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            lblCategory.Location = new System.Drawing.Point(3, 152);
-            lblCategory.Name = "lblCategory";
-            lblCategory.Size = new System.Drawing.Size(91, 28);
-            lblCategory.TabIndex = 10;
-            lblCategory.Text = "Category";
+            this.lblCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblCategory.Location = new System.Drawing.Point(3, 152);
+            this.lblCategory.Name = "lblCategory";
+            this.lblCategory.Size = new System.Drawing.Size(91, 28);
+            this.lblCategory.TabIndex = 10;
+            this.lblCategory.Text = "Category";
             // 
             // lblDescription
             // 
-            lblDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            lblDescription.Location = new System.Drawing.Point(3, 204);
-            lblDescription.Name = "lblDescription";
-            lblDescription.Size = new System.Drawing.Size(96, 21);
-            lblDescription.TabIndex = 11;
-            lblDescription.Text = "Description";
+            this.lblDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescription.Location = new System.Drawing.Point(3, 204);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(96, 21);
+            this.lblDescription.TabIndex = 11;
+            this.lblDescription.Text = "Description";
             // 
             // lblAttachment
             // 
-            lblAttachment.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            lblAttachment.Location = new System.Drawing.Point(3, 461);
-            lblAttachment.Name = "lblAttachment";
-            lblAttachment.Size = new System.Drawing.Size(91, 25);
-            lblAttachment.TabIndex = 12;
-            lblAttachment.Text = "Attach File";
+            this.lblAttachment.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblAttachment.Location = new System.Drawing.Point(3, 461);
+            this.lblAttachment.Name = "lblAttachment";
+            this.lblAttachment.Size = new System.Drawing.Size(91, 25);
+            this.lblAttachment.TabIndex = 12;
+            this.lblAttachment.Text = "Attach File";
             // 
             // cBCategory
             // 
-            cBCategory.BackColor = System.Drawing.SystemColors.Control;
-            cBCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            cBCategory.FormattingEnabled = true;
-            cBCategory.Location = new System.Drawing.Point(105, 152);
-            cBCategory.Name = "cBCategory";
-            cBCategory.Size = new System.Drawing.Size(270, 28);
-            cBCategory.TabIndex = 13;
-            cBCategory.Text = "Select a Category";
+            this.cBCategory.BackColor = System.Drawing.SystemColors.Control;
+            this.cBCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cBCategory.FormattingEnabled = true;
+            this.cBCategory.Location = new System.Drawing.Point(105, 152);
+            this.cBCategory.Name = "cBCategory";
+            this.cBCategory.Size = new System.Drawing.Size(270, 28);
+            this.cBCategory.TabIndex = 13;
+            this.cBCategory.Text = "Select a Category";
             // 
             // tVFiles
             // 
-            tVFiles.ContextMenuStrip = cMSRightClick;
-            tVFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            tVFiles.Location = new System.Drawing.Point(105, 461);
-            tVFiles.Name = "tVFiles";
-            tVFiles.Size = new System.Drawing.Size(270, 126);
-            tVFiles.TabIndex = 15;
-            tVFiles.NodeMouseDoubleClick += tVFiles_NodeMouseDoubleClick;
-            tVFiles.MouseUp += tVFiles_MouseUp;
+            this.tVFiles.ContextMenuStrip = this.cMSRightClick;
+            this.tVFiles.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tVFiles.Location = new System.Drawing.Point(105, 461);
+            this.tVFiles.Name = "tVFiles";
+            this.tVFiles.Size = new System.Drawing.Size(270, 126);
+            this.tVFiles.TabIndex = 15;
             // 
             // cMSRightClick
             // 
-            cMSRightClick.ImageScalingSize = new System.Drawing.Size(20, 20);
-            cMSRightClick.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tSMIDelete });
-            cMSRightClick.Name = "contextMenuStrip1";
-            cMSRightClick.Size = new System.Drawing.Size(123, 28);
-            cMSRightClick.Text = "Options";
+            this.cMSRightClick.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cMSRightClick.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tSMIDelete});
+            this.cMSRightClick.Name = "contextMenuStrip1";
+            this.cMSRightClick.Size = new System.Drawing.Size(123, 28);
+            this.cMSRightClick.Text = "Options";
             // 
             // tSMIDelete
             // 
-            tSMIDelete.Name = "tSMIDelete";
-            tSMIDelete.Size = new System.Drawing.Size(122, 24);
-            tSMIDelete.Text = "Delete";
-            tSMIDelete.Click += tSMIDelete_Click;
+            this.tSMIDelete.Name = "tSMIDelete";
+            this.tSMIDelete.Size = new System.Drawing.Size(122, 24);
+            this.tSMIDelete.Text = "Delete";
+            this.tSMIDelete.Click += new System.EventHandler(this.tSMIDelete_Click);
+            // 
+            // cBLocation
+            // 
+            this.cBLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cBLocation.FormattingEnabled = true;
+            this.cBLocation.Location = new System.Drawing.Point(105, 104);
+            this.cBLocation.Name = "cBLocation";
+            this.cBLocation.Size = new System.Drawing.Size(270, 28);
+            this.cBLocation.TabIndex = 16;
             // 
             // pBProgress
             // 
-            pBProgress.Dock = System.Windows.Forms.DockStyle.Top;
-            pBProgress.Location = new System.Drawing.Point(0, 53);
-            pBProgress.Name = "pBProgress";
-            pBProgress.Size = new System.Drawing.Size(413, 29);
-            pBProgress.TabIndex = 16;
+            this.pBProgress.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pBProgress.ForeColor = System.Drawing.Color.MidnightBlue;
+            this.pBProgress.Location = new System.Drawing.Point(0, 53);
+            this.pBProgress.MarqueeAnimationSpeed = 10;
+            this.pBProgress.Name = "pBProgress";
+            this.pBProgress.Size = new System.Drawing.Size(413, 23);
+            this.pBProgress.TabIndex = 17;
             // 
             // ReportIssuesForm
             // 
-            BackColor = System.Drawing.Color.Gainsboro;
-            ClientSize = new System.Drawing.Size(413, 674);
-            Controls.Add(pBProgress);
-            Controls.Add(tVFiles);
-            Controls.Add(rTBDescription);
-            Controls.Add(cBCategory);
-            Controls.Add(lblAttachment);
-            Controls.Add(lblDescription);
-            Controls.Add(lblCategory);
-            Controls.Add(lblLocation);
-            Controls.Add(tBLocation);
-            Controls.Add(mSMenu);
-            Controls.Add(tSTopBat);
-            Controls.Add(btnSubmit);
-            Controls.Add(btnBrowse);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            MainMenuStrip = mSMenu;
-            Name = "ReportIssuesForm";
-            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            tSTopBat.ResumeLayout(false);
-            tSTopBat.PerformLayout();
-            mSMenu.ResumeLayout(false);
-            mSMenu.PerformLayout();
-            cMSRightClick.ResumeLayout(false);
-            ResumeLayout(false);
-            PerformLayout();
+            this.BackColor = System.Drawing.Color.Gainsboro;
+            this.ClientSize = new System.Drawing.Size(413, 674);
+            this.Controls.Add(this.pBProgress);
+            this.Controls.Add(this.cBLocation);
+            this.Controls.Add(this.tVFiles);
+            this.Controls.Add(this.rTBDescription);
+            this.Controls.Add(this.cBCategory);
+            this.Controls.Add(this.lblAttachment);
+            this.Controls.Add(this.lblDescription);
+            this.Controls.Add(this.lblCategory);
+            this.Controls.Add(this.lblLocation);
+            this.Controls.Add(this.mSMenu);
+            this.Controls.Add(this.tSTopBat);
+            this.Controls.Add(this.btnSubmit);
+            this.Controls.Add(this.btnBrowse);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MainMenuStrip = this.mSMenu;
+            this.Name = "ReportIssuesForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.tSTopBat.ResumeLayout(false);
+            this.tSTopBat.PerformLayout();
+            this.mSMenu.ResumeLayout(false);
+            this.mSMenu.PerformLayout();
+            this.cMSRightClick.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
 
@@ -281,7 +286,6 @@ namespace PROG7312_POE
         private System.Windows.Forms.Button btnSubmit;
         private System.Windows.Forms.ToolStrip tSTopBat;
         private System.Windows.Forms.MenuStrip mSMenu;
-        private System.Windows.Forms.TextBox tBLocation;
         private System.Windows.Forms.RichTextBox rTBDescription;
         private System.Windows.Forms.Label lblLocation;
         private System.Windows.Forms.Label lblCategory;
@@ -293,8 +297,9 @@ namespace PROG7312_POE
         private System.Windows.Forms.ToolStripMenuItem TSMIReturnToHome;
         private System.Windows.Forms.ComboBox cBCategory;
         private System.Windows.Forms.TreeView tVFiles;
-        private Class.BrickProgressBar pBProgress;
         private System.Windows.Forms.ContextMenuStrip cMSRightClick;
         private System.Windows.Forms.ToolStripMenuItem tSMIDelete;
+        private System.Windows.Forms.ComboBox cBLocation;
+        private System.Windows.Forms.ProgressBar pBProgress;
     }
 }

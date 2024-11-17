@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Priority_Queue;
 using PROG7312_POE.Class.Models;
 
 namespace PROG7312_POE.Class
@@ -14,11 +15,10 @@ namespace PROG7312_POE.Class
         public static Dictionary<DateTime, List<EventClass>> EventDateSort = new Dictionary<DateTime, List<EventClass>>();
         public static Dictionary<string, List<EventClass>> EventCategorySort = new Dictionary<string, List<EventClass>>();
 
-        public PriorityQueue<AnnouncementClass, int> announcementQueue = new PriorityQueue<AnnouncementClass, int>();
+        public SimplePriorityQueue<AnnouncementClass, int> announcementQueue = new SimplePriorityQueue<AnnouncementClass, int>();
 
         public EventManagement()
         {
-
         }
 
         public List<EventClass> GetAll()

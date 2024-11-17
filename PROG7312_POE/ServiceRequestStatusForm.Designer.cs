@@ -28,193 +28,225 @@
         /// </summary>
         private void InitializeComponent()
         {
-            mSMenu = new System.Windows.Forms.MenuStrip();
-            mTSMIMenu = new System.Windows.Forms.ToolStripMenuItem();
-            TSMIReturnToHome = new System.Windows.Forms.ToolStripMenuItem();
-            tSTopBat = new System.Windows.Forms.ToolStrip();
-            tSlblTitle = new System.Windows.Forms.ToolStripLabel();
-            tSlblExit = new System.Windows.Forms.ToolStripLabel();
-            lVRequests = new System.Windows.Forms.ListView();
-            btnViewDetails = new System.Windows.Forms.Button();
-            btnTrackProgress = new System.Windows.Forms.Button();
-            rTBDetails = new System.Windows.Forms.RichTextBox();
-            lblPercentage = new System.Windows.Forms.Label();
-            pBRequestProgress = new System.Windows.Forms.ProgressBar();
-            gBProgress = new System.Windows.Forms.GroupBox();
-            mSMenu.SuspendLayout();
-            tSTopBat.SuspendLayout();
-            gBProgress.SuspendLayout();
-            SuspendLayout();
+            this.mSMenu = new System.Windows.Forms.MenuStrip();
+            this.mTSMIMenu = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMIReturnToHome = new System.Windows.Forms.ToolStripMenuItem();
+            this.tSTopBat = new System.Windows.Forms.ToolStrip();
+            this.tSlblTitle = new System.Windows.Forms.ToolStripLabel();
+            this.tSlblExit = new System.Windows.Forms.ToolStripLabel();
+            this.lVRequests = new System.Windows.Forms.ListView();
+            this.btnViewDetails = new System.Windows.Forms.Button();
+            this.btnTrackProgress = new System.Windows.Forms.Button();
+            this.rTBDetails = new System.Windows.Forms.RichTextBox();
+            this.lblPercentage = new System.Windows.Forms.Label();
+            this.pBRequestProgress = new System.Windows.Forms.ProgressBar();
+            this.gBProgress = new System.Windows.Forms.GroupBox();
+            this.btnGroup = new System.Windows.Forms.Button();
+            this.cBProvince = new System.Windows.Forms.ComboBox();
+            this.mSMenu.SuspendLayout();
+            this.tSTopBat.SuspendLayout();
+            this.gBProgress.SuspendLayout();
+            this.SuspendLayout();
             // 
             // mSMenu
             // 
-            mSMenu.BackColor = System.Drawing.Color.Gainsboro;
-            mSMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            mSMenu.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 0);
-            mSMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            mSMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { mTSMIMenu });
-            mSMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            mSMenu.Location = new System.Drawing.Point(0, 25);
-            mSMenu.Margin = new System.Windows.Forms.Padding(0, 0, 0, 2);
-            mSMenu.Name = "mSMenu";
-            mSMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 4);
-            mSMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            mSMenu.Size = new System.Drawing.Size(684, 30);
-            mSMenu.TabIndex = 3;
-            mSMenu.Text = "menuStrip1";
+            this.mSMenu.BackColor = System.Drawing.Color.Gainsboro;
+            this.mSMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mSMenu.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 0);
+            this.mSMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.mSMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mTSMIMenu});
+            this.mSMenu.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
+            this.mSMenu.Location = new System.Drawing.Point(0, 25);
+            this.mSMenu.Margin = new System.Windows.Forms.Padding(0, 0, 0, 2);
+            this.mSMenu.Name = "mSMenu";
+            this.mSMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 4);
+            this.mSMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.mSMenu.Size = new System.Drawing.Size(765, 30);
+            this.mSMenu.TabIndex = 3;
+            this.mSMenu.Text = "menuStrip1";
             // 
             // mTSMIMenu
             // 
-            mTSMIMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] { TSMIReturnToHome });
-            mTSMIMenu.Name = "mTSMIMenu";
-            mTSMIMenu.Size = new System.Drawing.Size(64, 24);
-            mTSMIMenu.Text = "Menu";
+            this.mTSMIMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMIReturnToHome});
+            this.mTSMIMenu.Name = "mTSMIMenu";
+            this.mTSMIMenu.Size = new System.Drawing.Size(64, 24);
+            this.mTSMIMenu.Text = "Menu";
             // 
             // TSMIReturnToHome
             // 
-            TSMIReturnToHome.Image = Properties.Resources.Home;
-            TSMIReturnToHome.Name = "TSMIReturnToHome";
-            TSMIReturnToHome.Size = new System.Drawing.Size(216, 26);
-            TSMIReturnToHome.Text = "Return To Home";
+            this.TSMIReturnToHome.Image = global::PROG7312_POE.Properties.Resources.Home;
+            this.TSMIReturnToHome.Name = "TSMIReturnToHome";
+            this.TSMIReturnToHome.Size = new System.Drawing.Size(216, 26);
+            this.TSMIReturnToHome.Text = "Return To Home";
+            this.TSMIReturnToHome.Click += new System.EventHandler(this.TSMIReturnToHome_Click);
             // 
             // tSTopBat
             // 
-            tSTopBat.BackColor = System.Drawing.Color.MidnightBlue;
-            tSTopBat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            tSTopBat.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            tSTopBat.ImageScalingSize = new System.Drawing.Size(20, 20);
-            tSTopBat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { tSlblTitle, tSlblExit });
-            tSTopBat.Location = new System.Drawing.Point(0, 0);
-            tSTopBat.Name = "tSTopBat";
-            tSTopBat.Size = new System.Drawing.Size(684, 25);
-            tSTopBat.TabIndex = 2;
-            tSTopBat.MouseDown += tSTopBat_MouseDown;
+            this.tSTopBat.BackColor = System.Drawing.Color.MidnightBlue;
+            this.tSTopBat.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tSTopBat.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.tSTopBat.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.tSTopBat.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tSlblTitle,
+            this.tSlblExit});
+            this.tSTopBat.Location = new System.Drawing.Point(0, 0);
+            this.tSTopBat.Name = "tSTopBat";
+            this.tSTopBat.Size = new System.Drawing.Size(765, 25);
+            this.tSTopBat.TabIndex = 2;
+            this.tSTopBat.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tSTopBat_MouseDown);
             // 
             // tSlblTitle
             // 
-            tSlblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            tSlblTitle.ForeColor = System.Drawing.Color.White;
-            tSlblTitle.Image = Properties.Resources.Status;
-            tSlblTitle.Name = "tSlblTitle";
-            tSlblTitle.Size = new System.Drawing.Size(227, 22);
-            tSlblTitle.Text = "Service Request Status";
+            this.tSlblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tSlblTitle.ForeColor = System.Drawing.Color.White;
+            this.tSlblTitle.Image = global::PROG7312_POE.Properties.Resources.Status;
+            this.tSlblTitle.Name = "tSlblTitle";
+            this.tSlblTitle.Size = new System.Drawing.Size(227, 22);
+            this.tSlblTitle.Text = "Service Request Status";
             // 
             // tSlblExit
             // 
-            tSlblExit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            tSlblExit.BackColor = System.Drawing.Color.MidnightBlue;
-            tSlblExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            tSlblExit.ForeColor = System.Drawing.Color.Gainsboro;
-            tSlblExit.Name = "tSlblExit";
-            tSlblExit.Size = new System.Drawing.Size(21, 22);
-            tSlblExit.Text = "X";
-            tSlblExit.Click += tSlblExit_Click;
+            this.tSlblExit.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.tSlblExit.BackColor = System.Drawing.Color.MidnightBlue;
+            this.tSlblExit.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tSlblExit.ForeColor = System.Drawing.Color.Gainsboro;
+            this.tSlblExit.Name = "tSlblExit";
+            this.tSlblExit.Size = new System.Drawing.Size(21, 22);
+            this.tSlblExit.Text = "X";
+            this.tSlblExit.Click += new System.EventHandler(this.tSlblExit_Click);
             // 
             // lVRequests
             // 
-            lVRequests.FullRowSelect = true;
-            lVRequests.Location = new System.Drawing.Point(12, 68);
-            lVRequests.MultiSelect = false;
-            lVRequests.Name = "lVRequests";
-            lVRequests.Size = new System.Drawing.Size(645, 194);
-            lVRequests.TabIndex = 4;
-            lVRequests.UseCompatibleStateImageBehavior = false;
-            lVRequests.View = System.Windows.Forms.View.Details;
+            this.lVRequests.FullRowSelect = true;
+            this.lVRequests.HideSelection = false;
+            this.lVRequests.Location = new System.Drawing.Point(12, 68);
+            this.lVRequests.MultiSelect = false;
+            this.lVRequests.Name = "lVRequests";
+            this.lVRequests.Size = new System.Drawing.Size(741, 208);
+            this.lVRequests.TabIndex = 4;
+            this.lVRequests.UseCompatibleStateImageBehavior = false;
+            this.lVRequests.View = System.Windows.Forms.View.Details;
             // 
             // btnViewDetails
             // 
-            btnViewDetails.BackColor = System.Drawing.Color.Gainsboro;
-            btnViewDetails.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            btnViewDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            btnViewDetails.Location = new System.Drawing.Point(12, 268);
-            btnViewDetails.Name = "btnViewDetails";
-            btnViewDetails.Size = new System.Drawing.Size(135, 30);
-            btnViewDetails.TabIndex = 5;
-            btnViewDetails.Text = "View Details";
-            btnViewDetails.UseVisualStyleBackColor = false;
-            btnViewDetails.Click += btnViewDetails_Click;
+            this.btnViewDetails.BackColor = System.Drawing.Color.Gainsboro;
+            this.btnViewDetails.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnViewDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnViewDetails.Location = new System.Drawing.Point(12, 282);
+            this.btnViewDetails.Name = "btnViewDetails";
+            this.btnViewDetails.Size = new System.Drawing.Size(135, 30);
+            this.btnViewDetails.TabIndex = 5;
+            this.btnViewDetails.Text = "View Details";
+            this.btnViewDetails.UseVisualStyleBackColor = false;
+            this.btnViewDetails.Click += new System.EventHandler(this.btnViewDetails_Click);
             // 
             // btnTrackProgress
             // 
-            btnTrackProgress.BackColor = System.Drawing.Color.Gainsboro;
-            btnTrackProgress.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            btnTrackProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            btnTrackProgress.Location = new System.Drawing.Point(522, 268);
-            btnTrackProgress.Name = "btnTrackProgress";
-            btnTrackProgress.Size = new System.Drawing.Size(135, 30);
-            btnTrackProgress.TabIndex = 6;
-            btnTrackProgress.Text = "Track Progress";
-            btnTrackProgress.UseVisualStyleBackColor = false;
-            btnTrackProgress.Click += btnTrackProgress_Click;
+            this.btnTrackProgress.BackColor = System.Drawing.Color.Gainsboro;
+            this.btnTrackProgress.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnTrackProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrackProgress.Location = new System.Drawing.Point(618, 282);
+            this.btnTrackProgress.Name = "btnTrackProgress";
+            this.btnTrackProgress.Size = new System.Drawing.Size(135, 30);
+            this.btnTrackProgress.TabIndex = 6;
+            this.btnTrackProgress.Text = "Track Progress";
+            this.btnTrackProgress.UseVisualStyleBackColor = false;
+            this.btnTrackProgress.Click += new System.EventHandler(this.btnTrackProgress_Click);
             // 
             // rTBDetails
             // 
-            rTBDetails.BackColor = System.Drawing.SystemColors.Window;
-            rTBDetails.Location = new System.Drawing.Point(12, 318);
-            rTBDetails.Name = "rTBDetails";
-            rTBDetails.ReadOnly = true;
-            rTBDetails.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
-            rTBDetails.Size = new System.Drawing.Size(645, 200);
-            rTBDetails.TabIndex = 7;
-            rTBDetails.Text = "";
+            this.rTBDetails.BackColor = System.Drawing.SystemColors.Window;
+            this.rTBDetails.Location = new System.Drawing.Point(12, 318);
+            this.rTBDetails.Name = "rTBDetails";
+            this.rTBDetails.ReadOnly = true;
+            this.rTBDetails.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.rTBDetails.Size = new System.Drawing.Size(741, 200);
+            this.rTBDetails.TabIndex = 7;
+            this.rTBDetails.Text = "";
             // 
             // lblPercentage
             // 
-            lblPercentage.AutoSize = true;
-            lblPercentage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            lblPercentage.Location = new System.Drawing.Point(547, 32);
-            lblPercentage.Name = "lblPercentage";
-            lblPercentage.Size = new System.Drawing.Size(26, 20);
-            lblPercentage.TabIndex = 2;
-            lblPercentage.Text = "lbl";
+            this.lblPercentage.AutoSize = true;
+            this.lblPercentage.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPercentage.Location = new System.Drawing.Point(623, 32);
+            this.lblPercentage.Name = "lblPercentage";
+            this.lblPercentage.Size = new System.Drawing.Size(112, 20);
+            this.lblPercentage.TabIndex = 2;
+            this.lblPercentage.Text = "% Complete...";
             // 
             // pBRequestProgress
             // 
-            pBRequestProgress.ForeColor = System.Drawing.Color.Green;
-            pBRequestProgress.Location = new System.Drawing.Point(9, 32);
-            pBRequestProgress.Name = "pBRequestProgress";
-            pBRequestProgress.Size = new System.Drawing.Size(480, 26);
-            pBRequestProgress.Step = 100;
-            pBRequestProgress.TabIndex = 0;
+            this.pBRequestProgress.ForeColor = System.Drawing.Color.Green;
+            this.pBRequestProgress.Location = new System.Drawing.Point(64, 32);
+            this.pBRequestProgress.Name = "pBRequestProgress";
+            this.pBRequestProgress.Size = new System.Drawing.Size(480, 26);
+            this.pBRequestProgress.Step = 100;
+            this.pBRequestProgress.TabIndex = 0;
             // 
             // gBProgress
             // 
-            gBProgress.Controls.Add(lblPercentage);
-            gBProgress.Controls.Add(pBRequestProgress);
-            gBProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            gBProgress.Location = new System.Drawing.Point(12, 534);
-            gBProgress.Name = "gBProgress";
-            gBProgress.Size = new System.Drawing.Size(645, 70);
-            gBProgress.TabIndex = 9;
-            gBProgress.TabStop = false;
-            gBProgress.Text = "Progress Tracker";
+            this.gBProgress.Controls.Add(this.lblPercentage);
+            this.gBProgress.Controls.Add(this.pBRequestProgress);
+            this.gBProgress.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gBProgress.Location = new System.Drawing.Point(12, 534);
+            this.gBProgress.Name = "gBProgress";
+            this.gBProgress.Size = new System.Drawing.Size(741, 70);
+            this.gBProgress.TabIndex = 9;
+            this.gBProgress.TabStop = false;
+            this.gBProgress.Text = "Progress Tracker";
+            // 
+            // btnGroup
+            // 
+            this.btnGroup.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnGroup.Location = new System.Drawing.Point(381, 282);
+            this.btnGroup.Name = "btnGroup";
+            this.btnGroup.Size = new System.Drawing.Size(175, 30);
+            this.btnGroup.TabIndex = 10;
+            this.btnGroup.Text = "Group by Province";
+            this.btnGroup.UseVisualStyleBackColor = true;
+            this.btnGroup.Click += new System.EventHandler(this.btnGroup_Click);
+            // 
+            // cBProvince
+            // 
+            this.cBProvince.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cBProvince.FormattingEnabled = true;
+            this.cBProvince.Location = new System.Drawing.Point(179, 284);
+            this.cBProvince.Name = "cBProvince";
+            this.cBProvince.Size = new System.Drawing.Size(196, 28);
+            this.cBProvince.TabIndex = 11;
             // 
             // ServiceRequestStatusForm
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            BackColor = System.Drawing.Color.Gainsboro;
-            ClientSize = new System.Drawing.Size(684, 616);
-            Controls.Add(gBProgress);
-            Controls.Add(rTBDetails);
-            Controls.Add(btnTrackProgress);
-            Controls.Add(btnViewDetails);
-            Controls.Add(lVRequests);
-            Controls.Add(mSMenu);
-            Controls.Add(tSTopBat);
-            Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            MainMenuStrip = mSMenu;
-            Name = "ServiceRequestStatusForm";
-            Text = "ServiceRequestStatusForm";
-            mSMenu.ResumeLayout(false);
-            mSMenu.PerformLayout();
-            tSTopBat.ResumeLayout(false);
-            tSTopBat.PerformLayout();
-            gBProgress.ResumeLayout(false);
-            gBProgress.PerformLayout();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Gainsboro;
+            this.ClientSize = new System.Drawing.Size(765, 607);
+            this.Controls.Add(this.cBProvince);
+            this.Controls.Add(this.btnGroup);
+            this.Controls.Add(this.gBProgress);
+            this.Controls.Add(this.rTBDetails);
+            this.Controls.Add(this.btnTrackProgress);
+            this.Controls.Add(this.btnViewDetails);
+            this.Controls.Add(this.lVRequests);
+            this.Controls.Add(this.mSMenu);
+            this.Controls.Add(this.tSTopBat);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.MainMenuStrip = this.mSMenu;
+            this.Name = "ServiceRequestStatusForm";
+            this.Text = "ServiceRequestStatusForm";
+            this.mSMenu.ResumeLayout(false);
+            this.mSMenu.PerformLayout();
+            this.tSTopBat.ResumeLayout(false);
+            this.tSTopBat.PerformLayout();
+            this.gBProgress.ResumeLayout(false);
+            this.gBProgress.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
@@ -232,5 +264,7 @@
         private System.Windows.Forms.ProgressBar pBRequestProgress;
         private System.Windows.Forms.Label lblPercentage;
         private System.Windows.Forms.GroupBox gBProgress;
+        private System.Windows.Forms.Button btnGroup;
+        private System.Windows.Forms.ComboBox cBProvince;
     }
 }

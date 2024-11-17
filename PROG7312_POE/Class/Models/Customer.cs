@@ -13,6 +13,8 @@ namespace PROG7312_POE.Class.Models
         public string ContactNumber { get; set; }
         public string Email { get; set; }
 
+        public Customer() { }
+
         public Customer(string name, string contactNumber, string email)
         {
             CustomerId = Guid.NewGuid();

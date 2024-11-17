@@ -28,165 +28,169 @@
         /// </summary>
         private void InitializeComponent()
         {
-            btnSubmit = new System.Windows.Forms.Button();
-            btnCancel = new System.Windows.Forms.Button();
-            toolStrip1 = new System.Windows.Forms.ToolStrip();
-            toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
-            toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
-            tBName = new System.Windows.Forms.TextBox();
-            tBNumber = new System.Windows.Forms.TextBox();
-            tBEmail = new System.Windows.Forms.TextBox();
-            label1 = new System.Windows.Forms.Label();
-            label2 = new System.Windows.Forms.Label();
-            label3 = new System.Windows.Forms.Label();
-            toolStrip1.SuspendLayout();
-            SuspendLayout();
+            this.btnSubmit = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.toolStripLabel1 = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripLabel2 = new System.Windows.Forms.ToolStripLabel();
+            this.tBName = new System.Windows.Forms.TextBox();
+            this.tBNumber = new System.Windows.Forms.TextBox();
+            this.tBEmail = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.toolStrip1.SuspendLayout();
+            this.SuspendLayout();
             // 
             // btnSubmit
             // 
-            btnSubmit.BackColor = System.Drawing.SystemColors.ControlLight;
-            btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            btnSubmit.Location = new System.Drawing.Point(13, 319);
-            btnSubmit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            btnSubmit.Name = "btnSubmit";
-            btnSubmit.Size = new System.Drawing.Size(89, 32);
-            btnSubmit.TabIndex = 0;
-            btnSubmit.Text = "Submit";
-            btnSubmit.UseVisualStyleBackColor = false;
-            btnSubmit.Click += btnSubmit_Click;
+            this.btnSubmit.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnSubmit.Location = new System.Drawing.Point(13, 319);
+            this.btnSubmit.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnSubmit.Name = "btnSubmit";
+            this.btnSubmit.Size = new System.Drawing.Size(89, 32);
+            this.btnSubmit.TabIndex = 0;
+            this.btnSubmit.Text = "Submit";
+            this.btnSubmit.UseVisualStyleBackColor = false;
+            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
             // 
             // btnCancel
             // 
-            btnCancel.BackColor = System.Drawing.SystemColors.ControlLight;
-            btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            btnCancel.Location = new System.Drawing.Point(162, 319);
-            btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            btnCancel.Name = "btnCancel";
-            btnCancel.Size = new System.Drawing.Size(100, 32);
-            btnCancel.TabIndex = 1;
-            btnCancel.Text = "Cancel";
-            btnCancel.UseVisualStyleBackColor = false;
-            btnCancel.Click += btnCancel_Click;
+            this.btnCancel.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCancel.Location = new System.Drawing.Point(162, 319);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(100, 32);
+            this.btnCancel.TabIndex = 1;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // toolStrip1
             // 
-            toolStrip1.BackColor = System.Drawing.Color.MidnightBlue;
-            toolStrip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { toolStripLabel1, toolStripLabel2 });
-            toolStrip1.Location = new System.Drawing.Point(0, 0);
-            toolStrip1.Name = "toolStrip1";
-            toolStrip1.Size = new System.Drawing.Size(275, 25);
-            toolStrip1.TabIndex = 2;
-            toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.BackColor = System.Drawing.Color.MidnightBlue;
+            this.toolStrip1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripLabel1,
+            this.toolStripLabel2});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(275, 25);
+            this.toolStrip1.TabIndex = 2;
+            this.toolStrip1.Text = "toolStrip1";
             // 
             // toolStripLabel1
             // 
-            toolStripLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            toolStripLabel1.ForeColor = System.Drawing.Color.White;
-            toolStripLabel1.Name = "toolStripLabel1";
-            toolStripLabel1.Size = new System.Drawing.Size(170, 22);
-            toolStripLabel1.Text = "Enter Your Details:";
+            this.toolStripLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel1.ForeColor = System.Drawing.Color.White;
+            this.toolStripLabel1.Name = "toolStripLabel1";
+            this.toolStripLabel1.Size = new System.Drawing.Size(170, 22);
+            this.toolStripLabel1.Text = "Enter Your Details:";
             // 
             // toolStripLabel2
             // 
-            toolStripLabel2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-            toolStripLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, 0);
-            toolStripLabel2.ForeColor = System.Drawing.Color.White;
-            toolStripLabel2.Name = "toolStripLabel2";
-            toolStripLabel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            toolStripLabel2.Size = new System.Drawing.Size(21, 22);
-            toolStripLabel2.Text = "X";
+            this.toolStripLabel2.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.toolStripLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.toolStripLabel2.ForeColor = System.Drawing.Color.White;
+            this.toolStripLabel2.Name = "toolStripLabel2";
+            this.toolStripLabel2.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
+            this.toolStripLabel2.Size = new System.Drawing.Size(21, 22);
+            this.toolStripLabel2.Text = "X";
             // 
             // tBName
             // 
-            tBName.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F);
-            tBName.Location = new System.Drawing.Point(13, 72);
-            tBName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tBName.Name = "tBName";
-            tBName.Size = new System.Drawing.Size(249, 28);
-            tBName.TabIndex = 4;
+            this.tBName.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F);
+            this.tBName.Location = new System.Drawing.Point(13, 72);
+            this.tBName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tBName.Name = "tBName";
+            this.tBName.Size = new System.Drawing.Size(249, 28);
+            this.tBName.TabIndex = 4;
             // 
             // tBNumber
             // 
-            tBNumber.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F);
-            tBNumber.Location = new System.Drawing.Point(13, 153);
-            tBNumber.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tBNumber.Name = "tBNumber";
-            tBNumber.Size = new System.Drawing.Size(249, 28);
-            tBNumber.TabIndex = 5;
+            this.tBNumber.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F);
+            this.tBNumber.Location = new System.Drawing.Point(13, 153);
+            this.tBNumber.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tBNumber.Name = "tBNumber";
+            this.tBNumber.Size = new System.Drawing.Size(249, 28);
+            this.tBNumber.TabIndex = 5;
             // 
             // tBEmail
             // 
-            tBEmail.Location = new System.Drawing.Point(13, 243);
-            tBEmail.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            tBEmail.Name = "tBEmail";
-            tBEmail.Size = new System.Drawing.Size(249, 28);
-            tBEmail.TabIndex = 6;
+            this.tBEmail.Location = new System.Drawing.Point(13, 243);
+            this.tBEmail.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.tBEmail.Name = "tBEmail";
+            this.tBEmail.Size = new System.Drawing.Size(249, 28);
+            this.tBEmail.TabIndex = 6;
             // 
             // label1
             // 
-            label1.AutoSize = true;
-            label1.BackColor = System.Drawing.Color.Gainsboro;
-            label1.Location = new System.Drawing.Point(13, 47);
-            label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label1.Name = "label1";
-            label1.Size = new System.Drawing.Size(105, 22);
-            label1.TabIndex = 8;
-            label1.Text = "Full Name:";
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Gainsboro;
+            this.label1.Location = new System.Drawing.Point(13, 47);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(105, 22);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Full Name:";
             // 
             // label2
             // 
-            label2.AutoSize = true;
-            label2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            label2.Location = new System.Drawing.Point(13, 128);
-            label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label2.Name = "label2";
-            label2.Size = new System.Drawing.Size(159, 22);
-            label2.TabIndex = 9;
-            label2.Text = "Contact Number:";
+            this.label2.AutoSize = true;
+            this.label2.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label2.Location = new System.Drawing.Point(13, 128);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(159, 22);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Contact Number:";
             // 
             // label3
             // 
-            label3.AutoSize = true;
-            label3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            label3.Location = new System.Drawing.Point(13, 218);
-            label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            label3.Name = "label3";
-            label3.Size = new System.Drawing.Size(66, 22);
-            label3.TabIndex = 10;
-            label3.Text = "Email:";
+            this.label3.AutoSize = true;
+            this.label3.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.label3.Location = new System.Drawing.Point(13, 218);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(66, 22);
+            this.label3.TabIndex = 10;
+            this.label3.Text = "Email:";
             // 
             // CustomerInput
             // 
-            AcceptButton = btnSubmit;
-            AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
-            AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            BackColor = System.Drawing.Color.Gainsboro;
-            BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            CancelButton = btnCancel;
-            ClientSize = new System.Drawing.Size(275, 373);
-            Controls.Add(toolStrip1);
-            Controls.Add(label3);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(tBEmail);
-            Controls.Add(tBNumber);
-            Controls.Add(tBName);
-            Controls.Add(btnCancel);
-            Controls.Add(btnSubmit);
-            Font = new System.Drawing.Font("MS Reference Sans Serif", 10F);
-            ForeColor = System.Drawing.SystemColors.ControlText;
-            FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            Name = "CustomerInput";
-            StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            Text = "CustomerInput";
-            toolStrip1.ResumeLayout(false);
-            toolStrip1.PerformLayout();
-            ResumeLayout(false);
-            PerformLayout();
+            this.AcceptButton = this.btnSubmit;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 22F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Gainsboro;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.CancelButton = this.btnCancel;
+            this.ClientSize = new System.Drawing.Size(275, 373);
+            this.Controls.Add(this.toolStrip1);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.tBEmail);
+            this.Controls.Add(this.tBNumber);
+            this.Controls.Add(this.tBName);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnSubmit);
+            this.Font = new System.Drawing.Font("MS Reference Sans Serif", 10F);
+            this.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Name = "CustomerInput";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "CustomerInput";
+            this.toolStrip1.ResumeLayout(false);
+            this.toolStrip1.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
