@@ -15,6 +15,7 @@ namespace PROG7312_POE
     public partial class CustomerInput : Form
     {
         public Customer CustomerDetails { get; private set; }
+        int valcount = 0;
         public CustomerInput()
         {
             InitializeComponent();
@@ -22,22 +23,29 @@ namespace PROG7312_POE
 
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            string cName = tBName.Text;
-            string cEmail = tBEmail.Text;
-            string cNumber = tBNumber.Text;
+            try
+            {
+                string cName = tBName.Text;
+                string cEmail = tBEmail.Text;
+                string cNumber = tBNumber.Text;
 
-            ValidationClass val = new ValidationClass();
+                ValidationClass val = new ValidationClass();
 
-            if (val.isString(cName)) ;
-            if (val.isString(cEmail)) ;
-            if (val.isString(cNumber)) ;
+                if (val.isString(cName)) valcount++;
+                if (val.isString(cEmail)) valcount++;
+                if (val.isString(cNumber)) valcount++;
 
-            // TODO: Validate inputs
+                if (valcount == 3)
+                {
 
-            CustomerDetails = new Customer(cName, cNumber, cEmail);
+                    CustomerDetails = new Customer(cName, cNumber, cEmail);
 
-            this.DialogResult = DialogResult.OK;
-            this.Close();
+                    this.DialogResult = DialogResult.OK;
+                    this.Close();
+
+                }
+            }
+            catch { }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

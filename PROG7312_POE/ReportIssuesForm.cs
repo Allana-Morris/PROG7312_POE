@@ -57,47 +57,51 @@ namespace PROG7312_POE
         /// </summary>
         public void loadEnums()
         {
-            cBCategory.Items.Clear(); // Clear any existing items
-            cBLocation.Items.Clear();
-            string noneString = "";
-
-            foreach (var category in Enum.GetValues(typeof(RequestCategory)).Cast<RequestCategory>())
+            try
             {
-                if(category == RequestCategory.None)
+                cBCategory.Items.Clear(); // Clear any existing items
+                cBLocation.Items.Clear();
+                string noneString = "";
+
+                foreach (var category in Enum.GetValues(typeof(RequestCategory)).Cast<RequestCategory>())
                 {
-                    noneString = GetEnumDescription(category);
+                    if (category == RequestCategory.None)
+                    {
+                        noneString = GetEnumDescription(category);
+                    }
+                    // Get the description for each enum value and add it to the ComboBox
+                    cBCategory.Items.Add(GetEnumDescription(category));
                 }
-                // Get the description for each enum value and add it to the ComboBox
-                cBCategory.Items.Add(GetEnumDescription(category));
-            }
 
-            cBCategory.Sorted = true;
-            cBCategory.Items.Remove(noneString);
+                cBCategory.Sorted = true;
+                cBCategory.Items.Remove(noneString);
 
-            if (cBCategory.Items.Count > 0)
-            {
-                cBCategory.Text = noneString;
-            }
-
-
-            foreach (var city in Enum.GetValues(typeof(SouthAfricanCities)).Cast<SouthAfricanCities>())
-            {
-                if (city == SouthAfricanCities.None)
+                if (cBCategory.Items.Count > 0)
                 {
-                    noneString = GetEnumDescription(city);
+                    cBCategory.Text = noneString;
                 }
-                // Get the description for each enum value and add it to the ComboBox
-                cBLocation.Items.Add(GetEnumDescription(city));
-            }
 
-            cBLocation.Sorted = true;
-            cBLocation.Items.Remove(noneString);
 
-            // Optionally set the ComboBox to the first item by default
-            if (cBLocation.Items.Count > 0)
-            {
-                cBLocation.Text = noneString;
+                foreach (var city in Enum.GetValues(typeof(SouthAfricanCities)).Cast<SouthAfricanCities>())
+                {
+                    if (city == SouthAfricanCities.None)
+                    {
+                        noneString = GetEnumDescription(city);
+                    }
+                    // Get the description for each enum value and add it to the ComboBox
+                    cBLocation.Items.Add(GetEnumDescription(city));
+                }
+
+                cBLocation.Sorted = true;
+                cBLocation.Items.Remove(noneString);
+
+                // Optionally set the ComboBox to the first item by default
+                if (cBLocation.Items.Count > 0)
+                {
+                    cBLocation.Text = noneString;
+                }
             }
+            catch { }
         }
         //-------------------------------------------------------------------------------------
         /// <summary>
@@ -128,7 +132,7 @@ namespace PROG7312_POE
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
                 openFileDialog.Title = "Attach Image or Document";
-                openFileDialog.Filter = "Image Files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png|PDF files (*.pdf)|*.pdf|All files (*.*)|*.*";
+                openFileDialog.Filter = "Image Files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png|PDF files (*.pdf)|*.pdf|Word Documents (*.docx)|*.docx|All files (*.*)|*.*";
                 openFileDialog.CheckFileExists = true;
                 openFileDialog.CheckPathExists = true;
                 openFileDialog.Multiselect = true;
@@ -137,10 +141,19 @@ namespace PROG7312_POE
                 {
                     StringBuilder fileNames = new StringBuilder();
                     List<byte[]> fileDataList = new List<byte[]>();
-                    tVFiles.Nodes.Clear();
 
-                    TreeNode rootNode = new TreeNode("Attached Files");
-                    tVFiles.Nodes.Add(rootNode);
+                    TreeNode rootNode;
+                    if (tVFiles.Nodes.Count == 0)
+                    {
+                        // Create root node if not already present
+                        rootNode = new TreeNode("Attached Files");
+                        tVFiles.Nodes.Add(rootNode);
+                    }
+                    else
+                    {
+                        // Get existing root node
+                        rootNode = tVFiles.Nodes[0];
+                    }
 
                     foreach (string file in openFileDialog.FileNames)
                     {
@@ -201,79 +214,83 @@ namespace PROG7312_POE
             // Ensure the user has completed all steps (ProgressBar value should be 4)
             if (pBProgress.Value == 4)
             {
-                // Prompt for customer details
-                using (CustomerInput customerInputForm = new CustomerInput())
+                try
                 {
-                    if (customerInputForm.ShowDialog() == DialogResult.OK)
+                    // Prompt for customer details
+                    using (CustomerInput customerInputForm = new CustomerInput())
                     {
-                        customer = customerInputForm.CustomerDetails;
+                        if (customerInputForm.ShowDialog() == DialogResult.OK)
+                        {
+                            customer = customerInputForm.CustomerDetails;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Customer details are required to submit the issue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;  // Exit if customer details are not provided
+                        }
                     }
-                    else
+
+                    // Ensure a file is uploaded before proceeding
+                    if (string.IsNullOrEmpty(userFileName) || userFileData == null || userFileData.Length == 0)
                     {
-                        MessageBox.Show("Customer details are required to submit the issue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;  // Exit if customer details are not provided
+                        MessageBox.Show("Please upload a file before submitting the issue report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;  // Exit if no file is uploaded
                     }
-                }
 
-                // Ensure a file is uploaded before proceeding
-                if (string.IsNullOrEmpty(userFileName) || userFileData == null || userFileData.Length == 0)
-                {
-                    MessageBox.Show("Please upload a file before submitting the issue report.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;  // Exit if no file is uploaded
-                }
+                    // Validate location and description inputs
+                    if (val.isString(rTBDescription.Text)) userDescription = rTBDescription.Text;
 
-                // Validate location and description inputs
-                if (val.isString(rTBDescription.Text)) userDescription = rTBDescription.Text;
-
-                // Validate and match the selected category
-                bool isMatchFound = false;
-                bool isMatch = false;  
-                foreach (var cat in Enum.GetValues(typeof(RequestCategory)).Cast<RequestCategory>())
-                {
-                    var description = GetEnumDescription(cat);
-                    if (cBCategory.Text == description)
+                    // Validate and match the selected category
+                    bool isMatchFound = false;
+                    bool isMatch = false;
+                    foreach (var cat in Enum.GetValues(typeof(RequestCategory)).Cast<RequestCategory>())
                     {
-                        category = cat;
-                        isMatchFound = true;
-                        break; // Exit the loop early since we found a match
+                        var description = GetEnumDescription(cat);
+                        if (cBCategory.Text == description)
+                        {
+                            category = cat;
+                            isMatchFound = true;
+                            break; // Exit the loop early since we found a match
+                        }
                     }
-                }
 
-                if (!isMatchFound)
-                {
-                    MessageBox.Show("The selected category does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                foreach (var city in Enum.GetValues(typeof(SouthAfricanCities)).Cast<SouthAfricanCities>())
-                {
-                    var description = GetEnumDescription(city);
-                    if (cBCategory.Text == description)
+                    if (!isMatchFound)
                     {
-                        location = city;
-                        isMatch = true;
-                        break; // Exit the loop early since we found a match
+                        MessageBox.Show("The selected category does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
                     }
+
+                    foreach (var city in Enum.GetValues(typeof(SouthAfricanCities)).Cast<SouthAfricanCities>())
+                    {
+                        var description = GetEnumDescription(city);
+                        if (cBCategory.Text == description)
+                        {
+                            location = city;
+                            isMatch = true;
+                            break; // Exit the loop early since we found a match
+                        }
+                    }
+
+                    if (!isMatch)
+                    {
+                        MessageBox.Show("The selected city does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    // Create the ReportedRequest object
+                    ReportedRequest issue = new ReportedRequest(customer, userDescription, category, location, userFileName, userFileData);
+
+                    // Add the issue to the issue list and the tree
+                    issueList.Add(issue);
+                    rbt.Insert(issue);
+
+                    Console.WriteLine($"Inserted ReportedRequest with ID: {issue.RequestId}");
+
+                    // Confirm successful submission
+                    MessageBox.Show("Issue reported successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.Close();
                 }
-
-                if (!isMatch)
-                {
-                    MessageBox.Show("The selected city does not exist.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-
-                // Create the ReportedRequest object
-                ReportedRequest issue = new ReportedRequest(customer, userDescription, category, location, userFileName, userFileData);
-
-                // Add the issue to the issue list and the tree
-                issueList.Add(issue);
-                rbt.Insert(issue);
-
-                Console.WriteLine($"Inserted ReportedRequest with ID: {issue.RequestId}");
-
-                // Confirm successful submission
-                MessageBox.Show("Issue reported successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Close();
+                catch { }
             }
             else
             {
@@ -284,9 +301,16 @@ namespace PROG7312_POE
 
         private string GetEnumDescription(Enum value)
         {
-            var field = value.GetType().GetField(value.ToString());
-            var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
-            return attribute == null ? value.ToString() : attribute.Description;
+            try
+            {
+                var field = value.GetType().GetField(value.ToString());
+                var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
+                return attribute == null ? value.ToString() : attribute.Description;
+            }
+            catch
+            {
+            }
+            return null;
         }
 
         //-------------------------------------------------------------------------------------
@@ -359,30 +383,34 @@ namespace PROG7312_POE
 
         private void tVFiles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            TreeNode selectedNode = e.Node;
-
-            // Retrieve the full file path from the Tag property
-            string filePath = selectedNode.Tag as string;
-
-            if (!string.IsNullOrEmpty(filePath))
+            try
             {
-                try
+                TreeNode selectedNode = e.Node;
+
+                // Retrieve the full file path from the Tag property
+                string filePath = selectedNode.Tag as string;
+
+                if (!string.IsNullOrEmpty(filePath))
                 {
-                    // Use Process.Start with the full path to open the file
-                    System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(filePath)
+                    try
                     {
-                        UseShellExecute = true // This ensures that the file is opened with the associated application
-                    });
+                        // Use Process.Start with the full path to open the file
+                        System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(filePath)
+                        {
+                            UseShellExecute = true // This ensures that the file is opened with the associated application
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Error opening file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show($"Error opening file: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("No file path available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
-            {
-                MessageBox.Show("No file path available.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            catch { }
         }
 
         private void tVFiles_MouseUp(object sender, MouseEventArgs e)
@@ -402,31 +430,37 @@ namespace PROG7312_POE
 
         private void tSMIDelete_Click(object sender, EventArgs e)
         {
-            // Get the selected node
-            TreeNode selectedNode = tVFiles.SelectedNode;
-
-            if (selectedNode != null)
+            try
             {
-                // Optionally, you can confirm with the user before deleting
-                var confirmation = MessageBox.Show("Are you sure you want to delete this file?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (confirmation == DialogResult.Yes)
+                // Get the selected node
+                TreeNode selectedNode = tVFiles.SelectedNode;
+
+                if (selectedNode != null)
                 {
-                    // Optionally, delete the file from the file system as well
-                    string filePath = Path.Combine("yourFilePathHere", selectedNode.Text);  // Adjust the path based on your file storage logic
-                    if (File.Exists(filePath))
+                    // Optionally, you can confirm with the user before deleting
+                    var confirmation = MessageBox.Show("Are you sure you want to delete this file?", "Confirm Deletion", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (confirmation == DialogResult.Yes)
                     {
-                        File.Delete(filePath);  // Delete the file from the file system
+                        // Optionally, delete the file from the file system as well
+                        string filePath = Path.Combine("yourFilePathHere", selectedNode.Text);  // Adjust the path based on your file storage logic
+                        if (File.Exists(filePath))
+                        {
+                            File.Delete(filePath);  // Delete the file from the file system
+                        }
+
+                        // Remove the node from the TreeView
+                        tVFiles.Nodes.Remove(selectedNode);
+
+                        // Optionally, update the file list or do other necessary cleanup
+                        MessageBox.Show("File deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
-
-                    // Remove the node from the TreeView
-                    tVFiles.Nodes.Remove(selectedNode);
-
-                    // Optionally, update the file list or do other necessary cleanup
-                    MessageBox.Show("File deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
+            catch (Exception ex)
+            {
+            }
         }
-  
+
     }
 }
 //-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

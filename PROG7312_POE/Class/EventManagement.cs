@@ -24,45 +24,74 @@ namespace PROG7312_POE.Class
 
         public List<EventClass> GetAll()
         {
-            List<EventClass> allEvents = EventStorage
-                .Select(entry => entry.Value)
-                .ToList();
+            try
+            {
+                List<EventClass> allEvents = EventStorage
+                    .Select(entry => entry.Value)
+                    .ToList();
 
-            return allEvents;
+                return allEvents;
+            }
+            catch (Exception ex)
+            {
+                return new List<EventClass>();
+            }
         }
 
         public List<EventClass> CategoryandDateFilter(List<string> selectedCategories, DateTime From, DateTime To)
         {
-            HashSet<string> hashcategories = new HashSet<string>(selectedCategories);
+            try
+            {
+                HashSet<string> hashcategories = new HashSet<string>(selectedCategories);
 
-            var SelectedEvents = EventDateSort
-                .Where(dateEntry => dateEntry.Key >= From && dateEntry.Key <= To)
-                .SelectMany(dateEntry => dateEntry.Value)
-                .Where(evt => hashcategories.Contains(evt.EventCategory.ToString()))
-                .ToList();
+                var SelectedEvents = EventDateSort
+                    .Where(dateEntry => dateEntry.Key >= From && dateEntry.Key <= To)
+                    .SelectMany(dateEntry => dateEntry.Value)
+                    .Where(evt => hashcategories.Contains(evt.EventCategory.ToString()))
+                    .ToList();
 
-            return SelectedEvents;
+                return SelectedEvents;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public List<EventClass> DateFilter(DateTime From, DateTime To)
         {
-            var SelectedEvents = EventDateSort
-                .Where(dateEntry => dateEntry.Key >= From && dateEntry.Key <= To)
-                .SelectMany(dateEntry => dateEntry.Value)
-                .ToList();
-            return SelectedEvents;
+            try
+            {
+                var SelectedEvents = EventDateSort
+                    .Where(dateEntry => dateEntry.Key >= From && dateEntry.Key <= To)
+                    .SelectMany(dateEntry => dateEntry.Value)
+                    .ToList();
+                return SelectedEvents;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+
         }
 
         public List<EventClass> CategoryFilter(List<string> selectedCategories)
         {
             HashSet<string> HashCategory = new HashSet<string>(selectedCategories);
+            try
+            {
+                var SelectedEvents = EventCategorySort
+                    .Where(cat => HashCategory.Contains(cat.Key.ToString()))
+                    .SelectMany(cat => cat.Value)
+                    .ToList();
+                return SelectedEvents;
+            }
+            catch (Exception ex)
+            {
+                return new List<EventClass>();
+            }
 
-            var SelectedEvents = EventCategorySort
-                .Where(cat => HashCategory.Contains(cat.Key.ToString()))
-                .SelectMany(cat => cat.Value)
-                .ToList();
 
-            return SelectedEvents;
         }
 
         //-------------------------------------------------------------------------------------
@@ -71,8 +100,9 @@ namespace PROG7312_POE.Class
         /// </summary>
         public void LoadEvents()
         {
-            // TODO: Adapt Part Two to be compatible with part Three
-            List<EventClass> events = new List<EventClass>
+            try
+            {
+                List<EventClass> events = new List<EventClass>
             {
                 new EventClass(1, "Water Quality Awareness Campaign", new DateTime(2024, 10, 15), RequestCategory.WaterSanitation),
                 new EventClass(2, "Loadshedding Management Workshop", new DateTime(2025, 1, 22), RequestCategory.ElectricityLoadshedding),
@@ -105,25 +135,27 @@ namespace PROG7312_POE.Class
                 new EventClass(29, "Public Transport User Feedback Session", new DateTime(2025, 12, 15), RequestCategory.PublicTransport),
                 new EventClass(30, "Emergency Services Awareness Day", new DateTime(2025, 2, 10), RequestCategory.CommunitySafetySecurity)
             };
-            foreach (var eventItem in events)
-            {
-                // Load into EventStorage
-                EventStorage.Add(eventItem.EventID, eventItem);
-
-                // Load into EventDateSort
-                if (!EventDateSort.ContainsKey(eventItem.EventDate))
+                foreach (var eventItem in events)
                 {
-                    EventDateSort[eventItem.EventDate] = new List<EventClass>();
-                }
-                EventDateSort[eventItem.EventDate].Add(eventItem);
+                    // Load into EventStorage
+                    EventStorage.Add(eventItem.EventID, eventItem);
 
-                // Load into EventCategorySort
-                if (!EventCategorySort.ContainsKey(eventItem.EventCategory))
-                {
-                    EventCategorySort[eventItem.EventCategory] = new List<EventClass>();
+                    // Load into EventDateSort
+                    if (!EventDateSort.ContainsKey(eventItem.EventDate))
+                    {
+                        EventDateSort[eventItem.EventDate] = new List<EventClass>();
+                    }
+                    EventDateSort[eventItem.EventDate].Add(eventItem);
+
+                    // Load into EventCategorySort
+                    if (!EventCategorySort.ContainsKey(eventItem.EventCategory))
+                    {
+                        EventCategorySort[eventItem.EventCategory] = new List<EventClass>();
+                    }
+                    EventCategorySort[eventItem.EventCategory].Add(eventItem);
                 }
-                EventCategorySort[eventItem.EventCategory].Add(eventItem);
             }
+            catch (Exception ex) { }
         }
     }
 }

@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Media;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 using System.Windows.Forms;
 using PROG7312_POE.Class;
+using PROG7312_POE.Properties;
 
 namespace PROG7312_POE
 {
@@ -21,6 +24,9 @@ namespace PROG7312_POE
             ev.LoadEvents();
             ReportedRequest rr = new ReportedRequest();
             rr.LoadExampleRequests();
+            DateTime now = DateTime.Now;
+            string formattedTime = now.ToString("h:mm tt").ToUpper();
+            lblTime.Text = formattedTime;
         }
 
         private void btnHome_Click(object sender, EventArgs e)
@@ -49,8 +55,13 @@ namespace PROG7312_POE
         /// </summary>
         private void btnShutDown_Click(object sender, EventArgs e)
         {
-          //  SoundPlayer soundPlayer = new SoundPlayer();
-          //  soundPlayer.Play();
+            byte[] soundData = Properties.Resources.Windows_95_Shutdown;  // Get the byte array from resources
+
+            using (MemoryStream memoryStream = new MemoryStream(soundData))
+            {
+                SoundPlayer soundPlayer = new SoundPlayer(memoryStream);
+                soundPlayer.PlaySync();  // Play the sound asynchronously
+            }
             this.Close();
         }
 
@@ -83,8 +94,14 @@ namespace PROG7312_POE
         /// </summary>
         private void StartUp_Load(object sender, EventArgs e)
         {
-            //  SoundPlayer player = new SoundPlayer(Resources.Windows_95_Startup);
-            // player.Play();
+            byte[] soundData = Properties.Resources.Windows_95_Startup;  // Get the byte array from resources
+
+            using (MemoryStream memoryStream = new MemoryStream(soundData))
+            {
+                SoundPlayer soundPlayer = new SoundPlayer(memoryStream);
+                soundPlayer.Play();  // Play the sound asynchronously
+            }
+
         }
 
         //-------------------------------------------------------------------------------------
@@ -160,6 +177,18 @@ namespace PROG7312_POE
                 ReleaseCapture();
                 SendMessage(this.Handle, 0xA1, 0x2, 0);
             }
+        }
+
+        private void StartUp_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
+        }
+
+        private void TimeTimer_Tick(object sender, EventArgs e)
+        {
+            DateTime now = DateTime.Now;
+            string formattedTime = now.ToString("h:mm tt").ToUpper();
+            lblTime.Text = formattedTime;
         }
     }
 }

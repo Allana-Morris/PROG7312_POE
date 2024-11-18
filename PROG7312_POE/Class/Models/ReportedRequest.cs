@@ -120,12 +120,12 @@ public class ReportedRequest : IComparable<ReportedRequest>
     public int CompareTo(ReportedRequest other)
     {
         if (other == null) return 1; // To handle null comparisons
-        return this.RequestId.CompareTo(other.RequestId);
+        return this.RequestName.CompareTo(other.RequestName);
     }
 
-    internal ReportedRequest(Guid requestId)
+    internal ReportedRequest(string reqName)
     {
-        RequestId = requestId;
+        RequestName = reqName;
     }
 
     // Method to assign priority based on the IssueCategory
@@ -152,15 +152,26 @@ public class ReportedRequest : IComparable<ReportedRequest>
         };
     }
 
+
+    RedBlackTree rbt = new RedBlackTree();
     public void LoadExampleRequests()
     {
         var random = new Random();
-        RedBlackTree rbt = new RedBlackTree();
-
-
         for (int i = 1; i <= 30; i++)
         {
-
+            int ranprog = random.Next(0, 101);
+            RequestStatus status = new RequestStatus();
+            if(ranprog == 0)
+            {
+                status = RequestStatus.Open;
+            }
+            else if(ranprog > 0 && ranprog < 100) {
+                status = RequestStatus.InProgress;
+            }
+            else
+            {
+                status = RequestStatus.Closed;
+            }
             // Create a new ReportedRequest
             var req = new ReportedRequest
             {
@@ -177,19 +188,19 @@ public class ReportedRequest : IComparable<ReportedRequest>
                 Category = (RequestCategory)random.Next(1, Enum.GetValues(typeof(RequestCategory)).Length),
 
                 // Ensuring Status is not "None"
-                Status = (RequestStatus)random.Next(1, Enum.GetValues(typeof(RequestStatus)).Length),
+                Status = status,
 
-                Progress = random.Next(0, 101), // Progress percentage
+                Progress= ranprog, // Progress percentage
 
                 // Ensuring UserLocation (city) is not "None"
                 UserLocation = (SouthAfricanCities)random.Next(1, Enum.GetValues(typeof(SouthAfricanCities)).Length),
 
                 UserFileNames = new List<string> { $"file{i}.txt", $"image{i}.png" },
                 UserFileData = new List<byte[]>
-    {
-        new byte[] { 0x1, 0x2, 0x3 },
-        new byte[] { 0x4, 0x5, 0x6 }
-    }
+                     {
+                          new byte[] { 0x1, 0x2, 0x3 },
+                          new byte[] { 0x4, 0x5, 0x6 }
+                     }
             };
 
             rbt.Insert(req);

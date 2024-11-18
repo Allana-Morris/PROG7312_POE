@@ -1,7 +1,6 @@
 ﻿using PROG7312_POE.Class;
 using PROG7312_POE.Class.Models;
 using PROG7312_POE.Class.Models.Enums;
-using PROG7312_POE.Class.Models.GeoClustering;
 using PROG7312_POE.Class.TreeClass;
 using System;
 using System.Collections.Generic;
@@ -12,20 +11,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static PROG7312_POE.Class.Models.Enums.SouthAfricanProvinces;
 
 namespace PROG7312_POE
 {
     public partial class ServiceRequestStatusForm : Form
     {
         private RedBlackTree redBlackTree = new RedBlackTree();
-        private bool isGrouped = false;
+        private bool isFilter = false;
+        private MinHeap minHeap = new MinHeap();
 
         public ServiceRequestStatusForm()
         {
             InitializeComponent();
             LoadRequestsFromTree(redBlackTree);
-            LoadProvinces();
+            loadHeap(redBlackTree);
+            loadCB();
         }
 
         private void TSMIReturnToHome_Click(object sender, EventArgs e)
@@ -38,7 +38,19 @@ namespace PROG7312_POE
             this.Close();
         }
 
-         //-------------------------------------------------------------------------------------
+        public void loadCB()
+        {
+            cBPriority.Items.Clear(); // Clear any existing items
+
+            foreach (var priority in Enum.GetValues(typeof(RequestPriority)).Cast<RequestPriority>())
+            {
+                // Get the description for each enum value and add it to the ComboBox
+                cBPriority.Items.Add(priority.ToString());
+            }
+            cBPriority.SelectedItem = RequestPriority.All.ToString();
+        }
+
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// 
         /// </summary>
@@ -57,6 +69,7 @@ namespace PROG7312_POE
 
                 // Set the RichTextBox text to the built string
                 rTBDetails.Text = requestDetails;
+                rTBDetails.Refresh();
             }
             else
             {
@@ -64,7 +77,7 @@ namespace PROG7312_POE
             }
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// 
         /// </summary>
@@ -85,7 +98,7 @@ namespace PROG7312_POE
             }
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// 
         /// </summary>
@@ -99,7 +112,17 @@ namespace PROG7312_POE
             }
         }
 
-         //-------------------------------------------------------------------------------------
+        private void loadHeap(RedBlackTree tree)
+        {
+            List<ReportedRequest> requests = redBlackTree.GetRequestsForListView();
+
+            foreach (ReportedRequest request in requests)
+            {
+                minHeap.Insert(request);
+            }
+        }
+
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// 
         /// </summary>
@@ -141,46 +164,19 @@ namespace PROG7312_POE
             }
         }
 
-         //-------------------------------------------------------------------------------------
-        /// <summary>
-        /// 
-        /// </summary>
-        private void LoadProvinces()
-        {
-            cBProvince.Items.Clear();
-            string noneString = "";
-            foreach (var prov in Enum.GetValues(typeof(SouthAfricanProvince)).Cast<SouthAfricanProvince>())
-            {
-                if (prov == SouthAfricanProvince.None)
-                {
-                    noneString = GetEnumDescription(prov);
-                }
-                // Get the description for each enum value and add it to the ComboBox
-                cBProvince.Items.Add(GetEnumDescription(prov));
-            }
-
-            cBProvince.Sorted = true;
-            cBProvince.Items.Remove(noneString);
-
-            // Optionally set the ComboBox to the first item by default
-            if (cBProvince.Items.Count > 0)
-            {
-                cBProvince.Text = noneString;
-            }
-        }
-
         //-------------------------------------------------------------------------------------
         /// <summary>
         /// Get description for Status enum
         /// </summary>
-        private string GetEnumDescription(Enum value)
+        public string GetEnumDescription(Enum value)
         {
             var field = value.GetType().GetField(value.ToString());
             var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
             return attribute == null ? value.ToString() : attribute.Description;
         }
 
-         //-------------------------------------------------------------------------------------
+
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// 
         /// </summary>
@@ -200,45 +196,52 @@ namespace PROG7312_POE
             sRequest.UpdateStatus(prog, randomTime);
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// 
         /// </summary>
-        private void btnGroup_Click(object sender, EventArgs e)
+        private void btnFilter_Click(object sender, EventArgs e)
         {
-            if (isGrouped)
+            if (isFilter)
             {
-                // If already grouped, reset to default (clear groups and show all requests)
-                LoadProvinces();
+                cBPriority.Text = RequestPriority.All.ToString();
                 LoadRequestsFromTree(redBlackTree);
             }
             else
             {
-                // If not grouped, group the requests by province
-                GroupRequestsByProvince(redBlackTree);
+                string selectedPriority = cBPriority.SelectedItem.ToString();
+
+                // Convert the selected priority to the RequestPriority enum
+                RequestPriority priority = selectedPriority switch
+                {
+                    "High" => RequestPriority.High,
+                    "Medium" => RequestPriority.Medium,
+                    "Low" => RequestPriority.Low,
+                    _ => RequestPriority.All // Default to High if "All" is selected
+                };
+
+                if (priority == RequestPriority.All)
+                {
+                    LoadRequestsFromTree(redBlackTree);
+                }
+                else
+                {
+                    // Filter the ListView based on the selected priority
+                    FilterByPriority(priority);
+                }
             }
 
             // Toggle the state for the next click
-            isGrouped = !isGrouped;
+            isFilter = !isFilter;
         }
 
-        //-------------------------------------------------------------------------------------
-        /// <summary>
-        /// Method to group the requests by province
-        /// </summary>
-        private void GroupRequestsByProvince(RedBlackTree tree)
+        private void FilterByPriority(RequestPriority priorityFilter)
         {
-            GeoClustering gCluster = new GeoClustering();
-            var provinceCluster = gCluster.PerformClustering();
+            // Clear the existing items
             lVRequests.Items.Clear();
             lVRequests.Columns.Clear();
 
-            // Process each request and group it based on its UserLocation (city)
-            // Perform in-order traversal to get a sorted list of ServiceRequests
-            var requests = tree.GetRequestsForListView();
-
-            // Optionally, sort requests by Category before adding to ListView
-            requests = requests.OrderBy(r => r.UserLocation).ToList();
+            lVRequests.View = View.Details;
 
             // Add columns to the ListView for displaying data
             lVRequests.Columns.Add("Request ID", 75);
@@ -248,40 +251,27 @@ namespace PROG7312_POE
             lVRequests.Columns.Add("Date Reported", 100);
             lVRequests.Columns.Add("Status", 75);
 
-            foreach (var request in requests)
+            // Loop through the heap and add each item to the ListView based on priority filter
+            foreach (var request in minHeap.GetHeapContent())
             {
-                // Get the province name based on the UserLocation (city)
-                string provinceName = GetProvinceFromCity(request.UserLocation);
-                // Create a new ListViewItem for this request
-                var priority = request.AssignPriority(request.Category).ToString();
-                var item = new ListViewItem(request.RequestName);
-                item.SubItems.Add(GetEnumDescription(request.Category));
-                item.SubItems.Add(GetEnumDescription(request.UserLocation));
-                item.SubItems.Add(priority);
-                item.SubItems.Add(request.RequestDate.ToShortDateString());
-                item.SubItems.Add(GetEnumDescription(request.Status));
-                if (cBProvince.Text == provinceName)
+                // Get the priority of the current request
+                RequestPriority priority = request.AssignPriority(request.Category);
+
+                // Only add items that match the filter, or show all if filter is "All"
+                if (priority == priorityFilter)
                 {
+                    var itempriority = request.AssignPriority(request.Category).ToString();
+                    var item = new ListViewItem(request.RequestName);
+                    item.SubItems.Add(GetEnumDescription(request.Category));
+                    item.SubItems.Add(GetEnumDescription(request.UserLocation));
+                    item.SubItems.Add(itempriority);
+                    item.SubItems.Add(request.RequestDate.ToShortDateString());
+                    item.SubItems.Add(GetEnumDescription(request.Status));
+
+                    // Add the item to the ListView
                     lVRequests.Items.Add(item);
                 }
             }
-        }
-
-        //-------------------------------------------------------------------------------------
-        /// <summary>
-        /// Method to get the province name based on the UserLocation (city)
-        /// </summary>
-        private string GetProvinceFromCity(SouthAfricanCities city)
-        {
-            foreach (var province in GroupedCitiesByProvince)
-            {
-                if (province.Value.Any(cityInfo => cityInfo.Description == GetEnumDescription(city)))
-                {
-                    return province.Key;
-                }
-            }
-
-            return "Unknown"; // Default value if no matching province is found
         }
 
         private void tSTopBat_MouseDown(object sender, MouseEventArgs e)

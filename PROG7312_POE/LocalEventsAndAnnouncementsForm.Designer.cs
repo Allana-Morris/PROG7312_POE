@@ -184,7 +184,6 @@
             this.cBCategory.TabIndex = 14;
             this.cBCategory.Text = "Category";
             this.cBCategory.UseVisualStyleBackColor = true;
-            this.cBCategory.CheckedChanged += new System.EventHandler(this.cBCategory_CheckedChanged);
             this.cBCategory.CheckStateChanged += new System.EventHandler(this.cBCategory_CheckStateChanged);
             // 
             // cBDate

@@ -9,21 +9,20 @@ namespace PROG7312_POE.Class.Models
     public class RedBlackTree
     {
         private static RedBlackTreeNode _root;
-        private IDSingleton IDSingleton = new IDSingleton();
         private int _nextId; // This is the counter for generating custom IDs
 
         public RedBlackTree()
         {
-            _nextId = 1;
         }
 
         // Insert a new ReportedRequest into the Red-Black Tree
         public void Insert(ReportedRequest request)
         {
+            IDSingleton IDSingleton = new IDSingleton();
+            _nextId = 1;
             int customRequestId = _nextId + IDSingleton.idcount;
 
             var nRequest = new ReportedRequest(customRequestId++, request);
-
             IDSingleton.IDPlus();
 
             var newNode = new RedBlackTreeNode(nRequest);
@@ -197,7 +196,7 @@ namespace PROG7312_POE.Class.Models
             if (node.Request.RequestName == repName)
                 return node.Request;
 
-            if (repName.CompareTo(node.Request.RequestId) < 0)
+            if (repName.CompareTo(node.Request.RequestName) < 0)
                 return nameSearch(node.Left, repName);
             else
                 return nameSearch(node.Right, repName);

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartUp));
             this.tSMIHome = new System.Windows.Forms.ToolStripMenuItem();
             this.shutDownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,6 +45,9 @@
             this.lblServiceRequestStatus = new System.Windows.Forms.Label();
             this.pBFeedback = new System.Windows.Forms.PictureBox();
             this.lblFeedback = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
+            this.TimeTimer = new System.Windows.Forms.Timer(this.components);
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.pBRequestStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBLocalEvents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBIssues)).BeginInit();
@@ -117,8 +121,10 @@
             this.tSMainMenu.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tSMainMenu.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.tSMainMenu.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Millimeter, ((byte)(0)));
+            this.tSMainMenu.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.tSMainMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.tSMainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator2,
             this.btnHome,
             this.toolStripSeparator1});
             this.tSMainMenu.Location = new System.Drawing.Point(0, 416);
@@ -129,13 +135,13 @@
             // btnHome
             // 
             this.btnHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHome.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHome.ForeColor = System.Drawing.Color.Black;
             this.btnHome.Image = global::PROG7312_POE.Properties.Resources.Home;
             this.btnHome.ImageTransparentColor = System.Drawing.Color.Transparent;
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(82, 31);
-            this.btnHome.Text = "Home";
+            this.btnHome.Size = new System.Drawing.Size(77, 31);
+            this.btnHome.Text = "Start";
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // toolStripSeparator1
@@ -229,12 +235,39 @@
             this.lblFeedback.Text = "Community Feedback";
             this.lblFeedback.Click += new System.EventHandler(this.pBFeedback_Click);
             // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.BackColor = System.Drawing.Color.Gainsboro;
+            this.lblTime.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblTime.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.lblTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.ForeColor = System.Drawing.Color.Black;
+            this.lblTime.Location = new System.Drawing.Point(683, 421);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(60, 24);
+            this.lblTime.TabIndex = 19;
+            this.lblTime.Text = "label1";
+            // 
+            // TimeTimer
+            // 
+            this.TimeTimer.Enabled = true;
+            this.TimeTimer.Interval = 1000;
+            this.TimeTimer.Tick += new System.EventHandler(this.TimeTimer_Tick);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.ForeColor = System.Drawing.Color.Gainsboro;
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 34);
+            // 
             // StartUp
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.AutoSize = true;
             this.BackColor = System.Drawing.Color.DarkCyan;
             this.ClientSize = new System.Drawing.Size(756, 450);
+            this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblFeedback);
             this.Controls.Add(this.pBFeedback);
             this.Controls.Add(this.tSMainMenu);
@@ -252,6 +285,8 @@
             this.Name = "StartUp";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StartUp_FormClosing);
+            this.Load += new System.EventHandler(this.StartUp_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pBRequestStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBLocalEvents)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBIssues)).EndInit();
@@ -260,6 +295,7 @@
             this.pnlMenu.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pBFeedback)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -280,5 +316,8 @@
         private System.Windows.Forms.Label lblServiceRequestStatus;
         private System.Windows.Forms.PictureBox pBFeedback;
         private System.Windows.Forms.Label lblFeedback;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Timer TimeTimer;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

@@ -143,16 +143,6 @@ namespace PROG7312_POE.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        public static byte[] Windows_95_Error {
-            get {
-                object obj = ResourceManager.GetObject("Windows 95 Error", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
         public static byte[] Windows_95_Shutdown {
             get {
                 object obj = ResourceManager.GetObject("Windows 95 Shutdown", resourceCulture);

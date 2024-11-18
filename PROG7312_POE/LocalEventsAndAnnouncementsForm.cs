@@ -42,96 +42,92 @@ namespace PROG7312_POE
         {
             List<string> selectedCategories = new List<string>();
             List<EventClass> selectedEvents = new List<EventClass>();
-
-            if (cLBCategory.Enabled && !dTPFromDate.Enabled)
+            try
             {
-
-
-                for (int i = 0; i < cLBCategory.Items.Count; i++)
+                if (cLBCategory.Enabled && !dTPFromDate.Enabled)
                 {
-                    if (cLBCategory.GetItemChecked(i))
+                    for (int i = 0; i < cLBCategory.Items.Count; i++)
                     {
-                        selectedCategories.Add(cLBCategory.GetItemText(i));
+                        if (cLBCategory.GetItemChecked(i))
+                        {
+                            selectedCategories.Add(cLBCategory.GetItemText(i));
+                        }
+                    }
+
+                    if (valClass.allCategoriesValid(selectedCategories))
+                    {
+                        //Go off and get events based on selected categories
+                        selectedEvents = em.CategoryFilter(selectedCategories);
+                    }
+                    else
+                    {
+                        MessageBox.Show("An error has occurred. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+
+                }
+                else if (dTPToDate.Enabled && dTPFromDate.Enabled && !cLBCategory.Enabled)
+                {
+                    DateTime FromDate = dTPFromDate.Value;
+                    DateTime ToDate = dTPToDate.Value;
+
+                    if (valClass.isValidDates(FromDate, ToDate))
+                    {
+                        selectedEvents = em.DateFilter(FromDate, ToDate);
+                    }
+                    else
+                    {
+                        MessageBox.Show("An error has occurred. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-
-                if (valClass.allCategoriesValid(selectedCategories))
+                else if (cLBCategory.Enabled && dTPFromDate.Enabled && dTPToDate.Enabled)
                 {
-                    //Go off and get events based on selected categories
-                    selectedEvents = em.CategoryFilter(selectedCategories);
-                }
-                else
-                {
+                    DateTime FromDate = dTPFromDate.Value;
+                    DateTime ToDate = dTPToDate.Value;
 
-                }
-
-            }
-            else if (dTPToDate.Enabled && dTPFromDate.Enabled && !cLBCategory.Enabled)
-            {
-                DateTime FromDate = dTPFromDate.Value;
-                DateTime ToDate = dTPToDate.Value;
-
-                if (valClass.isValidDates(FromDate, ToDate))
-                {
-                    selectedEvents = em.DateFilter(FromDate, ToDate);
-                }
-                else
-                {
-                    //error
-                }
-            }
-            else if (cLBCategory.Enabled && dTPFromDate.Enabled && dTPToDate.Enabled)
-            {
-
-
-                DateTime FromDate = dTPFromDate.Value;
-                DateTime ToDate = dTPToDate.Value;
-
-                for (int i = 0; i < cLBCategory.Items.Count; i++)
-                {
-                    if (cLBCategory.GetItemChecked(i))
+                    for (int i = 0; i < cLBCategory.Items.Count; i++)
                     {
-                        selectedCategories.Add(cLBCategory.GetItemText(i));
+                        if (cLBCategory.GetItemChecked(i))
+                        {
+                            selectedCategories.Add(cLBCategory.GetItemText(i));
+                        }
+                    }
+
+                    if (valClass.allCategoriesValid(selectedCategories) && valClass.isValidDates(FromDate, ToDate))
+                    {
+                        //Go off and get events based on selected categories & Dates
+                        selectedEvents = em.CategoryandDateFilter(selectedCategories, FromDate, ToDate);
+                    }
+                    else
+                    {
+                        MessageBox.Show("An error has occurred. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-
-                if (valClass.allCategoriesValid(selectedCategories) && valClass.isValidDates(FromDate, ToDate))
+                else if (!(cLBCategory.Enabled && dTPFromDate.Enabled && dTPToDate.Enabled))
                 {
-                    //Go off and get events based on selected categories & Dates
-                    selectedEvents = em.CategoryandDateFilter(selectedCategories, FromDate, ToDate);
-
-
+                    selectedEvents = em.GetAll();
                 }
-                else
+
+                lVEventsandAnnoucements.Items.Clear();
+                lVEventsandAnnoucements.Groups.Clear();
+
+                ListViewGroup EventGroup = new ListViewGroup("Events");
+                ListViewGroup AnnounceGroup = new ListViewGroup("Announcements");
+
+                lVEventsandAnnoucements.Groups.Add(EventGroup);
+                lVEventsandAnnoucements.Groups.Add(AnnounceGroup);
+
+                foreach (var evt in selectedEvents)
                 {
-                    //Error
+                    ListViewItem item = new ListViewItem(evt.EventName);
+                    item.SubItems.Add(evt.EventDate.ToShortDateString());
+                    item.SubItems.Add(GetEnumDescription(evt.EventCategory));
+
+                    item.Group = EventGroup;
+
+                    lVEventsandAnnoucements.Items.Add(item);
                 }
-            }
-            else if (!(cLBCategory.Enabled && dTPFromDate.Enabled && dTPToDate.Enabled))
-            {
-                selectedEvents = em.GetAll();
-            }
-
-            lVEventsandAnnoucements.Items.Clear();
-            lVEventsandAnnoucements.Groups.Clear();
-
-            ListViewGroup EventGroup = new ListViewGroup("Events");
-            ListViewGroup AnnounceGroup = new ListViewGroup("Announcements");
-
-            lVEventsandAnnoucements.Groups.Add(EventGroup);
-            lVEventsandAnnoucements.Groups.Add(AnnounceGroup);
-
-            foreach (var evt in selectedEvents)
-            {
-                ListViewItem item = new ListViewItem(evt.EventName);
-                item.SubItems.Add(evt.EventDate.ToShortDateString());
-                item.SubItems.Add(GetEnumDescription(evt.EventCategory));
-
-                item.Group = EventGroup;
-
-                lVEventsandAnnoucements.Items.Add(item);
-            }
-            AutoResizeColumns();
+                AutoResizeColumns();
+            } catch { }
         }
 
         private void cBCategory_CheckStateChanged(object sender, EventArgs e)
@@ -166,17 +162,19 @@ namespace PROG7312_POE
             cLBCategory.Items.Clear(); // Clear any existing items
             tVCategories.Nodes.Clear();
             string noneString = "";
-
-            foreach (var category in Enum.GetValues(typeof(RequestCategory)).Cast<RequestCategory>())
+            try
             {
-                if (category == RequestCategory.None)
+                foreach (var category in Enum.GetValues(typeof(RequestCategory)).Cast<RequestCategory>())
                 {
-                    noneString = GetEnumDescription(category);
+                    if (category == RequestCategory.None)
+                    {
+                        noneString = GetEnumDescription(category);
+                    }
+                    // Get the description for each enum value and add it to the ComboBox
+                    cLBCategory.Items.Add(GetEnumDescription(category));
+                    tVCategories.Nodes[0].Nodes.Add(GetEnumDescription(category));
                 }
-                // Get the description for each enum value and add it to the ComboBox
-                cLBCategory.Items.Add(GetEnumDescription(category));
-                tVCategories.Nodes[0].Nodes.Add(GetEnumDescription(category));
-            }
+            } catch { }
 
         }
 
@@ -189,50 +187,53 @@ namespace PROG7312_POE
 
         private void lVEventsandAnnoucements_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            var eventItems = lVEventsandAnnoucements.Items.Cast<ListViewItem>().ToList();
-
-            // Reset sort state for other columns
-            for (int i = 0; i < sortStates.Length; i++)
+            try
             {
-                if (i != e.Column) sortStates[i] = 2; // Reset state for other columns
-            }
+                var eventItems = lVEventsandAnnoucements.Items.Cast<ListViewItem>().ToList();
 
-            // Determine sort order for the clicked column
-            switch (sortStates[e.Column])
-            {
-                case 0: // Ascending
-                    if (e.Column == 0) // Event Name
-                        eventItems = eventItems.OrderBy(item => item.Text).ToList();
-                    else if (e.Column == 1) // Date
-                        eventItems = eventItems.OrderBy(item => DateTime.Parse(item.SubItems[1].Text)).ToList();
-                    else if (e.Column == 2) // Category
-                        eventItems = eventItems.OrderBy(item => item.SubItems[2].Text).ToList();
+                // Reset sort state for other columns
+                for (int i = 0; i < sortStates.Length; i++)
+                {
+                    if (i != e.Column) sortStates[i] = 2; // Reset state for other columns
+                }
 
-                    sortStates[e.Column] = 1; // Change to Descending
-                    break;
+                // Determine sort order for the clicked column
+                switch (sortStates[e.Column])
+                {
+                    case 0: // Ascending
+                        if (e.Column == 0) // Event Name
+                            eventItems = eventItems.OrderBy(item => item.Text).ToList();
+                        else if (e.Column == 1) // Date
+                            eventItems = eventItems.OrderBy(item => DateTime.Parse(item.SubItems[1].Text)).ToList();
+                        else if (e.Column == 2) // Category
+                            eventItems = eventItems.OrderBy(item => item.SubItems[2].Text).ToList();
 
-                case 1: // Descending
-                    if (e.Column == 0) // Event Name
-                        eventItems = eventItems.OrderByDescending(item => item.Text).ToList();
-                    else if (e.Column == 1) // Date
-                        eventItems = eventItems.OrderByDescending(item => DateTime.Parse(item.SubItems[1].Text)).ToList();
-                    else if (e.Column == 2) // Category
-                        eventItems = eventItems.OrderByDescending(item => item.SubItems[2].Text).ToList();
+                        sortStates[e.Column] = 1; // Change to Descending
+                        break;
 
-                    sortStates[e.Column] = 2; // Change to Reset
-                    break;
+                    case 1: // Descending
+                        if (e.Column == 0) // Event Name
+                            eventItems = eventItems.OrderByDescending(item => item.Text).ToList();
+                        else if (e.Column == 1) // Date
+                            eventItems = eventItems.OrderByDescending(item => DateTime.Parse(item.SubItems[1].Text)).ToList();
+                        else if (e.Column == 2) // Category
+                            eventItems = eventItems.OrderByDescending(item => item.SubItems[2].Text).ToList();
 
-                case 2: // Reset
-                        // You may want to sort based on the original order or implement custom reset logic
-                    eventItems = eventItems.OrderBy(item => item.Text).ToList(); // For example, reset to Event Name sorting
-                    sortStates[e.Column] = 0; // Change to Ascending for next click
-                    break;
-            }
+                        sortStates[e.Column] = 2; // Change to Reset
+                        break;
 
-            // Clear the ListView and re-add sorted items
-            lVEventsandAnnoucements.Items.Clear();
-            lVEventsandAnnoucements.Items.AddRange(eventItems.ToArray());
-            AutoResizeColumns();
+                    case 2: // Reset
+                            // You may want to sort based on the original order or implement custom reset logic
+                        eventItems = eventItems.OrderBy(item => item.Text).ToList(); // For example, reset to Event Name sorting
+                        sortStates[e.Column] = 0; // Change to Ascending for next click
+                        break;
+                }
+
+                // Clear the ListView and re-add sorted items
+                lVEventsandAnnoucements.Items.Clear();
+                lVEventsandAnnoucements.Items.AddRange(eventItems.ToArray());
+                AutoResizeColumns();
+            } catch { }
         }
 
         private void AutoResizeColumns()
@@ -394,16 +395,11 @@ namespace PROG7312_POE
             this.Size = new Size(requiredWidth + padding, requiredHeight + padding);
         }
 
-        private void cBCategory_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void tVCategories_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Node.Text != "Categories")
             {
-
+                MessageBox.Show("An error has occurred. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

@@ -8,6 +8,7 @@ namespace PROG7312_POE.Class.Models.Enums
 {
     public enum RequestPriority
     {
+        All,
         High,
         Medium,
         Low

@@ -41,8 +41,8 @@
             this.lblPercentage = new System.Windows.Forms.Label();
             this.pBRequestProgress = new System.Windows.Forms.ProgressBar();
             this.gBProgress = new System.Windows.Forms.GroupBox();
-            this.btnGroup = new System.Windows.Forms.Button();
-            this.cBProvince = new System.Windows.Forms.ComboBox();
+            this.cBPriority = new System.Windows.Forms.ComboBox();
+            this.btnFilter = new System.Windows.Forms.Button();
             this.mSMenu.SuspendLayout();
             this.tSTopBat.SuspendLayout();
             this.gBProgress.SuspendLayout();
@@ -197,26 +197,26 @@
             this.gBProgress.TabStop = false;
             this.gBProgress.Text = "Progress Tracker";
             // 
-            // btnGroup
+            // cBPriority
             // 
-            this.btnGroup.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnGroup.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGroup.Location = new System.Drawing.Point(381, 282);
-            this.btnGroup.Name = "btnGroup";
-            this.btnGroup.Size = new System.Drawing.Size(175, 30);
-            this.btnGroup.TabIndex = 10;
-            this.btnGroup.Text = "Group by Province";
-            this.btnGroup.UseVisualStyleBackColor = true;
-            this.btnGroup.Click += new System.EventHandler(this.btnGroup_Click);
+            this.cBPriority.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cBPriority.FormattingEnabled = true;
+            this.cBPriority.Location = new System.Drawing.Point(179, 284);
+            this.cBPriority.Name = "cBPriority";
+            this.cBPriority.Size = new System.Drawing.Size(196, 28);
+            this.cBPriority.TabIndex = 11;
             // 
-            // cBProvince
+            // btnFilter
             // 
-            this.cBProvince.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cBProvince.FormattingEnabled = true;
-            this.cBProvince.Location = new System.Drawing.Point(179, 284);
-            this.cBProvince.Name = "cBProvince";
-            this.cBProvince.Size = new System.Drawing.Size(196, 28);
-            this.cBProvince.TabIndex = 11;
+            this.btnFilter.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFilter.Location = new System.Drawing.Point(381, 282);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(175, 30);
+            this.btnFilter.TabIndex = 10;
+            this.btnFilter.Text = "Filter By Priority";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // ServiceRequestStatusForm
             // 
@@ -224,8 +224,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.ClientSize = new System.Drawing.Size(765, 607);
-            this.Controls.Add(this.cBProvince);
-            this.Controls.Add(this.btnGroup);
+            this.Controls.Add(this.cBPriority);
+            this.Controls.Add(this.btnFilter);
             this.Controls.Add(this.gBProgress);
             this.Controls.Add(this.rTBDetails);
             this.Controls.Add(this.btnTrackProgress);
@@ -264,7 +264,7 @@
         private System.Windows.Forms.ProgressBar pBRequestProgress;
         private System.Windows.Forms.Label lblPercentage;
         private System.Windows.Forms.GroupBox gBProgress;
-        private System.Windows.Forms.Button btnGroup;
-        private System.Windows.Forms.ComboBox cBProvince;
+        private System.Windows.Forms.ComboBox cBPriority;
+        private System.Windows.Forms.Button btnFilter;
     }
 }
