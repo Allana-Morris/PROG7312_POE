@@ -46,7 +46,7 @@ The application adheres to several key design principles:
 
 ### Prerequisites
 
-* **Software:** Visual Studio 2019 (or later) with .NET Framework support.
+* **Software:** Visual Studio 2022 with .NET Framework support.
 * **Framework:** .NET Framework 4.8 or later.
 
 ### Steps to Compile and Run
@@ -74,11 +74,7 @@ Detailed instructions for using each feature are provided within the application
 
 ## Contact
 For further assistance or inquiries, please reach out:
-- **Student Name**: [Allana Morris]
-- **Student Number**: [ST10204772]
+- **Student Name**: Allana Morris
+- **Student Number**: ST10204772
 
----
-
-## License
-This project is licensed under [The Independent Institute of Education (Pty) Ltd 2024].
 ```
