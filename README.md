@@ -51,7 +51,7 @@ The application adheres to several key design principles:
 
 ### Steps to Compile and Run
 
-1. Clone the repository (`git clone (https://github.com/Allana-Morris/PROG7312_POE.git)`).
+1. Clone the repository (`git clone https://github.com/Allana-Morris/PROG7312_POE.git`).
 2. Open `MunicipalServicesApp.sln` in Visual Studio.
 3. Build the project (`Build > Build Solution` or `Ctrl + Shift + B`).
 4. Run the application (`F5` for debugging, `Ctrl + F5` for execution).
@@ -77,8 +77,4 @@ For further assistance or inquiries, please reach out:
 - **Student Name**: Allana Morris
 - **Student Number**: ST10204772
 
----
-
-## License
-This project is licensed under [The Independent Institute of Education (Pty) Ltd 2024].
 ```
