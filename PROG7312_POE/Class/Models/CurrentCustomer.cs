@@ -1,29 +1,24 @@
 ﻿using PROG7312_POE.Class.Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PROG7312_POE.Class.Models
 {
     public class CurrentCustomer : Customer
     {
-        
+
         //-------------------------------------------------------------------------------------
         /// <summary>
         /// Static instance of CurrentCustomer
         /// </summary>
         private static CurrentCustomer _instance;
 
-        
+
         //-------------------------------------------------------------------------------------
         /// <summary>
         /// Lock object for thread safety
         /// </summary>
         private static readonly object _lock = new object();
 
-         
+
         //-------------------------------------------------------------------------------------
         /// <summary>
         /// Private constructor to prevent direct instantiation
@@ -33,7 +28,7 @@ namespace PROG7312_POE.Class.Models
         {
         }
 
-        
+
         //-------------------------------------------------------------------------------------
         /// <summary>
         /// Public static property to access the singleton instance
@@ -55,7 +50,7 @@ namespace PROG7312_POE.Class.Models
             }
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Sets Instance to Customer Details
         /// </summary>
@@ -79,7 +74,7 @@ namespace PROG7312_POE.Class.Models
             }
         }
 
-        
+
         //-------------------------------------------------------------------------------------
         /// <summary>
         /// Method to reset the instance

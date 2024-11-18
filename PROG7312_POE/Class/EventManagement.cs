@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Priority_Queue;
+﻿using Priority_Queue;
 using PROG7312_POE.Class.Models;
 using PROG7312_POE.Class.Models.Enums;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PROG7312_POE.Class
 {
@@ -124,7 +122,7 @@ namespace PROG7312_POE.Class
             return coordinates;
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Function that calculates the approximate distance between the two locations
         /// </summary>
@@ -142,7 +140,7 @@ namespace PROG7312_POE.Class
             return R * c; // Distance in kilometers
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Function that returns all the Event Objects that will be recommended to the Customer based on the searched Categories, Dates and their location
         /// </summary>

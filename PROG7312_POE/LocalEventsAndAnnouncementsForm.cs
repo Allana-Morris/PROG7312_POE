@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using PROG7312_POE.Class;
+﻿using PROG7312_POE.Class;
 using PROG7312_POE.Class.Models;
 using PROG7312_POE.Class.Models.Enums;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Drawing;
+using System.Linq;
+using System.Windows.Forms;
 
 namespace PROG7312_POE
 {
@@ -20,8 +15,7 @@ namespace PROG7312_POE
         ValidationClass valClass = new ValidationClass();
         private EventManagement em = new();
         List<EventClass> events = [];
-
-
+        EnumManager enumMan = new EnumManager();
         private int[] sortStates = new int[3];
 
         //-------------------------------------------------------------------------------------
@@ -51,7 +45,7 @@ namespace PROG7312_POE
             this.Close();
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Loads Suggested Events into the ListView
         /// </summary>
@@ -61,8 +55,8 @@ namespace PROG7312_POE
             {
                 ListViewItem item = new ListViewItem(evt.EventName);
                 item.SubItems.Add(evt.EventDate.ToShortDateString());
-                item.SubItems.Add(GetEnumDescription(evt.EventCategory));
-                item.SubItems.Add(GetEnumDescription(evt.EventLocation));
+                item.SubItems.Add(enumMan.GetEnumDescription(evt.EventCategory));
+                item.SubItems.Add(enumMan.GetEnumDescription(evt.EventLocation));
                 lVEventsandAnnoucements.Items.Add(item);
             }
         }
@@ -131,7 +125,7 @@ namespace PROG7312_POE
 
                     if (valClass.allCategoriesValid(selectedCategories) && valClass.isValidDates(FromDate, ToDate))
                     {
-                        selectedcats = ConvertDescriptionsToCategories(selectedCategories);
+                        selectedcats = enumMan.ConvertDescriptionsToCategories(selectedCategories);
                         //Go off and get events based on selected categories & Dates
                         selectedEvents = em.CategoryandDateFilter(selectedcats, FromDate, ToDate);
                     }
@@ -145,7 +139,7 @@ namespace PROG7312_POE
                     selectedEvents = em.GetAll();
                 }
 
-                selectedcats = ConvertDescriptionsToCategories(selectedCategories);
+                selectedcats = enumMan.ConvertDescriptionsToCategories(selectedCategories);
                 lVEventsandAnnoucements.Items.Clear();
                 events = em.SuggestEvents(selectedcats, FromDate, ToDate, currentUser.Location, selectedEvents);
 
@@ -153,48 +147,13 @@ namespace PROG7312_POE
                 {
                     ListViewItem item = new ListViewItem(evt.EventName);
                     item.SubItems.Add(evt.EventDate.ToShortDateString());
-                    item.SubItems.Add(GetEnumDescription(evt.EventCategory));
-                    item.SubItems.Add(GetEnumDescription(evt.EventLocation));
+                    item.SubItems.Add(enumMan.GetEnumDescription(evt.EventCategory));
+                    item.SubItems.Add(enumMan.GetEnumDescription(evt.EventLocation));
                     lVEventsandAnnoucements.Items.Add(item);
                 }
                 AutoResizeColumns();
             }
             catch { }
-        }
-
-         //-------------------------------------------------------------------------------------
-        /// <summary>
-        /// Converts a List of Enum Descriptions to the Enum Values
-        /// </summary>
-        public static List<RequestCategory> ConvertDescriptionsToCategories(List<string> descriptions)
-        {
-            var categories = new List<RequestCategory>();
-
-            foreach (var description in descriptions)
-            {
-                // Use reflection to find the enum value that matches the description
-                var category = Enum.GetValues(typeof(RequestCategory))
-                                   .Cast<RequestCategory>()
-                                   .FirstOrDefault(c => GetEnumDescription(c) == description);
-
-                if (category != RequestCategory.None) // Only add valid categories
-                {
-                    categories.Add(category);
-                }
-            }
-
-            return categories;
-        }
-
-         //-------------------------------------------------------------------------------------
-        /// <summary>
-        /// Helper method to get the description of an enum value
-        /// </summary>
-        private static string GetEnumDescription(Enum value)
-        {
-            var field = value.GetType().GetField(value.ToString());
-            var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
-            return attribute?.Description ?? value.ToString();
         }
 
         //-------------------------------------------------------------------------------------
@@ -247,11 +206,11 @@ namespace PROG7312_POE
                 {
                     if (category == RequestCategory.None)
                     {
-                        noneString = GetEnumDescription(category);
+                        noneString = enumMan.GetEnumDescription(category);
                     }
                     // Get the description for each enum value and add it to the ComboBox
-                    cLBCategory.Items.Add(GetEnumDescription(category));
-                    tVCategories.Nodes[0].Nodes.Add(GetEnumDescription(category));
+                    cLBCategory.Items.Add(enumMan.GetEnumDescription(category));
+                    tVCategories.Nodes[0].Nodes.Add(enumMan.GetEnumDescription(category));
                 }
             }
             catch { }
@@ -491,7 +450,7 @@ namespace PROG7312_POE
             }
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Resets Filters back to factory setting
         /// </summary>

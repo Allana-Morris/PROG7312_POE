@@ -1,13 +1,9 @@
-﻿using System;
-using System.Diagnostics;
+﻿using PROG7312_POE.Class;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Media;
-using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
 using System.Windows.Forms;
-using PROG7312_POE.Class;
-using PROG7312_POE.Properties;
 
 namespace PROG7312_POE
 {
@@ -15,6 +11,9 @@ namespace PROG7312_POE
     {
         private int shutdownCount = 0;
 
+        EventManagement ev = new EventManagement();
+        ReportedRequest rr = new ReportedRequest();
+        private DateTime now = DateTime.Now;
         //-------------------------------------------------------------------------------------
         /// <summary>
         /// Primary Constructor
@@ -23,16 +22,13 @@ namespace PROG7312_POE
         {
             InitializeComponent();
             this.DoubleBuffered = true;
-            EventManagement ev = new EventManagement();
             ev.LoadEvents();
-            ReportedRequest rr = new ReportedRequest();
             rr.LoadExampleRequests();
-            DateTime now = DateTime.Now;
             string formattedTime = now.ToString("h:mm tt").ToUpper();
             lblTime.Text = formattedTime;
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Opens a Start Menu
         /// </summary>
@@ -50,7 +46,7 @@ namespace PROG7312_POE
             }
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Opens the ReportIssues Form
         /// </summary>
@@ -77,7 +73,7 @@ namespace PROG7312_POE
             this.Close();
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Opens Local Events and Announcements Form
         /// </summary>
@@ -189,7 +185,7 @@ namespace PROG7312_POE
             }
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Timer that updates clock in the right corner
         /// </summary>

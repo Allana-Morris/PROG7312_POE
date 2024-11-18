@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PROG7312_POE.Class.Models
+﻿namespace PROG7312_POE.Class.Models
 {
-     //-------------------------------------------------------------------------------------
-        /// <summary>
-        /// Object to store Announcment infomation
-        /// </summary>
+    //-------------------------------------------------------------------------------------
+    /// <summary>
+    /// Object to store Announcment infomation
+    /// </summary>
     public class AnnouncementClass
     {
         public string AnnouncmentName { get; set; }

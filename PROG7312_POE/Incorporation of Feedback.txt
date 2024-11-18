@@ -1,0 +1,4 @@
+﻿Incorporation of Feedback
+
+1) Move Logical Code out of Forms and into class
+	- Created EnumManager and PriorityComparer to move logical code out of Forms

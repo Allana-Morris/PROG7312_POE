@@ -34,6 +34,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Class\EnumManager.cs" />
     <Compile Include="Class\IDSingleton.cs" />
     <Compile Include="Class\MinHeap.cs" />
     <Compile Include="Class\Models\AnnouncementClass.cs" />

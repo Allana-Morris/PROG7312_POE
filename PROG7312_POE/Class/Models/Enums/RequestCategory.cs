@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel;
 
 namespace PROG7312_POE.Class.Models.Enums
 {
-     //-------------------------------------------------------------------------------------
-        /// <summary>
-        /// Contains all the Categories the Customer can file a Request Under 
-        /// </summary>
+    //-------------------------------------------------------------------------------------
+    /// <summary>
+    /// Contains all the Categories the Customer can file a Request Under 
+    /// </summary>
     public enum RequestCategory
     {
         [Description("Select a Category")]

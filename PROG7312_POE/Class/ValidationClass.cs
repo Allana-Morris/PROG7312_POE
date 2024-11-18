@@ -3,9 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace PROG7312_POE.Class
 {
@@ -55,7 +52,7 @@ namespace PROG7312_POE.Class
             return ValidDates;
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Function that checks that all the selected categories are valid and exist in RequestCategory
         /// </summary>
@@ -84,7 +81,7 @@ namespace PROG7312_POE.Class
             }
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Gets Enum Decription using the value
         /// </summary>

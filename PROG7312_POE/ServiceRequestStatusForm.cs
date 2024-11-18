@@ -1,15 +1,11 @@
 ﻿using PROG7312_POE.Class;
 using PROG7312_POE.Class.Models;
 using PROG7312_POE.Class.Models.Enums;
-using PROG7312_POE.Class.TreeClass;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PROG7312_POE
@@ -19,6 +15,7 @@ namespace PROG7312_POE
         private RedBlackTree redBlackTree = new RedBlackTree();
         private bool isFilter = false;
         private MinHeap minHeap = new MinHeap();
+        EnumManager enumManager;
 
         //-------------------------------------------------------------------------------------
         /// <summary>
@@ -28,11 +25,11 @@ namespace PROG7312_POE
         {
             InitializeComponent();
             LoadRequestsFromTree(redBlackTree);
-            loadHeap(redBlackTree);
+            minHeap.loadHeap(redBlackTree);
             loadCB();
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Exits/ Closes Form
         /// </summary>
@@ -41,7 +38,7 @@ namespace PROG7312_POE
             this.Close();
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Exits/ Closes Form
         /// </summary>
@@ -50,7 +47,7 @@ namespace PROG7312_POE
             this.Close();
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Loads values into Priority Combobox
         /// </summary>
@@ -78,7 +75,7 @@ namespace PROG7312_POE
             {
                 // Build the text for the RichTextBox
                 string requestDetails = $"Request Location: {selectedRequest.UserLocation}\n" +   // Request Location
-                                        $"Category: {GetEnumDescription(selectedRequest.Category)}\n" +          // Category
+                                        $"Category: {enumManager.GetEnumDescription(selectedRequest.Category)}\n" +          // Category
                                         $"Description:\n{selectedRequest.Description}\n\n" + // Description
                                         $"Customer Name: {selectedRequest.Customer.Name}\n" + // Customer Name
                                         $"Customer Contact Number: {selectedRequest.Customer.ContactNumber}"; // Customer Contact Number
@@ -128,20 +125,6 @@ namespace PROG7312_POE
             }
         }
 
-         //-------------------------------------------------------------------------------------
-        /// <summary>
-        /// Loads the items in the tree into the Heap
-        /// </summary>
-        private void loadHeap(RedBlackTree tree)
-        {
-            List<ReportedRequest> requests = redBlackTree.GetRequestsForListView();
-
-            foreach (ReportedRequest request in requests)
-            {
-                minHeap.Insert(request);
-            }
-        }
-
         //-------------------------------------------------------------------------------------
         /// <summary>
         /// Loads ReportedRequests from tree into List view
@@ -174,25 +157,14 @@ namespace PROG7312_POE
             {
                 var priority = request.AssignPriority(request.Category).ToString();
                 var item = new ListViewItem(request.RequestName);
-                item.SubItems.Add(GetEnumDescription(request.Category));
-                item.SubItems.Add(GetEnumDescription(request.UserLocation));
+                item.SubItems.Add(enumManager.GetEnumDescription(request.Category));
+                item.SubItems.Add(enumManager.GetEnumDescription(request.UserLocation));
                 item.SubItems.Add(priority);
                 item.SubItems.Add(request.RequestDate.ToShortDateString());
-                item.SubItems.Add(GetEnumDescription(request.Status));
+                item.SubItems.Add(enumManager.GetEnumDescription(request.Status));
 
                 lVRequests.Items.Add(item);
             }
-        }
-
-        //-------------------------------------------------------------------------------------
-        /// <summary>
-        /// Get description for Status enum
-        /// </summary>
-        public string GetEnumDescription(Enum value)
-        {
-            var field = value.GetType().GetField(value.ToString());
-            var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
-            return attribute == null ? value.ToString() : attribute.Description;
         }
 
         //-------------------------------------------------------------------------------------
@@ -255,7 +227,7 @@ namespace PROG7312_POE
             isFilter = !isFilter;
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Returns all the ReportedRequests that fall under the selected Priority
         /// </summary>
@@ -286,11 +258,11 @@ namespace PROG7312_POE
                 {
                     var itempriority = request.AssignPriority(request.Category).ToString();
                     var item = new ListViewItem(request.RequestName);
-                    item.SubItems.Add(GetEnumDescription(request.Category));
-                    item.SubItems.Add(GetEnumDescription(request.UserLocation));
+                    item.SubItems.Add(enumManager.GetEnumDescription(request.Category));
+                    item.SubItems.Add(enumManager.GetEnumDescription(request.UserLocation));
                     item.SubItems.Add(itempriority);
                     item.SubItems.Add(request.RequestDate.ToShortDateString());
-                    item.SubItems.Add(GetEnumDescription(request.Status));
+                    item.SubItems.Add(enumManager.GetEnumDescription(request.Status));
 
                     // Add the item to the ListView
                     lVRequests.Items.Add(item);

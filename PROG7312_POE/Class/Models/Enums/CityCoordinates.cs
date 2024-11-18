@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace PROG7312_POE.Class.Models.Enums
 {
     public class Coordinates
     {
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Contains all the Geographical Coordinates of each City
         /// This is used in SuggestEvents() when suggesting Events near the Customer

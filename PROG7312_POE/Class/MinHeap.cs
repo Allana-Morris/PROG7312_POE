@@ -1,8 +1,5 @@
-﻿using System;
+﻿using PROG7312_POE.Class.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PROG7312_POE.Class
 {
@@ -18,6 +15,21 @@ namespace PROG7312_POE.Class
         {
             heap = new List<ReportedRequest>();
         }
+
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Loads the items in the tree into the Heap
+        /// </summary>
+        public void loadHeap(RedBlackTree tree)
+        {
+            List<ReportedRequest> requests = tree.GetRequestsForListView();
+
+            foreach (ReportedRequest request in requests)
+            {
+                Insert(request);
+            }
+        }
+
 
         //-------------------------------------------------------------------------------------
         /// <summary>

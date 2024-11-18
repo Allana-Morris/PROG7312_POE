@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace PROG7312_POE.Class
 {
     public class PriorityComparer : IComparer<ReportedRequest>
     {
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Compares two ReportedRequests to determine which one' priority is higher
         /// </summary>

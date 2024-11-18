@@ -1,5 +1,5 @@
-﻿using PROG7312_POE.Class.Models.Enums;
-using PROG7312_POE.Class.Models;
+﻿using PROG7312_POE.Class.Models;
+using PROG7312_POE.Class.Models.Enums;
 using System;
 using System.Collections.Generic;
 
@@ -157,7 +157,7 @@ public class ReportedRequest : IComparable<ReportedRequest>
         RequestName = reqName;
     }
 
-    
+
     //-------------------------------------------------------------------------------------
     /// <summary>
     /// Method to assign priority based on the RequestCategory

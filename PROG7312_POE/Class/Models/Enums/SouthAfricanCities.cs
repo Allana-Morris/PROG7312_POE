@@ -1,12 +1,11 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 
 namespace PROG7312_POE.Class.Models.Enums
 {
- //-------------------------------------------------------------------------------------
-        /// <summary>
-        /// All the Possible Locations a Customer can report a Request From
-        /// </summary>
+    //-------------------------------------------------------------------------------------
+    /// <summary>
+    /// All the Possible Locations a Customer can report a Request From
+    /// </summary>
     public enum SouthAfricanCities
     {
         [Description("Select Your Location")]
@@ -38,7 +37,7 @@ namespace PROG7312_POE.Class.Models.Enums
         Griquatown,
 
 
-        
+
         //-------------------------------------------------------------------------------------
         /// <summary>
         /// North West
@@ -88,8 +87,8 @@ namespace PROG7312_POE.Class.Models.Enums
         [Description("Vryburg")]
         Vryburg,
 
-        
-         //-------------------------------------------------------------------------------------
+
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Mpumalanga
         /// </summary>
@@ -112,8 +111,8 @@ namespace PROG7312_POE.Class.Models.Enums
         [Description("Middelburg")]
         Middelburg,
 
-        
-         //-------------------------------------------------------------------------------------
+
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Limpopo
         /// </summary>
@@ -139,7 +138,7 @@ namespace PROG7312_POE.Class.Models.Enums
         Modimolle,
 
         // 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// KwaZulu-Natal
         /// </summary>
@@ -178,8 +177,8 @@ namespace PROG7312_POE.Class.Models.Enums
         [Description("Dannhauser")]
         Dannhauser,
 
-        
-         //-------------------------------------------------------------------------------------
+
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Gauteng
         /// </summary>
@@ -226,8 +225,8 @@ namespace PROG7312_POE.Class.Models.Enums
         [Description("Randburg")]
         Randburg,
 
-        
-         //-------------------------------------------------------------------------------------
+
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Free State
         /// </summary>
@@ -268,8 +267,8 @@ namespace PROG7312_POE.Class.Models.Enums
         [Description("Senekal")]
         Senekal,
 
-        
-         //-------------------------------------------------------------------------------------
+
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Eastern Cape
         /// </summary>
@@ -324,7 +323,7 @@ namespace PROG7312_POE.Class.Models.Enums
         [Description("Willowvale")]
         Willowvale,
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Western Cape
         /// </summary>

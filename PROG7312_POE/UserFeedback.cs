@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using PROG7312_POE.Class;
+﻿using PROG7312_POE.Class;
 using PROG7312_POE.Class.Models;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System;
+using System.Windows.Forms;
 
 namespace PROG7312_POE
 {
@@ -27,7 +18,7 @@ namespace PROG7312_POE
             InitializeComponent();
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Submits and Stores the User's Feedback
         /// </summary>
@@ -47,7 +38,7 @@ namespace PROG7312_POE
             }
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Exits/ Closes Form
         /// </summary>

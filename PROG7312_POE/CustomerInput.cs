@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using PROG7312_POE.Class;
+﻿using PROG7312_POE.Class;
 using PROG7312_POE.Class.Models;
 using PROG7312_POE.Class.Models.Enums;
+using System;
+using System.Windows.Forms;
 
 namespace PROG7312_POE
 {
@@ -19,7 +12,7 @@ namespace PROG7312_POE
         int valcount = 0;
         readonly SouthAfricanCities customerLocation = SouthAfricanCities.None;
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Primary Constructor
         /// </summary>
@@ -28,7 +21,7 @@ namespace PROG7312_POE
             InitializeComponent();
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Constructor that receives the Customers location based on the Requet's location
         /// </summary>
@@ -37,7 +30,7 @@ namespace PROG7312_POE
             customerLocation = location;
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Creates new Customer using inputs
         /// </summary>
@@ -67,7 +60,7 @@ namespace PROG7312_POE
             catch { }
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Closes Form if Customer wants to cancel
         /// </summary>

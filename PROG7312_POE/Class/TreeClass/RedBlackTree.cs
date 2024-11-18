@@ -1,8 +1,6 @@
 ﻿using PROG7312_POE.Class.TreeClass;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Windows.Forms;
 
 namespace PROG7312_POE.Class.Models
 {
@@ -265,7 +263,7 @@ namespace PROG7312_POE.Class.Models
                 return Search(node.Right, requestId);
         }
 
-        
+
         //-------------------------------------------------------------------------------------
         /// <summary>
         /// Get all requests as a list

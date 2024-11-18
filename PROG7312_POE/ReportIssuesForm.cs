@@ -1,18 +1,14 @@
 ﻿using PROG7312_POE.Class;
 using PROG7312_POE.Class.Models;
 using PROG7312_POE.Class.Models.Enums;
-using PROG7312_POE.Class.TreeClass;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace PROG7312_POE
@@ -23,7 +19,7 @@ namespace PROG7312_POE
 
         private string userFileName = "";  // Initialize as an empty string
         private byte[] userFileData = [];  // Initialize as an empty byte array
-
+        EnumManager enumMan = new EnumManager();
         ValidationClass val = new();
 
         private RedBlackTree rbt = new();
@@ -65,10 +61,10 @@ namespace PROG7312_POE
                 {
                     if (category == RequestCategory.None)
                     {
-                        noneString = GetEnumDescription(category);
+                        noneString = enumMan.GetEnumDescription(category);
                     }
                     // Get the description for each enum value and add it to the ComboBox
-                    cBCategory.Items.Add(GetEnumDescription(category));
+                    cBCategory.Items.Add(enumMan.GetEnumDescription(category));
                 }
 
                 cBCategory.Sorted = true;
@@ -84,10 +80,10 @@ namespace PROG7312_POE
                 {
                     if (city == SouthAfricanCities.None)
                     {
-                        noneString = GetEnumDescription(city);
+                        noneString = enumMan.GetEnumDescription(city);
                     }
                     // Get the description for each enum value and add it to the ComboBox
-                    cBLocation.Items.Add(GetEnumDescription(city));
+                    cBLocation.Items.Add(enumMan.GetEnumDescription(city));
                 }
 
                 cBLocation.Sorted = true;
@@ -231,7 +227,7 @@ namespace PROG7312_POE
                     bool isMatch = false;
                     foreach (var cat in Enum.GetValues(typeof(RequestCategory)).Cast<RequestCategory>())
                     {
-                        var description = GetEnumDescription(cat);
+                        var description = enumMan.GetEnumDescription(cat);
                         if (cBCategory.Text == description)
                         {
                             category = cat;
@@ -248,7 +244,7 @@ namespace PROG7312_POE
 
                     foreach (var city in Enum.GetValues(typeof(SouthAfricanCities)).Cast<SouthAfricanCities>())
                     {
-                        var description = GetEnumDescription(city);
+                        var description = enumMan.GetEnumDescription(city);
                         if (cBCategory.Text == description)
                         {
                             location = city;
@@ -297,24 +293,6 @@ namespace PROG7312_POE
                 // Invalid state for submission
                 MessageBox.Show("Invalid Issue Request.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-         //-------------------------------------------------------------------------------------
-        /// <summary>
-        /// Gets the Descriptions using the Enum values
-        /// </summary>
-        private string GetEnumDescription(Enum value)
-        {
-            try
-            {
-                var field = value.GetType().GetField(value.ToString());
-                var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
-                return attribute == null ? value.ToString() : attribute.Description;
-            }
-            catch
-            {
-            }
-            return null;
         }
 
         //-------------------------------------------------------------------------------------
@@ -384,7 +362,7 @@ namespace PROG7312_POE
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Opens the file in the corresponding node in the appropriate program 
         /// </summary>
@@ -420,7 +398,7 @@ namespace PROG7312_POE
             catch { }
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Right click on a Node
         /// </summary>
@@ -439,7 +417,7 @@ namespace PROG7312_POE
             }
         }
 
-         //-------------------------------------------------------------------------------------
+        //-------------------------------------------------------------------------------------
         /// <summary>
         /// Removes a File from the Attachement list
         /// </summary>
