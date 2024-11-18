@@ -7,6 +7,7 @@ using PROG7312_POE.Class.Models;
 
 namespace PROG7312_POE.Class.TreeClass
 {
+
     public class RedBlackTreeNode
     {
         public ReportedRequest Request { get; set; }
@@ -15,6 +16,10 @@ namespace PROG7312_POE.Class.TreeClass
         public RedBlackTreeNode Parent { get; set; }
         public bool IsRed { get; set; }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Primary Constructor
+        /// </summary>
         public RedBlackTreeNode(ReportedRequest request)
         {
             Request = request;
@@ -23,3 +28,4 @@ namespace PROG7312_POE.Class.TreeClass
         }
     }
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

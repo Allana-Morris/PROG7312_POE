@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PROG7312_POE.Class.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,15 +13,27 @@ namespace PROG7312_POE.Class.Models
         public string Name { get; set; }
         public string ContactNumber { get; set; }
         public string Email { get; set; }
+        public SouthAfricanCities Location { get; set; }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Primary Constructor
+        /// </summary>
         public Customer() { }
 
-        public Customer(string name, string contactNumber, string email)
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Constructor to initialize Data
+        /// </summary>
+        public Customer(string name, string contactNumber, string email, SouthAfricanCities location)
         {
+
             CustomerId = Guid.NewGuid();
             Name = name;
             ContactNumber = contactNumber;
             Email = email;
+            Location = location;
         }
     }
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

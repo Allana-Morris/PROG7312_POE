@@ -37,7 +37,9 @@
     <Compile Include="Class\IDSingleton.cs" />
     <Compile Include="Class\MinHeap.cs" />
     <Compile Include="Class\Models\AnnouncementClass.cs" />
+    <Compile Include="Class\Models\CurrentCustomer.cs" />
     <Compile Include="Class\Models\Customer.cs" />
+    <Compile Include="Class\Models\Enums\CityCoordinates.cs" />
     <Compile Include="Class\Models\Enums\RequestCategory.cs" />
     <Compile Include="Class\Models\Enums\SouthAfricanCities.cs" />
     <Compile Include="Class\Models\Enums\RequestPriority.cs" />

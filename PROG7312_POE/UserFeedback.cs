@@ -18,11 +18,19 @@ namespace PROG7312_POE
     {
         ValidationClass val = new ValidationClass();
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Primary Constructor
+        /// </summary>
         public UserFeedback()
         {
             InitializeComponent();
         }
 
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Submits and Stores the User's Feedback
+        /// </summary>
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             if ((string.IsNullOrEmpty(txtAdvice.Text)) || (CLBSatisfied.SelectedIndex < 0))
@@ -35,14 +43,18 @@ namespace PROG7312_POE
                 string userAdvice = txtAdvice.Text;
                 string userSatisfied = CLBSatisfied.SelectedItem.ToString();
                 FeedbackClass feedback = new FeedbackClass(userSatisfied, userAdvice);
-
                 this.Close();
             }
         }
 
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Exits/ Closes Form
+        /// </summary>
         private void tSlblExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
     }
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

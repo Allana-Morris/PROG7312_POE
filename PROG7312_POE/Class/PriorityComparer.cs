@@ -8,6 +8,10 @@ namespace PROG7312_POE.Class
 {
     public class PriorityComparer : IComparer<ReportedRequest>
     {
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Compares two ReportedRequests to determine which one' priority is higher
+        /// </summary>
         public int Compare(ReportedRequest x, ReportedRequest y)
         {
             if (x == null || y == null) return 0;
@@ -25,3 +29,4 @@ namespace PROG7312_POE.Class
         }
     }
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

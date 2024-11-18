@@ -15,7 +15,10 @@ namespace PROG7312_POE
     {
         private int shutdownCount = 0;
 
-
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Primary Constructor
+        /// </summary>
         public StartUp()
         {
             InitializeComponent();
@@ -29,6 +32,10 @@ namespace PROG7312_POE
             lblTime.Text = formattedTime;
         }
 
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Opens a Start Menu
+        /// </summary>
         private void btnHome_Click(object sender, EventArgs e)
         {
             if (shutdownCount == 0)
@@ -43,6 +50,10 @@ namespace PROG7312_POE
             }
         }
 
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Opens the ReportIssues Form
+        /// </summary>
         private void pBIssues_Click(object sender, EventArgs e)
         {
             ReportIssuesForm Form = new ReportIssuesForm();
@@ -51,7 +62,8 @@ namespace PROG7312_POE
 
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// There was no Specific Shutdown sound but according to research the default set sound for shut down was this audio (tada.wav) 
+        /// Plays Shutdown Sound and then closes program
+        /// There was no Specific Shutdown sound but according to research the default set sound for shut down was this audio (tada.wav) [Which has been renamed to Windows 95 Shutdown in Resources.resx]
         /// </summary>
         private void btnShutDown_Click(object sender, EventArgs e)
         {
@@ -65,12 +77,10 @@ namespace PROG7312_POE
             this.Close();
         }
 
-        private void lblReport_Click(object sender, EventArgs e)
-        {
-            ReportIssuesForm Form = new ReportIssuesForm();
-            Form.ShowDialog();
-        }
-
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Opens Local Events and Announcements Form
+        /// </summary>
         private void pBLocalEvents_Click(object sender, EventArgs e)
         {
             LocalEventsAndAnnouncementsForm LEAA = new LocalEventsAndAnnouncementsForm();
@@ -79,7 +89,7 @@ namespace PROG7312_POE
 
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// Error Sound plays as this is not available yet
+        /// Opens Service Request Status Form
         /// </summary>
         private void pBRequestStatus_Click(object sender, EventArgs e)
         {
@@ -179,11 +189,10 @@ namespace PROG7312_POE
             }
         }
 
-        private void StartUp_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            
-        }
-
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Timer that updates clock in the right corner
+        /// </summary>
         private void TimeTimer_Tick(object sender, EventArgs e)
         {
             DateTime now = DateTime.Now;
@@ -192,3 +201,4 @@ namespace PROG7312_POE
         }
     }
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

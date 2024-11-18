@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace PROG7312_POE.Class.Models.Enums
 {
+     //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Contains the status the Request can be assigned
+        /// </summary>
     public enum RequestStatus
     {
         [Description("Request Open")]
@@ -19,3 +23,4 @@ namespace PROG7312_POE.Class.Models.Enums
         Closed
     }
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

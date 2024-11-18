@@ -36,6 +36,7 @@
             this.pBLocalEvents = new System.Windows.Forms.PictureBox();
             this.pBIssues = new System.Windows.Forms.PictureBox();
             this.tSMainMenu = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.btnHome = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.pnlMenu = new System.Windows.Forms.Panel();
@@ -47,7 +48,6 @@
             this.lblFeedback = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
             this.TimeTimer = new System.Windows.Forms.Timer(this.components);
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             ((System.ComponentModel.ISupportInitialize)(this.pBRequestStatus)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBLocalEvents)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBIssues)).BeginInit();
@@ -132,6 +132,12 @@
             this.tSMainMenu.Size = new System.Drawing.Size(756, 34);
             this.tSMainMenu.TabIndex = 0;
             // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.ForeColor = System.Drawing.Color.Gainsboro;
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 34);
+            // 
             // btnHome
             // 
             this.btnHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
@@ -190,7 +196,7 @@
             this.lblReport.Size = new System.Drawing.Size(115, 24);
             this.lblReport.TabIndex = 14;
             this.lblReport.Text = "Report Issues";
-            this.lblReport.Click += new System.EventHandler(this.lblReport_Click);
+            this.lblReport.Click += new System.EventHandler(this.pBIssues_Click);
             // 
             // lblEventsandAnnouncements
             // 
@@ -245,21 +251,15 @@
             this.lblTime.ForeColor = System.Drawing.Color.Black;
             this.lblTime.Location = new System.Drawing.Point(683, 421);
             this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(60, 24);
+            this.lblTime.Size = new System.Drawing.Size(57, 24);
             this.lblTime.TabIndex = 19;
-            this.lblTime.Text = "label1";
+            this.lblTime.Text = "         ";
             // 
             // TimeTimer
             // 
             this.TimeTimer.Enabled = true;
             this.TimeTimer.Interval = 1000;
             this.TimeTimer.Tick += new System.EventHandler(this.TimeTimer_Tick);
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.ForeColor = System.Drawing.Color.Gainsboro;
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 34);
             // 
             // StartUp
             // 
@@ -285,7 +285,6 @@
             this.Name = "StartUp";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StartUp_FormClosing);
             this.Load += new System.EventHandler(this.StartUp_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pBRequestStatus)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pBLocalEvents)).EndInit();

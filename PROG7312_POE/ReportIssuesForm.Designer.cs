@@ -66,7 +66,7 @@ namespace PROG7312_POE
             this.btnBrowse.TabIndex = 0;
             this.btnBrowse.Text = "&Browse...";
             this.btnBrowse.UseVisualStyleBackColor = false;
-            this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
+            this.btnBrowse.Click += new System.EventHandler(this.BtnBrowse_Click);
             // 
             // btnSubmit
             // 
@@ -79,7 +79,7 @@ namespace PROG7312_POE
             this.btnSubmit.TabIndex = 1;
             this.btnSubmit.Text = "Submit";
             this.btnSubmit.UseVisualStyleBackColor = false;
-            this.btnSubmit.Click += new System.EventHandler(this.btnSubmit_Click);
+            this.btnSubmit.Click += new System.EventHandler(this.BtnSubmit_Click);
             // 
             // tSTopBat
             // 
@@ -114,7 +114,7 @@ namespace PROG7312_POE
             this.tSlblExit.Name = "tSlblExit";
             this.tSlblExit.Size = new System.Drawing.Size(21, 22);
             this.tSlblExit.Text = "X";
-            this.tSlblExit.Click += new System.EventHandler(this.tSlblExit_Click);
+            this.tSlblExit.Click += new System.EventHandler(this.TSlblExit_Click);
             // 
             // mSMenu
             // 
@@ -144,7 +144,7 @@ namespace PROG7312_POE
             this.TSMIReturnToHome.Name = "TSMIReturnToHome";
             this.TSMIReturnToHome.Size = new System.Drawing.Size(211, 26);
             this.TSMIReturnToHome.Text = "Return to Home";
-            this.TSMIReturnToHome.Click += new System.EventHandler(this.returnToHomeToolStripMenuItem_Click);
+            this.TSMIReturnToHome.Click += new System.EventHandler(this.ReturnToHomeToolStripMenuItem_Click);
             // 
             // rTBDescription
             // 
@@ -225,7 +225,7 @@ namespace PROG7312_POE
             this.tSMIDelete.Name = "tSMIDelete";
             this.tSMIDelete.Size = new System.Drawing.Size(122, 24);
             this.tSMIDelete.Text = "Delete";
-            this.tSMIDelete.Click += new System.EventHandler(this.tSMIDelete_Click);
+            this.tSMIDelete.Click += new System.EventHandler(this.TSMIDelete_Click);
             // 
             // cBLocation
             // 

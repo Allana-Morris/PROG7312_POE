@@ -10,19 +10,29 @@ namespace PROG7312_POE.Class
     {
         private List<ReportedRequest> heap;
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Primary Constructor that initializes heap list
+        /// </summary>
         public MinHeap()
         {
             heap = new List<ReportedRequest>();
         }
 
-        // Insert a new item into the heap
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Insert a new item into the heap
+        /// </summary>
         public void Insert(ReportedRequest request)
         {
             heap.Add(request);
             HeapifyUp(heap.Count - 1);
         }
 
-        // Remove the minimum item (root) from the heap
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Remove the minimum item (root) from the heap
+        /// </summary>
         public ReportedRequest RemoveMin()
         {
             if (heap.Count == 0)
@@ -36,7 +46,10 @@ namespace PROG7312_POE.Class
             return minItem;
         }
 
-        // Helper method to heapify up
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Helper method to heapify up
+        /// </summary>
         private void HeapifyUp(int index)
         {
             while (index > 0 && heap[index].CompareTo(heap[(index - 1) / 2]) < 0)
@@ -49,7 +62,10 @@ namespace PROG7312_POE.Class
             }
         }
 
-        // Helper method to heapify down
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Helper method to heapify down
+        /// </summary>
         private void HeapifyDown(int index)
         {
             int leftChild = 2 * index + 1;
@@ -76,7 +92,10 @@ namespace PROG7312_POE.Class
             }
         }
 
-        // Get the heap content (the list of items in the heap)
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Get the heap content (the list of items in the heap)
+        /// </summary>
         public List<ReportedRequest> GetHeapContent()
         {
             return heap;
@@ -84,3 +103,4 @@ namespace PROG7312_POE.Class
     }
 
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

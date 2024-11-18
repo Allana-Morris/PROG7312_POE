@@ -60,6 +60,8 @@
             this.tPEvents = new System.Windows.Forms.TabPage();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.loserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.LocationHeader = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.BtnReset = new System.Windows.Forms.Button();
             this.mSMenuBar.SuspendLayout();
             this.tSTopBar.SuspendLayout();
             this.pSearch.SuspendLayout();
@@ -136,6 +138,7 @@
             // 
             this.pSearch.BackColor = System.Drawing.Color.LightGray;
             this.pSearch.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pSearch.Controls.Add(this.BtnReset);
             this.pSearch.Controls.Add(this.label1);
             this.pSearch.Controls.Add(this.groupBox1);
             this.pSearch.Controls.Add(this.lblSearchBy);
@@ -167,9 +170,9 @@
             this.groupBox1.Controls.Add(this.cBCategory);
             this.groupBox1.Controls.Add(this.cBDate);
             this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.groupBox1.Location = new System.Drawing.Point(124, 63);
+            this.groupBox1.Location = new System.Drawing.Point(99, 57);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(88, 72);
+            this.groupBox1.Size = new System.Drawing.Size(144, 82);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             // 
@@ -203,7 +206,7 @@
             // 
             this.lblSearchBy.AutoSize = true;
             this.lblSearchBy.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblSearchBy.Location = new System.Drawing.Point(120, 40);
+            this.lblSearchBy.Location = new System.Drawing.Point(120, 34);
             this.lblSearchBy.Name = "lblSearchBy";
             this.lblSearchBy.Size = new System.Drawing.Size(92, 20);
             this.lblSearchBy.TabIndex = 13;
@@ -213,7 +216,7 @@
             // 
             this.lblTo.AutoSize = true;
             this.lblTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTo.Location = new System.Drawing.Point(95, 317);
+            this.lblTo.Location = new System.Drawing.Point(95, 356);
             this.lblTo.Name = "lblTo";
             this.lblTo.Size = new System.Drawing.Size(33, 20);
             this.lblTo.TabIndex = 11;
@@ -225,7 +228,7 @@
             this.dTPToDate.Enabled = false;
             this.dTPToDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dTPToDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dTPToDate.Location = new System.Drawing.Point(99, 340);
+            this.dTPToDate.Location = new System.Drawing.Point(99, 379);
             this.dTPToDate.Name = "dTPToDate";
             this.dTPToDate.Size = new System.Drawing.Size(189, 24);
             this.dTPToDate.TabIndex = 10;
@@ -234,7 +237,7 @@
             // 
             this.lblFrom.AutoSize = true;
             this.lblFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFrom.Location = new System.Drawing.Point(95, 256);
+            this.lblFrom.Location = new System.Drawing.Point(95, 295);
             this.lblFrom.Name = "lblFrom";
             this.lblFrom.Size = new System.Drawing.Size(53, 20);
             this.lblFrom.TabIndex = 9;
@@ -244,7 +247,7 @@
             // 
             this.lblCategory.AutoSize = true;
             this.lblCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblCategory.Location = new System.Drawing.Point(3, 115);
+            this.lblCategory.Location = new System.Drawing.Point(-1, 155);
             this.lblCategory.Name = "lblCategory";
             this.lblCategory.Size = new System.Drawing.Size(81, 20);
             this.lblCategory.TabIndex = 8;
@@ -255,7 +258,7 @@
             this.btnSearch.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSearch.Location = new System.Drawing.Point(127, 409);
+            this.btnSearch.Location = new System.Drawing.Point(99, 431);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(85, 35);
             this.btnSearch.TabIndex = 7;
@@ -273,7 +276,7 @@
             this.cLBCategory.FormattingEnabled = true;
             this.cLBCategory.Items.AddRange(new object[] {
             " "});
-            this.cLBCategory.Location = new System.Drawing.Point(5, 138);
+            this.cLBCategory.Location = new System.Drawing.Point(1, 178);
             this.cLBCategory.Name = "cLBCategory";
             this.cLBCategory.Size = new System.Drawing.Size(346, 114);
             this.cLBCategory.TabIndex = 6;
@@ -283,7 +286,7 @@
             this.dTPFromDate.Enabled = false;
             this.dTPFromDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dTPFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dTPFromDate.Location = new System.Drawing.Point(99, 290);
+            this.dTPFromDate.Location = new System.Drawing.Point(99, 329);
             this.dTPFromDate.MaxDate = new System.DateTime(2025, 10, 15, 0, 0, 0, 0);
             this.dTPFromDate.MinDate = new System.DateTime(2024, 10, 15, 0, 0, 0, 0);
             this.dTPFromDate.Name = "dTPFromDate";
@@ -297,7 +300,8 @@
             this.lVEventsandAnnoucements.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.NameHeader,
             this.DateHeader,
-            this.CategoryHeader});
+            this.CategoryHeader,
+            this.LocationHeader});
             this.lVEventsandAnnoucements.Dock = System.Windows.Forms.DockStyle.Right;
             this.lVEventsandAnnoucements.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lVEventsandAnnoucements.HideSelection = false;
@@ -313,17 +317,17 @@
             // NameHeader
             // 
             this.NameHeader.Text = "Name";
-            this.NameHeader.Width = 199;
+            this.NameHeader.Width = 100;
             // 
             // DateHeader
             // 
             this.DateHeader.Text = "Date";
-            this.DateHeader.Width = 143;
+            this.DateHeader.Width = 100;
             // 
             // CategoryHeader
             // 
             this.CategoryHeader.Text = "Category";
-            this.CategoryHeader.Width = 244;
+            this.CategoryHeader.Width = 150;
             // 
             // tCEventsandAnnouncements
             // 
@@ -370,6 +374,7 @@
             // 
             this.listView1.BackColor = System.Drawing.Color.Gainsboro;
             this.listView1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(349, 3);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(600, 496);
@@ -404,6 +409,24 @@
             this.loserToolStripMenuItem.Name = "loserToolStripMenuItem";
             this.loserToolStripMenuItem.Size = new System.Drawing.Size(88, 24);
             this.loserToolStripMenuItem.Text = "Loser";
+            // 
+            // LocationHeader
+            // 
+            this.LocationHeader.Text = "Location";
+            this.LocationHeader.Width = 100;
+            // 
+            // BtnReset
+            // 
+            this.BtnReset.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.BtnReset.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BtnReset.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BtnReset.Location = new System.Drawing.Point(203, 431);
+            this.BtnReset.Name = "BtnReset";
+            this.BtnReset.Size = new System.Drawing.Size(85, 35);
+            this.BtnReset.TabIndex = 18;
+            this.BtnReset.Text = "Reset";
+            this.BtnReset.UseVisualStyleBackColor = false;
+            this.BtnReset.Click += new System.EventHandler(this.BtnReset_Click);
             // 
             // LocalEventsAndAnnouncementsForm
             // 
@@ -467,5 +490,7 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem loserToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader LocationHeader;
+        private System.Windows.Forms.Button BtnReset;
     }
 }

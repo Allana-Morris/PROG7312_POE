@@ -20,6 +20,10 @@ namespace PROG7312_POE
         private bool isFilter = false;
         private MinHeap minHeap = new MinHeap();
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Primary Constructor
+        /// </summary>
         public ServiceRequestStatusForm()
         {
             InitializeComponent();
@@ -28,16 +32,28 @@ namespace PROG7312_POE
             loadCB();
         }
 
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Exits/ Closes Form
+        /// </summary>
         private void TSMIReturnToHome_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Exits/ Closes Form
+        /// </summary>
         private void tSlblExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Loads values into Priority Combobox
+        /// </summary>
         public void loadCB()
         {
             cBPriority.Items.Clear(); // Clear any existing items
@@ -52,7 +68,7 @@ namespace PROG7312_POE
 
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// 
+        /// Adds details of the ReportedRequest Selected
         /// </summary>
         private void btnViewDetails_Click(object sender, EventArgs e)
         {
@@ -79,7 +95,7 @@ namespace PROG7312_POE
 
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// 
+        /// Gets the ReportedRequest object of the selected Item in the Listview
         /// </summary>
         private ReportedRequest GetSelectedRequest()
         {
@@ -100,7 +116,7 @@ namespace PROG7312_POE
 
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// 
+        /// Gets the progress of the ReportedRequest and Displays it visually
         /// </summary>
         private void btnTrackProgress_Click(object sender, EventArgs e)
         {
@@ -112,6 +128,10 @@ namespace PROG7312_POE
             }
         }
 
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Loads the items in the tree into the Heap
+        /// </summary>
         private void loadHeap(RedBlackTree tree)
         {
             List<ReportedRequest> requests = redBlackTree.GetRequestsForListView();
@@ -124,7 +144,7 @@ namespace PROG7312_POE
 
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// 
+        /// Loads ReportedRequests from tree into List view
         /// </summary>
         public void LoadRequestsFromTree(RedBlackTree tree)
         {
@@ -175,10 +195,10 @@ namespace PROG7312_POE
             return attribute == null ? value.ToString() : attribute.Description;
         }
 
-
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// 
+        /// Not Accessable
+        /// Updates Status of an Item in the Listview
         /// </summary>
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
@@ -198,7 +218,7 @@ namespace PROG7312_POE
 
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// 
+        /// adds all the ReportedRequests where the Filtered Priority applies to the Listview
         /// </summary>
         private void btnFilter_Click(object sender, EventArgs e)
         {
@@ -235,6 +255,10 @@ namespace PROG7312_POE
             isFilter = !isFilter;
         }
 
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Returns all the ReportedRequests that fall under the selected Priority
+        /// </summary>
         private void FilterByPriority(RequestPriority priorityFilter)
         {
             // Clear the existing items
@@ -337,8 +361,6 @@ namespace PROG7312_POE
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-
     }
-
 }
-
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

@@ -3,12 +3,19 @@ using System.ComponentModel;
 
 namespace PROG7312_POE.Class.Models.Enums
 {
+ //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// All the Possible Locations a Customer can report a Request From
+        /// </summary>
     public enum SouthAfricanCities
     {
         [Description("Select Your Location")]
         None = 0,
 
-        // Northern Cape
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Northern Cape
+        /// </summary>
         [Description("Kimberley")]
         Kimberley,
         [Description("Upington")]
@@ -31,7 +38,11 @@ namespace PROG7312_POE.Class.Models.Enums
         Griquatown,
 
 
-        //North West
+        
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// North West
+        /// </summary>
         [Description("Klerksdorp")]
         Klerksdorp,
         [Description("Potchefstroom")]
@@ -77,7 +88,11 @@ namespace PROG7312_POE.Class.Models.Enums
         [Description("Vryburg")]
         Vryburg,
 
-        // Mpumalanga
+        
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Mpumalanga
+        /// </summary>
         [Description("Mbombela")]
         Mbombela,
         [Description("Belfast")]
@@ -97,7 +112,11 @@ namespace PROG7312_POE.Class.Models.Enums
         [Description("Middelburg")]
         Middelburg,
 
-        //Limpopo
+        
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Limpopo
+        /// </summary>
         [Description("Polokwane")]
         Polokwane,
         [Description("Mokopane")]
@@ -119,7 +138,11 @@ namespace PROG7312_POE.Class.Models.Enums
         [Description("Modimolle")]
         Modimolle,
 
-        // KwaZulu-Natal
+        // 
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// KwaZulu-Natal
+        /// </summary>
         [Description("Durban")]
         Durban,
         [Description("Pietermaritzburg")]
@@ -155,7 +178,11 @@ namespace PROG7312_POE.Class.Models.Enums
         [Description("Dannhauser")]
         Dannhauser,
 
-        //Gauteng
+        
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gauteng
+        /// </summary>
         [Description("Krugersdorp")]
         Krugersdorp,
         [Description("Randfontein")]
@@ -199,7 +226,11 @@ namespace PROG7312_POE.Class.Models.Enums
         [Description("Randburg")]
         Randburg,
 
-        //Free State
+        
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Free State
+        /// </summary>
         [Description("Bloemfontein")]
         Bloemfontein,
         [Description("Botshabelo")]
@@ -237,7 +268,11 @@ namespace PROG7312_POE.Class.Models.Enums
         [Description("Senekal")]
         Senekal,
 
-        // Eastern Cape
+        
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Eastern Cape
+        /// </summary>
         [Description("Alice")]
         Alice,
         [Description("Bhisho")]
@@ -289,7 +324,10 @@ namespace PROG7312_POE.Class.Models.Enums
         [Description("Willowvale")]
         Willowvale,
 
-        //Western Cape
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Western Cape
+        /// </summary>
         [Description("Piketberg")]
         Piketberg,
         [Description("Plettenberg Bay")]
@@ -327,3 +365,4 @@ namespace PROG7312_POE.Class.Models.Enums
 
     }
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using PROG7312_POE.Class;
 using PROG7312_POE.Class.Models;
+using PROG7312_POE.Class.Models.Enums;
 
 namespace PROG7312_POE
 {
@@ -16,12 +17,31 @@ namespace PROG7312_POE
     {
         public Customer CustomerDetails { get; private set; }
         int valcount = 0;
+        readonly SouthAfricanCities customerLocation = SouthAfricanCities.None;
+
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Primary Constructor
+        /// </summary>
         public CustomerInput()
         {
             InitializeComponent();
         }
 
-        private void btnSubmit_Click(object sender, EventArgs e)
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Constructor that receives the Customers location based on the Requet's location
+        /// </summary>
+        public CustomerInput(SouthAfricanCities location)
+        {
+            customerLocation = location;
+        }
+
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Creates new Customer using inputs
+        /// </summary>
+        private void BtnSubmit_Click(object sender, EventArgs e)
         {
             try
             {
@@ -29,7 +49,7 @@ namespace PROG7312_POE
                 string cEmail = tBEmail.Text;
                 string cNumber = tBNumber.Text;
 
-                ValidationClass val = new ValidationClass();
+                ValidationClass val = new();
 
                 if (val.isString(cName)) valcount++;
                 if (val.isString(cEmail)) valcount++;
@@ -38,17 +58,20 @@ namespace PROG7312_POE
                 if (valcount == 3)
                 {
 
-                    CustomerDetails = new Customer(cName, cNumber, cEmail);
-
+                    CustomerDetails = new Customer(cName, cNumber, cEmail, customerLocation);
+                    CurrentCustomer.SetInstance(CustomerDetails);
                     this.DialogResult = DialogResult.OK;
                     this.Close();
-
                 }
             }
             catch { }
         }
 
-        private void btnCancel_Click(object sender, EventArgs e)
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Closes Form if Customer wants to cancel
+        /// </summary>
+        private void BtnCancel_Click(object sender, EventArgs e)
         {
             // Close the form with DialogResult.Cancel
             this.DialogResult = DialogResult.Cancel;
@@ -56,3 +79,4 @@ namespace PROG7312_POE
         }
     }
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

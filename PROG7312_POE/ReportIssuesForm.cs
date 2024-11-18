@@ -19,27 +19,25 @@ namespace PROG7312_POE
 {
     public partial class ReportIssuesForm : Form
     {
-        private int totalBoxes = 4;
+        private const int totalBoxes = 4;
 
         private string userFileName = "";  // Initialize as an empty string
-        private byte[] userFileData = new byte[0];  // Initialize as an empty byte array
+        private byte[] userFileData = [];  // Initialize as an empty byte array
 
-        ValidationClass val = new ValidationClass();
+        ValidationClass val = new();
 
-        private RedBlackTree rbt = new RedBlackTree();
+        private RedBlackTree rbt = new();
 
-        List<ReportedRequest> issueList = new List<ReportedRequest>();
+        List<ReportedRequest> issueList = [];
 
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// 
+        /// Primary Constructor
         /// </summary>
         public ReportIssuesForm()
         {
             InitializeComponent();
-
-
-            loadEnums();
+            LoadEnums();
 
             pBProgress.Minimum = 0;
             pBProgress.Maximum = totalBoxes;
@@ -53,9 +51,9 @@ namespace PROG7312_POE
 
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// 
+        /// Loads values from Enums to ComboBoxes
         /// </summary>
-        public void loadEnums()
+        public void LoadEnums()
         {
             try
             {
@@ -105,42 +103,44 @@ namespace PROG7312_POE
         }
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// 
+        /// Exits/Closes Form
         /// </summary>
-        private void tSlblExit_Click(object sender, EventArgs e)
+        private void TSlblExit_Click(object sender, EventArgs e)
         {
             this.Close();
         }
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// 
+        /// Exits/Closes Form
         /// </summary>
-        private void returnToHomeToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ReturnToHomeToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// 
+        /// Opens File Dialog and handles File selection
         /// </summary>
-        private void btnBrowse_Click(object sender, EventArgs e)
+        private void BtnBrowse_Click(object sender, EventArgs e)
         {
             try
             {
                 // Implement OpenFileDialog to attach media
-                OpenFileDialog openFileDialog = new OpenFileDialog();
-                openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-                openFileDialog.Title = "Attach Image or Document";
-                openFileDialog.Filter = "Image Files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png|PDF files (*.pdf)|*.pdf|Word Documents (*.docx)|*.docx|All files (*.*)|*.*";
-                openFileDialog.CheckFileExists = true;
-                openFileDialog.CheckPathExists = true;
-                openFileDialog.Multiselect = true;
+                OpenFileDialog openFileDialog = new()
+                {
+                    InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments),
+                    Title = "Attach Image or Document",
+                    Filter = "Image Files (*.jpg, *.jpeg, *.png)|*.jpg;*.jpeg;*.png|PDF files (*.pdf)|*.pdf|Word Documents (*.docx)|*.docx|All files (*.*)|*.*",
+                    CheckFileExists = true,
+                    CheckPathExists = true,
+                    Multiselect = true
+                };
 
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
-                    StringBuilder fileNames = new StringBuilder();
-                    List<byte[]> fileDataList = new List<byte[]>();
+                    StringBuilder fileNames = new();
+                    List<byte[]> fileDataList = [];
 
                     TreeNode rootNode;
                     if (tVFiles.Nodes.Count == 0)
@@ -161,7 +161,7 @@ namespace PROG7312_POE
                         fileNames.AppendLine(Path.GetFileName(file));  // Store the file names
                         byte[] fileData = File.ReadAllBytes(file);  // Read file data
                         fileDataList.Add(fileData);  // Store file data
-                        TreeNode node = new TreeNode(Path.GetFileName(file))
+                        TreeNode node = new(Path.GetFileName(file))
                         {
                             Tag = file // Store the full file path in the Tag property
                         };
@@ -183,7 +183,7 @@ namespace PROG7312_POE
 
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// 
+        /// Updates Progress bar based on Changes in the Form Components
         /// </summary>
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
@@ -201,9 +201,9 @@ namespace PROG7312_POE
 
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// 
+        /// Validates inputed data, opens Customer Input form and creates a ReportedRequest
         /// </summary>
-        private void btnSubmit_Click(object sender, EventArgs e)
+        private void BtnSubmit_Click(object sender, EventArgs e)
         {
             // Fields to capture user inputs
             string userDescription = "";
@@ -216,20 +216,6 @@ namespace PROG7312_POE
             {
                 try
                 {
-                    // Prompt for customer details
-                    using (CustomerInput customerInputForm = new CustomerInput())
-                    {
-                        if (customerInputForm.ShowDialog() == DialogResult.OK)
-                        {
-                            customer = customerInputForm.CustomerDetails;
-                        }
-                        else
-                        {
-                            MessageBox.Show("Customer details are required to submit the issue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;  // Exit if customer details are not provided
-                        }
-                    }
-
                     // Ensure a file is uploaded before proceeding
                     if (string.IsNullOrEmpty(userFileName) || userFileData == null || userFileData.Length == 0)
                     {
@@ -277,8 +263,22 @@ namespace PROG7312_POE
                         return;
                     }
 
+                    // Prompt for customer details
+                    using (CustomerInput customerInputForm = new(location))
+                    {
+                        if (customerInputForm.ShowDialog() == DialogResult.OK)
+                        {
+                            customer = customerInputForm.CustomerDetails;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Customer details are required to submit the issue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;  // Exit if customer details are not provided
+                        }
+                    }
+
                     // Create the ReportedRequest object
-                    ReportedRequest issue = new ReportedRequest(customer, userDescription, category, location, userFileName, userFileData);
+                    ReportedRequest issue = new(customer, userDescription, category, location, userFileName, userFileData);
 
                     // Add the issue to the issue list and the tree
                     issueList.Add(issue);
@@ -299,6 +299,10 @@ namespace PROG7312_POE
             }
         }
 
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets the Descriptions using the Enum values
+        /// </summary>
         private string GetEnumDescription(Enum value)
         {
             try
@@ -315,9 +319,9 @@ namespace PROG7312_POE
 
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// 
+        /// necessary methods for window dragging
         /// </summary>
-        private void tSTopBat_MouseDown(object sender, MouseEventArgs e)
+        private void TSTopBat_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
             {
@@ -374,14 +378,17 @@ namespace PROG7312_POE
             base.WndProc(ref m);
         }
 
-        // Import necessary methods for window dragging
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern bool ReleaseCapture();
 
         [System.Runtime.InteropServices.DllImport("user32.dll")]
         private static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
 
-        private void tVFiles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Opens the file in the corresponding node in the appropriate program 
+        /// </summary>
+        private void TVFiles_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             try
             {
@@ -413,7 +420,11 @@ namespace PROG7312_POE
             catch { }
         }
 
-        private void tVFiles_MouseUp(object sender, MouseEventArgs e)
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Right click on a Node
+        /// </summary>
+        private void TVFiles_MouseUp(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
@@ -428,7 +439,11 @@ namespace PROG7312_POE
             }
         }
 
-        private void tSMIDelete_Click(object sender, EventArgs e)
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Removes a File from the Attachement list
+        /// </summary>
+        private void TSMIDelete_Click(object sender, EventArgs e)
         {
             try
             {
@@ -456,7 +471,7 @@ namespace PROG7312_POE
                     }
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
             }
         }

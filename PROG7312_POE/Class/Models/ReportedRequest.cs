@@ -1,12 +1,8 @@
 ﻿using PROG7312_POE.Class.Models.Enums;
 using PROG7312_POE.Class.Models;
-using System.ComponentModel;
 using System;
 using System.Collections.Generic;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using System.Xml.Linq;
 
-// Combine the RequestPriority with IssueCategory for consistency
 public class ReportedRequest : IComparable<ReportedRequest>
 {
     public Guid RequestId { get; private set; }
@@ -22,9 +18,16 @@ public class ReportedRequest : IComparable<ReportedRequest>
     public List<string> UserFileNames { get; set; } = new List<string>();
     public List<byte[]> UserFileData { get; set; } = new List<byte[]>();
 
-
+    //-------------------------------------------------------------------------------------
+    /// <summary>
+    /// Primary Constructor
+    /// </summary>
     public ReportedRequest() { }
 
+    //-------------------------------------------------------------------------------------
+    /// <summary>
+    /// Constructor to initialize data
+    /// </summary>
     public ReportedRequest(Customer customer, string description, RequestCategory category, SouthAfricanCities location, string filename, byte[] filedata)
     {
         RequestId = new Guid();
@@ -39,6 +42,10 @@ public class ReportedRequest : IComparable<ReportedRequest>
         Progress = 0;
     }
 
+    //-------------------------------------------------------------------------------------
+    /// <summary>
+    /// Constructor to initialize data and generate custom RequestId/RequestName
+    /// </summary>
     public ReportedRequest(int id, ReportedRequest rr)
     {
         RequestId = rr.RequestId;
@@ -55,7 +62,11 @@ public class ReportedRequest : IComparable<ReportedRequest>
         Progress = rr.Progress;
     }
 
-    // Method to add a file (to control how files are added)
+
+    //-------------------------------------------------------------------------------------
+    /// <summary>
+    /// Method to add a file (to control how files are added)
+    /// </summary>
     public void AddFile(string filename, byte[] filedata)
     {
         if (string.IsNullOrWhiteSpace(filename))
@@ -67,7 +78,11 @@ public class ReportedRequest : IComparable<ReportedRequest>
         UserFileData.Add(filedata);
     }
 
-    // Optionally: Method to remove a file by filename (or index, depending on your use case)
+
+    //-------------------------------------------------------------------------------------
+    /// <summary>
+    /// Method to remove a file by filename
+    /// </summary>
     public bool RemoveFile(string filename)
     {
         var index = UserFileNames.IndexOf(filename);
@@ -80,7 +95,10 @@ public class ReportedRequest : IComparable<ReportedRequest>
         return false;  // Return false if file was not found
     }
 
-    // Optionally: Method to remove a file by index
+    //-------------------------------------------------------------------------------------
+    /// <summary>
+    /// Method to remove a file by index
+    /// </summary>
     public bool RemoveFileAt(int index)
     {
         if (index >= 0 && index < UserFileNames.Count)
@@ -92,7 +110,10 @@ public class ReportedRequest : IComparable<ReportedRequest>
         return false;  // Return false if index is out of range
     }
 
-
+    //-------------------------------------------------------------------------------------
+    /// <summary>
+    /// Method to Change/Update Request Status (Not Implemented)
+    /// </summary>
     public void UpdateStatus(int progress, DateTime updateTime)
     {
         if (progress > 0 && progress < 100)
@@ -112,11 +133,19 @@ public class ReportedRequest : IComparable<ReportedRequest>
         LastUpdated = updateTime;
     }
 
+    //-------------------------------------------------------------------------------------
+    /// <summary>
+    /// Method to generate custom RequestId/RequestName
+    /// </summary>
     private string GenerateCustomRequestId(int id)
     {
         return $"REP{id:D3}"; // D3 formats the number as a 3-digit string, e.g., "REP001"
     }
 
+    //-------------------------------------------------------------------------------------
+    /// <summary>
+    /// Method to Compare RequestName
+    /// </summary>
     public int CompareTo(ReportedRequest other)
     {
         if (other == null) return 1; // To handle null comparisons
@@ -128,7 +157,11 @@ public class ReportedRequest : IComparable<ReportedRequest>
         RequestName = reqName;
     }
 
-    // Method to assign priority based on the IssueCategory
+    
+    //-------------------------------------------------------------------------------------
+    /// <summary>
+    /// Method to assign priority based on the RequestCategory
+    /// </summary>
     public RequestPriority AssignPriority(RequestCategory category)
     {
         return category switch
@@ -148,11 +181,14 @@ public class ReportedRequest : IComparable<ReportedRequest>
             RequestCategory.ParksPublicSpaces => RequestPriority.Low,
             RequestCategory.NoiseComplaints => RequestPriority.Low,
 
-            _ => RequestPriority.Low
+            _ => RequestPriority.Low //Default to Low
         };
     }
 
-
+    //-------------------------------------------------------------------------------------
+    /// <summary>
+    /// Method to create Example reported requests
+    /// </summary>
     RedBlackTree rbt = new RedBlackTree();
     public void LoadExampleRequests()
     {
@@ -161,11 +197,12 @@ public class ReportedRequest : IComparable<ReportedRequest>
         {
             int ranprog = random.Next(0, 101);
             RequestStatus status = new RequestStatus();
-            if(ranprog == 0)
+            if (ranprog == 0)
             {
                 status = RequestStatus.Open;
             }
-            else if(ranprog > 0 && ranprog < 100) {
+            else if (ranprog > 0 && ranprog < 100)
+            {
                 status = RequestStatus.InProgress;
             }
             else
@@ -179,7 +216,8 @@ public class ReportedRequest : IComparable<ReportedRequest>
                 RequestName = $"Request {i}",
                 Customer = new Customer($"Customer {i}",
                      $"Customer {i}",
-                     $"customer{i}@example.com"),
+                     $"customer{i}@example.com",
+                     (SouthAfricanCities)random.Next(1, Enum.GetValues(typeof(SouthAfricanCities)).Length)),
                 RequestDate = DateTime.Now.AddDays(-random.Next(1, 100)),
                 LastUpdated = DateTime.Now.AddDays(-random.Next(0, 10)),
                 Description = $"Description for Request {i}",
@@ -190,7 +228,7 @@ public class ReportedRequest : IComparable<ReportedRequest>
                 // Ensuring Status is not "None"
                 Status = status,
 
-                Progress= ranprog, // Progress percentage
+                Progress = ranprog, // Progress percentage
 
                 // Ensuring UserLocation (city) is not "None"
                 UserLocation = (SouthAfricanCities)random.Next(1, Enum.GetValues(typeof(SouthAfricanCities)).Length),
@@ -204,8 +242,7 @@ public class ReportedRequest : IComparable<ReportedRequest>
             };
 
             rbt.Insert(req);
-
         }
-
     }
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

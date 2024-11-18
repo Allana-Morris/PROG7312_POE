@@ -13,15 +13,25 @@ namespace PROG7312_POE.Class
     {
         public ValidationClass() { }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Function that return whether or not the input is null or empty
+        /// </summary>
         public bool isString(string userinput)
         {
             if (string.IsNullOrEmpty(userinput)) return false;
             return true;
         }
 
-        ///check if
+        /// <summary>
+        /// check if
         ///a) Dates are not past
-        ///b) if the To date is after the From date
+        ///b) if the To date is after the From date <summary>
+        /// 
+        /// <param name="FromDate"></param>
+        /// <param name="ToDate"></param>
+        /// <returns></returns>
+        /// </summary>
         public bool isValidDates(DateTime FromDate, DateTime ToDate)
         {
             bool pastDate = true;
@@ -45,6 +55,10 @@ namespace PROG7312_POE.Class
             return ValidDates;
         }
 
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Function that checks that all the selected categories are valid and exist in RequestCategory
+        /// </summary>
         public bool allCategoriesValid(List<string> usercategories)
         {
             int count = 0;
@@ -67,17 +81,19 @@ namespace PROG7312_POE.Class
             else
             {
                 return true;
-            }           
+            }
         }
 
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets Enum Decription using the value
+        /// </summary>
         private string GetEnumDescription(Enum value)
         {
             var field = value.GetType().GetField(value.ToString());
             var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
             return attribute == null ? value.ToString() : attribute.Description;
         }
-
-
-
     }
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

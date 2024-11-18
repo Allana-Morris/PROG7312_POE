@@ -18,10 +18,16 @@ namespace PROG7312_POE
     public partial class LocalEventsAndAnnouncementsForm : Form
     {
         ValidationClass valClass = new ValidationClass();
-        EventManagement em = new EventManagement();
-        
-        private int[] sortStates = new int[3];  
+        private EventManagement em = new();
+        List<EventClass> events = [];
 
+
+        private int[] sortStates = new int[3];
+
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Primary Constructor
+        /// </summary>
         public LocalEventsAndAnnouncementsForm()
         {
             InitializeComponent();
@@ -31,17 +37,48 @@ namespace PROG7312_POE
             lVEventsandAnnoucements.Items.Clear();
             cLBCategory.Items.Clear();
             loadCategories();
+
+            dTPFromDate.Format = DateTimePickerFormat.Short;
+            dTPToDate.Format = DateTimePickerFormat.Short;
         }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Exits Form
+        /// </summary>
         private void tSLExitLEA_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Loads Suggested Events into the ListView
+        /// </summary>
+        private void loadSuggestions()
+        {
+            foreach (var evt in events)
+            {
+                ListViewItem item = new ListViewItem(evt.EventName);
+                item.SubItems.Add(evt.EventDate.ToShortDateString());
+                item.SubItems.Add(GetEnumDescription(evt.EventCategory));
+                item.SubItems.Add(GetEnumDescription(evt.EventLocation));
+                lVEventsandAnnoucements.Items.Add(item);
+            }
+        }
+
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Gets Requests based on Filters
+        /// </summary>
         private void btnSearch_Click(object sender, EventArgs e)
         {
             List<string> selectedCategories = new List<string>();
             List<EventClass> selectedEvents = new List<EventClass>();
+            var selectedcats = new List<RequestCategory>();
+            DateTime FromDate = dTPFromDate.Value;
+            DateTime ToDate = dTPToDate.Value;
+            var currentUser = CurrentCustomer.Instance;
             try
             {
                 if (cLBCategory.Enabled && !dTPFromDate.Enabled)
@@ -67,8 +104,8 @@ namespace PROG7312_POE
                 }
                 else if (dTPToDate.Enabled && dTPFromDate.Enabled && !cLBCategory.Enabled)
                 {
-                    DateTime FromDate = dTPFromDate.Value;
-                    DateTime ToDate = dTPToDate.Value;
+                    FromDate = dTPFromDate.Value;
+                    ToDate = dTPToDate.Value;
 
                     if (valClass.isValidDates(FromDate, ToDate))
                     {
@@ -81,8 +118,8 @@ namespace PROG7312_POE
                 }
                 else if (cLBCategory.Enabled && dTPFromDate.Enabled && dTPToDate.Enabled)
                 {
-                    DateTime FromDate = dTPFromDate.Value;
-                    DateTime ToDate = dTPToDate.Value;
+                    FromDate = dTPFromDate.Value;
+                    ToDate = dTPToDate.Value;
 
                     for (int i = 0; i < cLBCategory.Items.Count; i++)
                     {
@@ -94,8 +131,9 @@ namespace PROG7312_POE
 
                     if (valClass.allCategoriesValid(selectedCategories) && valClass.isValidDates(FromDate, ToDate))
                     {
+                        selectedcats = ConvertDescriptionsToCategories(selectedCategories);
                         //Go off and get events based on selected categories & Dates
-                        selectedEvents = em.CategoryandDateFilter(selectedCategories, FromDate, ToDate);
+                        selectedEvents = em.CategoryandDateFilter(selectedcats, FromDate, ToDate);
                     }
                     else
                     {
@@ -107,29 +145,62 @@ namespace PROG7312_POE
                     selectedEvents = em.GetAll();
                 }
 
+                selectedcats = ConvertDescriptionsToCategories(selectedCategories);
                 lVEventsandAnnoucements.Items.Clear();
-                lVEventsandAnnoucements.Groups.Clear();
-
-                ListViewGroup EventGroup = new ListViewGroup("Events");
-                ListViewGroup AnnounceGroup = new ListViewGroup("Announcements");
-
-                lVEventsandAnnoucements.Groups.Add(EventGroup);
-                lVEventsandAnnoucements.Groups.Add(AnnounceGroup);
+                events = em.SuggestEvents(selectedcats, FromDate, ToDate, currentUser.Location, selectedEvents);
 
                 foreach (var evt in selectedEvents)
                 {
                     ListViewItem item = new ListViewItem(evt.EventName);
                     item.SubItems.Add(evt.EventDate.ToShortDateString());
                     item.SubItems.Add(GetEnumDescription(evt.EventCategory));
-
-                    item.Group = EventGroup;
-
+                    item.SubItems.Add(GetEnumDescription(evt.EventLocation));
                     lVEventsandAnnoucements.Items.Add(item);
                 }
                 AutoResizeColumns();
-            } catch { }
+            }
+            catch { }
         }
 
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Converts a List of Enum Descriptions to the Enum Values
+        /// </summary>
+        public static List<RequestCategory> ConvertDescriptionsToCategories(List<string> descriptions)
+        {
+            var categories = new List<RequestCategory>();
+
+            foreach (var description in descriptions)
+            {
+                // Use reflection to find the enum value that matches the description
+                var category = Enum.GetValues(typeof(RequestCategory))
+                                   .Cast<RequestCategory>()
+                                   .FirstOrDefault(c => GetEnumDescription(c) == description);
+
+                if (category != RequestCategory.None) // Only add valid categories
+                {
+                    categories.Add(category);
+                }
+            }
+
+            return categories;
+        }
+
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Helper method to get the description of an enum value
+        /// </summary>
+        private static string GetEnumDescription(Enum value)
+        {
+            var field = value.GetType().GetField(value.ToString());
+            var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
+            return attribute?.Description ?? value.ToString();
+        }
+
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Enables Selection of Categories
+        /// </summary>
         private void cBCategory_CheckStateChanged(object sender, EventArgs e)
         {
             if (cBCategory.CheckState == CheckState.Checked)
@@ -143,6 +214,10 @@ namespace PROG7312_POE
 
         }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Enables Selection of Date Range
+        /// </summary>
         private void cBDate_CheckStateChanged(object sender, EventArgs e)
         {
             if (cBDate.CheckState == CheckState.Checked)
@@ -157,6 +232,10 @@ namespace PROG7312_POE
             }
         }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Loads categories into the Combobox
+        /// </summary>
         private void loadCategories()
         {
             cLBCategory.Items.Clear(); // Clear any existing items
@@ -174,17 +253,15 @@ namespace PROG7312_POE
                     cLBCategory.Items.Add(GetEnumDescription(category));
                     tVCategories.Nodes[0].Nodes.Add(GetEnumDescription(category));
                 }
-            } catch { }
+            }
+            catch { }
 
         }
 
-        private string GetEnumDescription(Enum value)
-        {
-            var field = value.GetType().GetField(value.ToString());
-            var attribute = (DescriptionAttribute)Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute));
-            return attribute == null ? value.ToString() : attribute.Description;
-        }
-
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Reorders Items in Listview based on which Column is clicked
+        /// </summary>
         private void lVEventsandAnnoucements_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             try
@@ -207,6 +284,8 @@ namespace PROG7312_POE
                             eventItems = eventItems.OrderBy(item => DateTime.Parse(item.SubItems[1].Text)).ToList();
                         else if (e.Column == 2) // Category
                             eventItems = eventItems.OrderBy(item => item.SubItems[2].Text).ToList();
+                        else if (e.Column == 3) // Location
+                            eventItems = eventItems.OrderBy(item => item.SubItems[3].Text).ToList();
 
                         sortStates[e.Column] = 1; // Change to Descending
                         break;
@@ -218,6 +297,8 @@ namespace PROG7312_POE
                             eventItems = eventItems.OrderByDescending(item => DateTime.Parse(item.SubItems[1].Text)).ToList();
                         else if (e.Column == 2) // Category
                             eventItems = eventItems.OrderByDescending(item => item.SubItems[2].Text).ToList();
+                        else if (e.Column == 3) // Category
+                            eventItems = eventItems.OrderByDescending(item => item.SubItems[3].Text).ToList();
 
                         sortStates[e.Column] = 2; // Change to Reset
                         break;
@@ -228,14 +309,18 @@ namespace PROG7312_POE
                         sortStates[e.Column] = 0; // Change to Ascending for next click
                         break;
                 }
-
                 // Clear the ListView and re-add sorted items
                 lVEventsandAnnoucements.Items.Clear();
                 lVEventsandAnnoucements.Items.AddRange(eventItems.ToArray());
                 AutoResizeColumns();
-            } catch { }
+            }
+            catch { }
         }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Automaticall resizes the columns widths based on the width of the items values
+        /// </summary>
         private void AutoResizeColumns()
         {
             foreach (ColumnHeader column in lVEventsandAnnoucements.Columns)
@@ -244,12 +329,11 @@ namespace PROG7312_POE
             }
         }
 
-
         //-------------------------------------------------------------------------------------
         /// <summary>
-        /// Done By ChatGPT (There is Zero way I would even know this)
+        /// Done By ChatGPT 
         /// </summary>
-        
+
         private void tSTopBar_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -395,6 +479,10 @@ namespace PROG7312_POE
             this.Size = new Size(requiredWidth + padding, requiredHeight + padding);
         }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Checks if the Clicked Node is not the default valueless one
+        /// </summary>
         private void tVCategories_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Node.Text != "Categories")
@@ -402,7 +490,24 @@ namespace PROG7312_POE
                 MessageBox.Show("An error has occurred. Please try again.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-    }
 
- 
+         //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Resets Filters back to factory setting
+        /// </summary>
+        private void BtnReset_Click(object sender, EventArgs e)
+        {
+            cBCategory.Checked = false;
+            cBDate.Checked = false;
+            cLBCategory.Enabled = false;
+            dTPFromDate.Enabled = false;
+            dTPToDate.Enabled = false;
+            dTPFromDate.Text = "2024/01/01";
+            dTPToDate.Text = "2024/12/31";
+
+            lVEventsandAnnoucements.Items.Clear();
+            loadSuggestions();
+        }
+    }
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//

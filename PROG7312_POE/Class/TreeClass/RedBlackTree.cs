@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Windows.Forms;  // Assuming Windows Forms for ListView
+using System.Windows.Forms;
 
 namespace PROG7312_POE.Class.Models
 {
@@ -11,11 +11,18 @@ namespace PROG7312_POE.Class.Models
         private static RedBlackTreeNode _root;
         private int _nextId; // This is the counter for generating custom IDs
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Primary Constructor
+        /// </summary>
         public RedBlackTree()
         {
         }
 
-        // Insert a new ReportedRequest into the Red-Black Tree
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Insert a new ReportedRequest into the Red-Black Tree
+        /// </summary>
         public void Insert(ReportedRequest request)
         {
             IDSingleton IDSingleton = new IDSingleton();
@@ -38,6 +45,10 @@ namespace PROG7312_POE.Class.Models
             }
         }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Insert a new ReportedRequest into the Red-Black Tree Node
+        /// </summary>
         private void InsertNode(RedBlackTreeNode current, RedBlackTreeNode newNode)
         {
             if (newNode.Request.CompareTo(current.Request) < 0)
@@ -66,6 +77,10 @@ namespace PROG7312_POE.Class.Models
             }
         }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// ensures insertion follows Tree rules
+        /// </summary>
         private void FixInsertion(RedBlackTreeNode node)
         {
             while (node != _root && node.Parent.IsRed)
@@ -124,6 +139,10 @@ namespace PROG7312_POE.Class.Models
             _root.IsRed = false; // Ensure root is black
         }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        ///  Rotates the Node to the Left
+        /// </summary>
         private void RotateLeft(RedBlackTreeNode node)
         {
             var pivot = node.Right;
@@ -149,6 +168,10 @@ namespace PROG7312_POE.Class.Models
             node.Parent = pivot;
         }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Rotates the Node to the Right
+        /// </summary>
         private void RotateRight(RedBlackTreeNode node)
         {
             var pivot = node.Left;
@@ -174,6 +197,10 @@ namespace PROG7312_POE.Class.Models
             node.Parent = pivot;
         }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Get's Node Uncle
+        /// </summary>
         private RedBlackTreeNode GetUncle(RedBlackTreeNode node)
         {
             var grandparent = node.Parent?.Parent;
@@ -183,11 +210,19 @@ namespace PROG7312_POE.Class.Models
             return node.Parent == grandparent.Left ? grandparent.Right : grandparent.Left;
         }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Searches for a Node using the RequestName
+        /// </summary>
         public ReportedRequest nameSearch(String repName)
         {
             return nameSearch(_root, repName);
         }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Searches for a Node using the RequestName within tree
+        /// </summary>
         private ReportedRequest nameSearch(RedBlackTreeNode node, string repName)
         {
             if (node == null)
@@ -203,11 +238,19 @@ namespace PROG7312_POE.Class.Models
         }
 
         // Search for a service request by RequestId
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Searches for a Node using the RequestId
+        /// </summary>
         public ReportedRequest Search(Guid requestId)
         {
             return Search(_root, requestId);
         }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Searches for a Node using the RequestName within tree
+        /// </summary>
         private ReportedRequest Search(RedBlackTreeNode node, Guid requestId)
         {
             if (node == null)
@@ -222,7 +265,11 @@ namespace PROG7312_POE.Class.Models
                 return Search(node.Right, requestId);
         }
 
-        // Get all requests as a list
+        
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Get all requests as a list
+        /// </summary>
         public List<ReportedRequest> GetRequestsForListView()
         {
             var requests = new List<ReportedRequest>();
@@ -230,6 +277,10 @@ namespace PROG7312_POE.Class.Models
             return requests;
         }
 
+        //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// adds all requests to a list
+        /// </summary>
         private void GetRequestsForListView(RedBlackTreeNode node, List<ReportedRequest> requests)
         {
             if (node == null) return;

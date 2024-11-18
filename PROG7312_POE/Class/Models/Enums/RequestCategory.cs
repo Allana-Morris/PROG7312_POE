@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace PROG7312_POE.Class.Models.Enums
 {
+     //-------------------------------------------------------------------------------------
+        /// <summary>
+        /// Contains all the Categories the Customer can file a Request Under 
+        /// </summary>
     public enum RequestCategory
     {
         [Description("Select a Category")]
@@ -49,3 +53,4 @@ namespace PROG7312_POE.Class.Models.Enums
         AnimalControlWildlife
     }
 }
+//-----------------------------------...ooo000 END OF FILE 000ooo...-----------------------------------//
